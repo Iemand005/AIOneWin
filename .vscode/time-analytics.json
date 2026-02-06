@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 2539519,
+    "totalFocusTime": 2554944,
     "totalActiveTime": 31377
   },
   "files": {
@@ -19,11 +19,11 @@
     },
     "AIOne/CMakeLists.txt": {
       "pending": 13094,
-      "focus": 289921
+      "focus": 291798
     },
     "AIOne/src/AIOneAPI.hpp": {
       "pending": 545,
-      "focus": 133201
+      "focus": 159844
     },
     "AIOneWinUI/AIOneWinUI.vcxproj": {
       "pending": 558,
