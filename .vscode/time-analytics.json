@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 2299723,
-    "totalActiveTime": 30218
+    "totalFocusTime": 2539519,
+    "totalActiveTime": 31377
   },
   "files": {
     ".gitignore": {
@@ -18,16 +18,16 @@
       "focus": 26947
     },
     "AIOne/CMakeLists.txt": {
-      "pending": 12493,
-      "focus": 248353
+      "pending": 13094,
+      "focus": 289921
     },
     "AIOne/src/AIOneAPI.hpp": {
       "pending": 545,
-      "focus": 58239
+      "focus": 133201
     },
     "AIOneWinUI/AIOneWinUI.vcxproj": {
-      "pending": 0,
-      "focus": 1412
+      "pending": 558,
+      "focus": 55908
     },
     "AIOneUWPCX/AIOneUWPCX.vcxproj": {
       "pending": 0,

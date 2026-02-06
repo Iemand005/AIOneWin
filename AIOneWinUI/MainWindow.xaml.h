@@ -3,6 +3,7 @@
 #include "MainWindow.g.h"
 
 #include <AIOne>
+#pragma comment(lib, "AIOneCore.lib")
 
 namespace winrt::AIOneWinUI::implementation
 {
