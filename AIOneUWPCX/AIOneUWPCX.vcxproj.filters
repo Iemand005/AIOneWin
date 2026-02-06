@@ -49,5 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AIOneUWPCX_TemporaryKey.pfx" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 2554944,
-    "totalActiveTime": 31377
+    "totalFocusTime": 2769565,
+    "totalActiveTime": 31961
   },
   "files": {
     ".gitignore": {
@@ -26,12 +26,16 @@
       "focus": 159844
     },
     "AIOneWinUI/AIOneWinUI.vcxproj": {
-      "pending": 558,
-      "focus": 55908
+      "pending": 1142,
+      "focus": 124092
     },
     "AIOneUWPCX/AIOneUWPCX.vcxproj": {
       "pending": 0,
       "focus": 6101
+    },
+    "AIOne/src/LLModel.hpp": {
+      "pending": 0,
+      "focus": 11017
     }
   }
 }

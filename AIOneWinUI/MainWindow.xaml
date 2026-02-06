@@ -11,6 +11,6 @@
 
 	<Grid>
 		<TextBox></TextBox>
-		<Button>Snd</Button>
+		<Button >Snd</Button>
     </Grid>
 </Window>
