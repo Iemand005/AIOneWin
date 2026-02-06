@@ -7,8 +7,8 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="f95c08bd-13bc-4daf-a340-bd9df9e9544c"
-    Publisher="CN=Lasse"
+    Name="AIOneUWP"
+    Publisher="CN=Lasse Lauwerys"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="f95c08bd-13bc-4daf-a340-bd9df9e9544c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>

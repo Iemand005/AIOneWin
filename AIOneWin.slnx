@@ -4,7 +4,10 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="AIOneUWPCX/AIOneUWPCX.vcxproj">
+  <Project Path="AIOneUWPCX/AIOneUWPCX.vcxproj" Id="a18f1613-bd80-43c6-98bf-a19de8326cc2">
+    <Deploy />
+  </Project>
+  <Project Path="AIOneWinUI/AIOneWinUI.vcxproj" Id="0852111d-f90d-43c2-bb75-0e61a5ce5de6">
     <Deploy />
   </Project>
 </Solution>
