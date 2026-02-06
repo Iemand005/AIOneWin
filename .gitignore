@@ -3,3 +3,4 @@ packages
 Debug
 Generated Files
 *.pfx
+build*/

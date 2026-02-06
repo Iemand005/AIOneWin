@@ -1,13 +1,25 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 312020,
-    "totalActiveTime": 12608
+    "totalFocusTime": 1448236,
+    "totalActiveTime": 22078
   },
   "files": {
     ".gitignore": {
-      "pending": 12608,
-      "focus": 120155
+      "pending": 15660,
+      "focus": 376113
+    },
+    ".gitmodules": {
+      "pending": 1520,
+      "focus": 38727
+    },
+    "AIOneWin.slnx": {
+      "pending": 0,
+      "focus": 26947
+    },
+    "AIOne/CMakeLists.txt": {
+      "pending": 4898,
+      "focus": 65219
     }
   }
 }
