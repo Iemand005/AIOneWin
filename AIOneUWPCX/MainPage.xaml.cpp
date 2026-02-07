@@ -49,7 +49,6 @@ void MainPage::LoadLLModel(String^ path)
 			self->ModelProgressBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 			self->MessageControl->IsEnabled = true;
 		}));
-		// TODO: disable buttons until loaded
 	};
 
 	AIManager->loadLLMAsync(path->Data(), options);
