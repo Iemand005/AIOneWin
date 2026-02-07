@@ -45,8 +45,9 @@ void MainPage::LoadLLModel(String^ path)
 			self->ModelProgressBar->Value = progress * 100;
 		}));
 	};
-	options.onDone = [self]() {
 
+	options.onDone = [self]() {
+		// TODO: disable buttons until loaded
 	};
 
 	AIManager->loadLLMAsync(path->Data(), options);
@@ -64,25 +65,19 @@ void MainPage::LoadModelButton_Click(Platform::Object^ sender, Windows::UI::Xaml
 			
 		auto file = operation->GetResults();
 		if (file == nullptr) return;
-
-		this->LoadLLModel(file->Path);
+		auto self = this;
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, file]() {
+			self->LoadLLModel(file->Path);
+		}));
 	});
 }
-
-std::string trimLeadingNewlines(const std::string& s) {
-	size_t start = 0;
-	while (start < s.size() && s[start] == '\n') ++start;
-	return s.substr(start);
-}
-
-
 
 void MainPage::SendMessage()
 {
 	auto message = MessageInput->Text;
+	MessageInput->Text = "";
 
 	Messages->Append(ref new Message("User", message));
-	MessageInput->Text = "";
 	AssistantMessage = ref new Message("Assistant");
 
 	AsyncTextGenOptions options;
@@ -105,12 +100,9 @@ void MainPage::SendMessage()
 					self->Messages->Append(self->AssistantMessage);
 					self->HasAssistantSent = true;
 				}
-				auto trimmedToken = token;
-				if (!reasoning && self->AssistantMessage->Text->IsEmpty())
-					trimmedToken = trimLeadingNewlines(token);
 
 				std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-				String^ newToken = ref new String(converter.from_bytes(trimmedToken).c_str());;
+				String^ newToken = ref new String(converter.from_bytes(token).c_str());;
 				if (reasoning)
 					self->AssistantMessage->Thoughts += newToken;
 				else self->AssistantMessage->Text += newToken;
@@ -131,16 +123,5 @@ void MainPage::SendButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Rou
 void MainPage::InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
 {
 	if (e->Key == VirtualKey::Enter)
-	{
 		SendMessage();
-
-		//e->Handled = true;
-	}
 }
-
-//template<typename Fn>
-//void MainPage::RunAsync(Fn task) {
-//	Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([task]() {
-//		task();
-//	}));
-//}

@@ -14,17 +14,7 @@
                       FallbackColor="Transparent"/>
 	</Page.Background>
 
-	<Page.Resources>
-		<local:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
-	</Page.Resources>
-
 	<Grid Margin="10">
-		<!--<Grid.Background>
-			<AcrylicBrush BackgroundSource="HostBackdrop"
-                          TintColor="Black"
-                          TintOpacity="0.6"
-                          FallbackColor="Transparent"/>
-		</Grid.Background>-->
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
@@ -43,13 +33,13 @@
 				<DataTemplate x:DataType="local:Message">
 					<StackPanel>
 						<TextBlock Text="{x:Bind Role, Mode=OneWay}" Margin="0,5,5,0" FontWeight="Bold" FontSize="14" />
-						<ToggleButton x:Name="ExpandButton" FontWeight="SemiBold" Background="Transparent" Visibility="{x:Bind ReasoningVisibility, Mode=OneWay}">
+						<ToggleButton x:Name="ExpandButton" FontWeight="SemiBold" Background="Transparent" Visibility="{x:Bind HasThought, Mode=OneWay}">
 							<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 								<TextBlock Text="▶ Reasoning" Margin="0,0,5,0"/>
 								<ProgressRing Width="16" Height="16" IsActive="{x:Bind IsReasoning, Mode=OneWay}"/>
 							</StackPanel>
 						</ToggleButton>
-						<StackPanel Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=ExpandButton, Converter={StaticResource BoolToVisibility}}">
+						<StackPanel Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=ExpandButton}">
 							<TextBlock Text="{x:Bind Thoughts, Mode=OneWay}" TextWrapping="Wrap"/>
 						</StackPanel>
 						<TextBlock Text="{x:Bind Text, Mode=OneWay}" Margin="5,0,5,5" TextWrapping="Wrap"/>

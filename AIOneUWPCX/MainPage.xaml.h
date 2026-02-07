@@ -17,24 +17,6 @@ using namespace Windows::UI::Xaml::Data;
 
 namespace AIOneUWPCX
 {
-	public ref class BoolToVisibilityConverter sealed : IValueConverter
-	{
-	public:
-		virtual Object^ Convert(Object^ value, Windows::UI::Xaml::Interop::TypeName targetType, Object^ parameter, String^ language)
-		{
-			auto b = dynamic_cast<IBox<bool>^>(value);
-			if (b != nullptr && b->Value)
-				return Windows::UI::Xaml::Visibility::Visible;
-			else
-				return Windows::UI::Xaml::Visibility::Collapsed;
-		}
-
-		virtual Object^ ConvertBack(Object^ value, Windows::UI::Xaml::Interop::TypeName targetType, Object^ parameter, String^ language)
-		{
-			throw ref new Platform::NotImplementedException();
-		}
-	};
-
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
@@ -51,8 +33,6 @@ namespace AIOneUWPCX
 
 		void LoadLLModel(String^ path);
 		void SendMessage();
-		//template<typename Fn>
-		//void RunAsync(Fn func);
 
 		ModelManagerPtr AIManager;
 		Message^ AssistantMessage;
