@@ -6,9 +6,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DesignHeight="484" d:DesignWidth="1152">
+	d:DesignHeight="484" d:DesignWidth="1152">
+	<Page.Background>
+		<AcrylicBrush BackgroundSource="HostBackdrop"
+                      TintColor="Black"
+                      TintOpacity="0.6"
+                      FallbackColor="Transparent"/>
+	</Page.Background>
+
+	<Page.Resources>
+		<local:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+	</Page.Resources>
 
 	<Grid Margin="10">
+		<!--<Grid.Background>
+			<AcrylicBrush BackgroundSource="HostBackdrop"
+                          TintColor="Black"
+                          TintOpacity="0.6"
+                          FallbackColor="Transparent"/>
+		</Grid.Background>-->
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
@@ -25,9 +41,13 @@
 		<ListView Grid.Row="3" ItemsSource="{x:Bind Messages, Mode=OneWay}" SelectionChanged="ListView_SelectionChanged">
 			<ListView.ItemTemplate>
 				<DataTemplate x:DataType="local:Message">
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="{x:Bind Role, Mode=OneWay}" Margin="5"/>
-						<TextBlock Text="{x:Bind Text, Mode=OneWay}" Margin="5"/>
+					<StackPanel>
+						<TextBlock Text="{x:Bind Role, Mode=OneWay}" Margin="0,5,5,0" FontWeight="Bold" FontSize="14" />
+						<ToggleButton x:Name="ExpandButton" Content="▶ Reasoning" FontWeight="SemiBold" Background="Transparent"/>
+						<StackPanel Margin="20,5,0,0" Visibility="{Binding IsChecked, ElementName=ExpandButton, Converter={StaticResource BoolToVisibility}}">
+							<TextBlock Text="{x:Bind Thoughts, Mode=OneWay}" TextWrapping="Wrap"/>
+						</StackPanel>
+						<TextBlock Text="{x:Bind Text, Mode=OneWay}" Margin="5,0,5,5" TextWrapping="Wrap"/>
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>

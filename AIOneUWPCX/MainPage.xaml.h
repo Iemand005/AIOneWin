@@ -6,7 +6,7 @@
 #pragma once
 
 #include "MainPage.g.h"
-#include <collection.h>          // Vector/IObservableVector
+#include <collection.h>
 using namespace Platform;
 using namespace Platform::Collections;
 using namespace Windows::UI::Xaml::Data;
@@ -40,6 +40,17 @@ namespace AIOneUWPCX
 			}
 		}
 
+		property String^ Thoughts
+		{
+			String^ get() { return _thoughts; }
+			void set(String^ value)
+			{
+				if (_thoughts == value) return;
+				_thoughts = value;
+				OnPropertyChanged("Thoughts");
+			}
+		}
+
 		Message() {
 			_role = "";
 			_text = "";
@@ -66,6 +77,25 @@ namespace AIOneUWPCX
 	private:
 		String^ _role;
 		String^ _text;
+		String^ _thoughts;
+	};
+
+	public ref class BoolToVisibilityConverter sealed : IValueConverter
+	{
+	public:
+		virtual Object^ Convert(Object^ value, Windows::UI::Xaml::Interop::TypeName targetType, Object^ parameter, String^ language)
+		{
+			auto b = dynamic_cast<IBox<bool>^>(value);
+			if (b != nullptr && b->Value)
+				return Windows::UI::Xaml::Visibility::Visible;
+			else
+				return Windows::UI::Xaml::Visibility::Collapsed;
+		}
+
+		virtual Object^ ConvertBack(Object^ value, Windows::UI::Xaml::Interop::TypeName targetType, Object^ parameter, String^ language)
+		{
+			throw ref new Platform::NotImplementedException();
+		}
 	};
 
 	/// <summary>

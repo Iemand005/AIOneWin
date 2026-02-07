@@ -29,6 +29,8 @@ MainPage::MainPage()
 {
 	InitializeComponent();
 
+	//ApplicationView::GetForCurrentView()->Title = "AIOne";
+
 	modelManager = std::make_unique<ModelManager>();
 
 	Messages = ref new Vector<Message^>();
@@ -90,19 +92,26 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 		
 		};*/
 
-		options.onToken = [self, assistantMessage](std::string token) {
+		options.onTokenReasoning = [self, assistantMessage](std::string token, bool reasoning) {
+		try{
 			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
-				ref new Windows::UI::Core::DispatchedHandler([self, assistantMessage, token]()
+				ref new Windows::UI::Core::DispatchedHandler([self, assistantMessage, token, reasoning]()
 					{
+						try {
 					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-						//self->MessageInput->Text = ref new String(converter.from_bytes(token).c_str());
 						String^ newToken = ref new String(converter.from_bytes(token).c_str());;
-						//self->Messages->Append(ref new Message("Assistant", msg));
-						//assistantMessage->Append(newToken);
-						assistantMessage->Text += newToken;
-						//self->messages->
-						
+						if (reasoning)
+							assistantMessage->Thoughts += newToken;
+						else assistantMessage->Text += newToken;
+						}
+						catch (...) {
+							assistantMessage->Text += "";
+						}
 					}));;;;
+		}
+		catch (...) {
+			assistantMessage->Text += "oopsiee";
+					}
 		};
 	modelManager->getChatManager()->sendAsync(this->MessageInput->Text->Data(), options);
 }
