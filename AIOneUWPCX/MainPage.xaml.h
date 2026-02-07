@@ -48,10 +48,14 @@ namespace AIOneUWPCX
 		void ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
 		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
 
 		void LoadLLModel(String^ path);
+		void SendMessage();
 
-		ModelManagerPtr modelManager;
+		ModelManagerPtr AIManager;
+		Message^ AssistantMessage;
+		Boolean HasAssistantSent = false;
 
 	};
 }

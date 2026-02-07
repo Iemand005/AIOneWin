@@ -32,7 +32,7 @@ MainPage::MainPage()
 
 	//ApplicationView::GetForCurrentView()->Title = "AIOne";
 
-	modelManager = std::make_unique<ModelManager>();
+	AIManager = std::make_unique<ModelManager>();
 
 	Messages = ref new Vector<Message^>();
 
@@ -66,7 +66,7 @@ void AIOneUWPCX::MainPage::LoadLLModel(String^ path)
 
 		};
 
-	this->modelManager->loadLLMAsync(path->Data(), options);
+	AIManager->loadLLMAsync(path->Data(), options);
 }
 
 void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -100,73 +100,98 @@ std::string trimLeadingNewlines(const std::string& s) {
 	return s.substr(start);
 }
 
-//String^ TrimLeadingNewlines(String^ str)
-//{
-//	int start = 0;
-//	while (start < str->Length() && str->Data()[start] == '\n') {
-//		++start;
-//	}
-//	return str->Substring(start);
-//}
-
 void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//auto message = MexxageInput
+	/*auto message = MessageInput->Text;
+
+	Messages->Append(ref new Message("User", message));
+	MessageInput->Text = "";
+	auto AssistantMessage = ref new Message("Assistant");
+	Messages->Append(AssistantMessage);*/
+
+	SendMessage();
+}
+
+void MainPage::SendMessage() {
 	auto message = MessageInput->Text;
 
 	Messages->Append(ref new Message("User", message));
 	MessageInput->Text = "";
-	auto assistantMessage = ref new Message("Assistant");
-	Messages->Append(assistantMessage);
-	//assistantMessage = Messages->GetAt(Messages->Size - 1);
+	AssistantMessage = ref new Message("Assistant");
+	bool hasAssistantSent = false;
 
 	AsyncTextGenOptions options;
 	auto self = this;
 
 	/*options.onDone = [](const TextGenResult& output) {
-		
+
 		};*/
 
-	options.onThinkStart = [self, assistantMessage]() {
-		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([assistantMessage]()
+	options.onThinkStart = [self]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self]()
 			{
-				assistantMessage->Reasoning = true;
-			}));;;;
-			};
-
-	options.onThinkEnd = [self, assistantMessage]() {
-		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([assistantMessage]()
-			{
-				assistantMessage->Reasoning = false;
-
+				self->AssistantMessage->Reasoning = true;
 			}));;;;
 		};
 
-		options.onTokenReasoning = [self, assistantMessage](std::string token, bool reasoning) {
-		try{
+	options.onThinkEnd = [self]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self]()
+			{
+				self->AssistantMessage->Reasoning = false;
+
+			}));;;;
+		};
+	options.onDone = [self](const TextGenResult &result) {
+		//self->AssistantMessage->Text = result.
+		//result.output
+		self->HasAssistantSent = false;
+			};
+	options.onTokenReasoning = [self, &hasAssistantSent](std::string token, bool reasoning) {
+		try {
 			//auto path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
-			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, assistantMessage, token, reasoning]()
-					{
-						try {
-							auto tok = token;
-							if (!reasoning && assistantMessage->Text->IsEmpty()) {
-								tok = trimLeadingNewlines(token);
-							}
+			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, &hasAssistantSent, token, reasoning]()
+				{
+					try {
+						if (!self->HasAssistantSent) {
+							self->Messages->Append(self->AssistantMessage);
+							
+							self->HasAssistantSent = true;
+						}
+						auto tok = token;
+						if (!reasoning && self->AssistantMessage->Text->IsEmpty()) {
+							tok = trimLeadingNewlines(token);
+						}
 
 						std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 						String^ newToken = ref new String(converter.from_bytes(tok).c_str());;
 						if (reasoning)
-							assistantMessage->Thoughts += newToken;
-						else assistantMessage->Text += newToken;
-						}
-						catch (...) {
-							assistantMessage->Text += "";
-						}
-					}));;;;
+							self->AssistantMessage->Thoughts += newToken;
+						else self->AssistantMessage->Text += newToken;
+					}
+					catch (...) {
+						self->AssistantMessage->Text += "";
+					}
+				}));;;;
 		}
 		catch (...) {
-			assistantMessage->Text += "oopsiee";
-					}
+			self->AssistantMessage->Text += "oopsiee";
+		}
 		};
-	modelManager->getChatManager()->sendAsync(message->Data(), options);
+	AIManager->getChatManager()->sendAsync(message->Data(), options);
+}
+
+void MainPage::InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
+{
+	if (e->Key == Windows::System::VirtualKey::Enter)
+	{
+		auto textBox = dynamic_cast<TextBox^>(sender);
+		auto message = textBox->Text;
+
+		SendMessage();
+
+		textBox->Text = "";
+
+		e->Handled = true;
+	}
 }
