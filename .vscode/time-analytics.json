@@ -1,21 +1,21 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 6240034,
-    "totalActiveTime": 247460
+    "totalFocusTime": 7186281,
+    "totalActiveTime": 307149
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
-      "pending": 0,
-      "focus": 29952
+      "pending": 3393,
+      "focus": 80752
     },
     "AIOne/src/LLModel.hpp": {
       "pending": 0,
-      "focus": 1874
+      "focus": 7044
     },
     "AIOne/src/LLModel.cpp": {
-      "pending": 42596,
-      "focus": 589306
+      "pending": 89457,
+      "focus": 898949
     },
     "AIOne/external/llama.cpp/src/llama-mmap.cpp": {
       "pending": 41932,
@@ -62,8 +62,12 @@
       "focus": 70429
     },
     "AIOneUWPCX/MainPage.xaml.cpp": {
-      "pending": 15676,
-      "focus": 1612224
+      "pending": 25111,
+      "focus": 2570678
+    },
+    "AIOneUWPCX/MainPage.xaml.h": {
+      "pending": 0,
+      "focus": 754
     }
   }
 }
