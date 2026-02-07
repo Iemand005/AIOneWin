@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 6388054,
-    "totalActiveTime": 146541
+    "totalFocusTime": 6554228,
+    "totalActiveTime": 147348
   },
   "files": {
     ".gitignore": {
@@ -26,8 +26,8 @@
       "focus": 159844
     },
     "AIOneWinUI/AIOneWinUI.vcxproj": {
-      "pending": 1142,
-      "focus": 124092
+      "pending": 1949,
+      "focus": 458816
     },
     "AIOneUWPCX/AIOneUWPCX.vcxproj": {
       "pending": 2350,
@@ -59,7 +59,7 @@
     },
     "AIOne/src/TextGenOptions.hpp": {
       "pending": 1408,
-      "focus": 37525
+      "focus": 92640
     },
     "AIOne/src/ModelFactory.hpp": {
       "pending": 9852,

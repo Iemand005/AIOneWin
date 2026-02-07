@@ -9,6 +9,7 @@
 using namespace AIOneUWPCX;
 
 using namespace Platform;
+using namespace Platform::Collections;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::Storage;
@@ -29,6 +30,8 @@ MainPage::MainPage()
 	InitializeComponent();
 
 	modelManager = std::make_unique<ModelManager>();
+
+	Messages = ref new Vector<Message^>();
 }
 
 void AIOneUWPCX::MainPage::ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
@@ -86,7 +89,9 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 				ref new Windows::UI::Core::DispatchedHandler([self, token]()
 					{
 					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-						self->MessageInput->Text = ref new String(converter.from_bytes(token).c_str());
+						//self->MessageInput->Text = ref new String(converter.from_bytes(token).c_str());
+						String^ msg = ref new String(converter.from_bytes(token).c_str());;
+						//self->messages->
 					}));;;;
 		};
 	modelManager->getChatManager()->sendAsync(this->MessageInput->Text->Data(), options);
