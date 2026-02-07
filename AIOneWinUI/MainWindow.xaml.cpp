@@ -102,7 +102,9 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
 
     options.onToken = [this](const std::string& token) {
         this->DispatcherQueue().TryEnqueue([this, token]() {
-            this->Messages.Append(winrt::to_hstring(token));
+            auto  message  = winrt::make<MessageItem>("assistant", "");
+            //this->Messages.Append(winrt::to_hstring(token));
+            this->Messages.Append(winrt::make<MessageItem>("assistant", ""));
         });
     };
 

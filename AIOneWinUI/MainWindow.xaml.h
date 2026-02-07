@@ -17,7 +17,8 @@ namespace winrt::AIOneWinUI::implementation
 
         //Vector
 
-        winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> Messages{ nullptr };
+        //winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> Messages{ nullptr };
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> Messages{ nullptr };
 
         MainWindow()
         {
