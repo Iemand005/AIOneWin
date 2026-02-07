@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 3281634,
-    "totalActiveTime": 108534
+    "totalFocusTime": 6067346,
+    "totalActiveTime": 231784
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
@@ -15,27 +15,27 @@
     },
     "AIOne/src/LLModel.cpp": {
       "pending": 42596,
-      "focus": 470550
+      "focus": 589306
     },
     "AIOne/external/llama.cpp/src/llama-mmap.cpp": {
-      "pending": 32446,
-      "focus": 225173
+      "pending": 41932,
+      "focus": 517352
     },
     "AIOne/external/llama.cpp/common/common.cpp": {
-      "pending": 7508,
-      "focus": 131322
+      "pending": 56258,
+      "focus": 334488
     },
     "build_uwp.cmd": {
-      "pending": 3585,
-      "focus": 42593
+      "pending": 4141,
+      "focus": 107207
     },
     "AIOne/CMakeLists.txt": {
-      "pending": 19068,
-      "focus": 218693
+      "pending": 36348,
+      "focus": 975189
     },
     "AIOneWinUI/AIOneWinUI.vcxproj": {
-      "pending": 2780,
-      "focus": 89237
+      "pending": 49408,
+      "focus": 186258
     },
     "AIOne/external/llama.cpp/src/CMakeLists.txt": {
       "pending": 0,
@@ -51,7 +51,15 @@
     },
     ".gitignore": {
       "pending": 551,
-      "focus": 551
+      "focus": 45506
+    },
+    "AIOne/src/Utf8.hpp": {
+      "pending": 0,
+      "focus": 20239
+    },
+    "AIOne/src/ChatManager.hpp": {
+      "pending": 550,
+      "focus": 70429
     }
   }
 }

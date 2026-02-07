@@ -92,15 +92,33 @@ void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::X
 	//this->modelManager->
 }
 
+std::string trimLeadingNewlines(const std::string& s) {
+	size_t start = 0;
+	while (start < s.size() && s[start] == '\n') {
+		++start;
+	}
+	return s.substr(start);
+}
+
+//String^ TrimLeadingNewlines(String^ str)
+//{
+//	int start = 0;
+//	while (start < str->Length() && str->Data()[start] == '\n') {
+//		++start;
+//	}
+//	return str->Substring(start);
+//}
+
 void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	//auto message = MexxageInput
 	auto message = MessageInput->Text;
 
 	Messages->Append(ref new Message("User", MessageInput->Text));
+	MessageInput->Text = "";
 	auto assistantMessage = ref new Message("Assistant");
 	Messages->Append(assistantMessage);
-	assistantMessage = Messages->GetAt(Messages->Size - 1);
+	//assistantMessage = Messages->GetAt(Messages->Size - 1);
 
 	AsyncTextGenOptions options;
 	auto self = this;
@@ -130,8 +148,13 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, assistantMessage, token, reasoning]()
 					{
 						try {
-					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-						String^ newToken = ref new String(converter.from_bytes(token).c_str());;
+							auto tok = token;
+							if (!reasoning && assistantMessage->Text->IsEmpty()) {
+								tok = trimLeadingNewlines(token);
+							}
+
+						std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+						String^ newToken = ref new String(converter.from_bytes(tok).c_str());;
 						if (reasoning)
 							assistantMessage->Thoughts += newToken;
 						else assistantMessage->Text += newToken;

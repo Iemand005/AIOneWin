@@ -98,6 +98,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -133,7 +138,7 @@
       <AdditionalDependencies>AIOneCore.lib;llama.lib;common.lib;ggml.lib;ggml-base.lib;ggml-cpu.lib;stable-diffusion.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOne" -A x64 -DAIONE_UWP=true
+      <Command>cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOne" -A x64
 cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>

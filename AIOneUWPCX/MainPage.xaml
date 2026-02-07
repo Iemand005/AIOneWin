@@ -49,7 +49,7 @@
 								<ProgressRing Width="16" Height="16" IsActive="{x:Bind Reasoning, Mode=OneWay}"/>
 							</StackPanel>
 						</ToggleButton>
-						<StackPanel Margin="20,5,0,0" Visibility="{Binding IsChecked, ElementName=ExpandButton, Converter={StaticResource BoolToVisibility}}">
+						<StackPanel Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=ExpandButton, Converter={StaticResource BoolToVisibility}}">
 							<TextBlock Text="{x:Bind Thoughts, Mode=OneWay}" TextWrapping="Wrap"/>
 						</StackPanel>
 						<TextBlock Text="{x:Bind Text, Mode=OneWay}" Margin="5,0,5,5" TextWrapping="Wrap"/>
