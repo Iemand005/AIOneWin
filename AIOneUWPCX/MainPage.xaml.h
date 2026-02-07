@@ -15,20 +15,57 @@ using namespace Windows::UI::Xaml::Data;
 
 namespace AIOneUWPCX
 {
-	public ref class Message sealed
+	public ref class Message sealed : INotifyPropertyChanged
 	{
 	public:
-		property Platform::String^ Role;
-		property Platform::String^ Text;
+		property String^ Role
+		{
+			String^ get() { return _role; }
+			void set(String^ value)
+			{
+				if (_role == value) return;
+				_role = value;
+				OnPropertyChanged("Role");
+			}
+		}
+
+		property String^ Text
+		{
+			String^ get() { return _text; }
+			void set(String^ value)
+			{
+				if (_text == value) return;
+				_text = value;
+				OnPropertyChanged("Text");
+			}
+		}
 
 		Message() {
-			Role = "";
-			Text = "";
+			_role = "";
+			_text = "";
 		}
-		Message(String^ role, String^ text = "") {
-			Role = role;
-			Text = text;
+
+		Message(String^ role) {
+			_role = role;
+			_text = "";
 		}
+
+		Message(String^ role, String^ text) {
+			_role = role;
+			_text = text;
+		}
+
+		virtual event PropertyChangedEventHandler^ PropertyChanged;
+
+	protected:
+		void OnPropertyChanged(String^ propertyName)
+		{
+			PropertyChanged(this, ref new PropertyChangedEventArgs(propertyName));
+		}
+
+	private:
+		String^ _role;
+		String^ _text;
 	};
 
 	/// <summary>

@@ -86,9 +86,9 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 	AsyncTextGenOptions options;
 	auto self = this;
 
-	/*options.onDone = [](const TextGenResult& output) {
+	options.onDone = [](const TextGenResult& output) {
 		
-		};*/
+		};
 
 		options.onToken = [self, assistantMessage](std::string token) {
 			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,

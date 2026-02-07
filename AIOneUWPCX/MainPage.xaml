@@ -22,12 +22,12 @@
 		</Grid.RowDefinitions>
 		<Button HorizontalAlignment="Stretch" Click="Button_Click">Load model</Button>
 		<ProgressBar x:Name="ModelProgressBar" Grid.Row="1" Value="0" Maximum="100"/>
-		<ListView Grid.Row="3" ItemsSource="{x:Bind Messages}" SelectionChanged="ListView_SelectionChanged">
+		<ListView Grid.Row="3" ItemsSource="{x:Bind Messages, Mode=OneWay}" SelectionChanged="ListView_SelectionChanged">
 			<ListView.ItemTemplate>
 				<DataTemplate x:DataType="local:Message">
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="{x:Bind Role}" Margin="5"/>
-						<TextBlock Text="{x:Bind Text}" Margin="5"/>
+						<TextBlock Text="{x:Bind Role, Mode=OneWay}" Margin="5"/>
+						<TextBlock Text="{x:Bind Text, Mode=OneWay}" Margin="5"/>
 					</StackPanel>
 				</DataTemplate>
 			</ListView.ItemTemplate>
