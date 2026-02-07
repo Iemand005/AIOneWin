@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 3329827,
-    "totalActiveTime": 32555
+    "totalFocusTime": 4538154,
+    "totalActiveTime": 48712
   },
   "files": {
     ".gitignore": {
@@ -18,8 +18,8 @@
       "focus": 26947
     },
     "AIOne/CMakeLists.txt": {
-      "pending": 13094,
-      "focus": 291798
+      "pending": 23768,
+      "focus": 477739
     },
     "AIOne/src/AIOneAPI.hpp": {
       "pending": 545,
@@ -30,12 +30,24 @@
       "focus": 124092
     },
     "AIOneUWPCX/AIOneUWPCX.vcxproj": {
-      "pending": 594,
-      "focus": 395125
+      "pending": 2350,
+      "focus": 1193044
     },
     "AIOne/src/LLModel.hpp": {
       "pending": 0,
       "focus": 11017
+    },
+    "AIOne/external/llama.cpp/common/common.cpp": {
+      "pending": 1253,
+      "focus": 143309
+    },
+    "AIOne/external/llama.cpp/src/llama-mmap.cpp": {
+      "pending": 0,
+      "focus": 127372
+    },
+    "build_uwp.cmd": {
+      "pending": 2474,
+      "focus": 426960
     }
   }
 }
