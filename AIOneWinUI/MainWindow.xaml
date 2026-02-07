@@ -37,9 +37,9 @@
 					<RowDefinition Height="10"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-				<ListView ItemsSource="">
+				<ListView x:Name="MessagesListView" ItemsSource="{x:Bind Messages}">
 					<ListView.ItemTemplate>
-						<DataTemplate>
+						<DataTemplate x:DataType="local:MessageItem">
 							<TextBlock Text="Hi"/>
 						</DataTemplate>
 					</ListView.ItemTemplate>

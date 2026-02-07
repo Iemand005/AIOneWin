@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 7260327,
-    "totalActiveTime": 307149
+    "totalFocusTime": 7382425,
+    "totalActiveTime": 307752
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
@@ -63,11 +63,15 @@
     },
     "AIOneUWPCX/MainPage.xaml.cpp": {
       "pending": 25111,
-      "focus": 2583313
+      "focus": 2602309
     },
     "AIOneUWPCX/MainPage.xaml.h": {
       "pending": 0,
       "focus": 754
+    },
+    "AIOneWinUI/MainWindow.xaml": {
+      "pending": 603,
+      "focus": 30336
     }
   }
 }

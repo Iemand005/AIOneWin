@@ -2,9 +2,6 @@
 
 #include "MainWindow.g.h"
 
-//#include <AIOne>
-//#pragma comment(lib, "AIOneCore.lib")
-
 #include <winrt/Microsoft.UI.Xaml.h>
 #include <winrt/Microsoft.UI.Xaml.Controls.h>
 #include <winrt/Microsoft.UI.Xaml.Data.h>
@@ -20,11 +17,11 @@ namespace winrt::AIOneWinUI::implementation
 
         //Vector
 
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::hstring> Messages{ nullptr };
+        winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> Messages{ nullptr };
 
         MainWindow()
         {
-            Messages = winrt::single_threaded_observable_vector<winrt::hstring>();
+            Messages = winrt::single_threaded_observable_vector<MessageItem>();
             modelManager = std::make_unique<ModelManager>();
 
             //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
