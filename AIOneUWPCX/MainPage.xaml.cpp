@@ -25,8 +25,6 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 MainPage::MainPage()
 {
 	InitializeComponent();
@@ -41,19 +39,23 @@ void MainPage::LoadLLModel(String^ path)
 	LLModelOptionsAsync options;
 	auto self = this;
 	options.onProgress = [self](float progress) -> void {
-		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, progress]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, progress]() {
 			self->ModelProgressBar->Value = progress * 100;
 		}));
 	};
 
 	options.onDone = [self]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self]() {
+			self->ModelProgressBar->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+			self->MessageControl->IsEnabled = true;
+		}));
 		// TODO: disable buttons until loaded
 	};
 
 	AIManager->loadLLMAsync(path->Data(), options);
 }
 
-void MainPage::LoadModelButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::LoadModelButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	auto picker	 = ref new FileOpenPicker();
 	picker->SuggestedStartLocation = PickerLocationId::DocumentsLibrary;
@@ -66,7 +68,7 @@ void MainPage::LoadModelButton_Click(Platform::Object^ sender, Windows::UI::Xaml
 		auto file = operation->GetResults();
 		if (file == nullptr) return;
 		auto self = this;
-		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, file]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, file]() {
 			self->LoadLLModel(file->Path);
 		}));
 	});
@@ -84,7 +86,7 @@ void MainPage::SendMessage()
 	auto self = this;
 
 	options.onThinkStateChange = [self](bool thinking) {
-		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, thinking]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, thinking]() {
 			self->AssistantMessage->IsReasoning = thinking;
 		}));
 	};
@@ -94,7 +96,7 @@ void MainPage::SendMessage()
 	};
 
 	options.onTokenReasoning = [self](std::string token, bool reasoning) {
-		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, token, reasoning]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, token, reasoning]() {
 			try {
 				if (!self->HasAssistantSent) {
 					self->Messages->Append(self->AssistantMessage);
@@ -115,12 +117,12 @@ void MainPage::SendMessage()
 	AIManager->getChatManager()->sendAsync(message->Data(), options);
 }
 
-void MainPage::SendButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::SendButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	SendMessage();
 }
 
-void MainPage::InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
+void MainPage::InputTextBox_KeyDown(Object^ sender, KeyRoutedEventArgs^ e)
 {
 	if (e->Key == VirtualKey::Enter)
 		SendMessage();

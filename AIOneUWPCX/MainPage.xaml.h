@@ -11,6 +11,8 @@ using namespace Platform;
 using namespace Platform::Collections;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Data;
+using namespace Windows::UI::Xaml::Input;
+using namespace Windows::Foundation::Collections;
 
 #include <AIOne>
 #include "Message.h"
@@ -25,11 +27,11 @@ namespace AIOneUWPCX
 	public:
 		MainPage();
 
-		property Windows::Foundation::Collections::IObservableVector<Message^>^ Messages;
+		property IObservableVector<Message^>^ Messages;
 	private:
-		void LoadModelButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		void SendButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		void InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
+		void LoadModelButton_Click(Platform::Object^ sender, RoutedEventArgs^ e);
+		void SendButton_Click(Platform::Object^ sender, RoutedEventArgs^ e);
+		void InputTextBox_KeyDown(Platform::Object^ sender, KeyRoutedEventArgs^ e);
 
 		void LoadLLModel(String^ path);
 		void SendMessage();
