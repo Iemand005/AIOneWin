@@ -58,7 +58,12 @@ void winrt::AIOneWinUI::implementation::MainWindow::LoadModelButton_Click(winrt:
     picker.SuggestedStartLocation(winrt::Windows::Storage::Pickers::PickerLocationId::DocumentsLibrary);
     picker.FileTypeFilter().Append(L".gguf");
 
-    winrt::Windows::Storage::StorageFile file = picker.PickSingleFileAsync().get();
+    //winrt::Windows::Storage::StorageFile file = 
+    picker.PickSingleFileAsync().Completed([this](auto const& operation, auto const& status) {
+        if (status != winrt::Windows::Foundation::AsyncStatus::Completed) return;
+
+        auto file = operation.GetResults();
+    
 
     if (file)
     {
@@ -81,4 +86,15 @@ void winrt::AIOneWinUI::implementation::MainWindow::LoadModelButton_Click(winrt:
 
         modelManager->loadLLMAsync(path, options);
     }
+        });
+}
+
+void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
+
+}
+
+void winrt::AIOneWinUI::implementation::MainWindow::TextBox_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)
+{
+    //if ( e.Key == winrt::Microsoft::UI::Xaml::Input::IKeyRoutedEventArgs)
+    if ( e.Key() == winrt::Windows::System::VirtualKey::Enter) Send();
 }

@@ -44,7 +44,7 @@
 						</DataTemplate>
 					</ListView.ItemTemplate>
 				</ListView>
-				<TextBox Grid.Row="2"></TextBox>
+				<TextBox Grid.Row="2" KeyDown="TextBox_KeyDown"></TextBox>
 				<Button Grid.Row="2" Grid.Column="2" x:Name="SendButton" Click="SendButton_Click">Send</Button>
 			</Grid>
 		</ContentControl>
