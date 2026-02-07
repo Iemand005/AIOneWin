@@ -35,6 +35,14 @@ MainPage::MainPage()
 	modelManager = std::make_unique<ModelManager>();
 
 	Messages = ref new Vector<Message^>();
+
+	try {
+		String^ path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
+		this->LoadLLModel(path);
+	}
+	catch (...) {
+
+	}
 }
 
 void AIOneUWPCX::MainPage::ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
@@ -42,11 +50,33 @@ void AIOneUWPCX::MainPage::ListView_SelectionChanged(Platform::Object^ sender, W
 
 }
 
+void AIOneUWPCX::MainPage::LoadLLModel(String^ path)
+{
+	LLModelOptionsAsync options;
+	auto self = this;
+	options.onProgress = [self](float progress) -> void
+		{
+			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
+				ref new Windows::UI::Core::DispatchedHandler([self, progress]()
+					{
+						self->ModelProgressBar->Value = progress * 100;
+					}));;;;
+		};
+	options.onDone = []() {
+
+		};
+
+	this->modelManager->loadLLMAsync(path->Data(), options);
+}
+
 void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	auto picker	 = ref new FileOpenPicker();
 	picker->SuggestedStartLocation = PickerLocationId::DocumentsLibrary;
 	picker->FileTypeFilter->Append(".gguf");
+
+	String^ path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
+	this->LoadLLModel(path);
 	
 	auto operation = picker->PickSingleFileAsync();
 	operation->Completed = ref new AsyncOperationCompletedHandler<StorageFile^>([this](IAsyncOperation<StorageFile^>^ operation, AsyncStatus status)
@@ -54,24 +84,8 @@ void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::X
 		if (status != AsyncStatus::Completed) return;
 		auto file = operation->GetResults();
 		if (file == nullptr) return;
-		auto name = file->Name;
 
-		LLModelOptionsAsync options;
-		//options.
-		auto self = this;
-		options.onProgress = [self](float progress) -> void
-		{
-			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
-				ref new Windows::UI::Core::DispatchedHandler([self, progress]()
-					{
-					self->ModelProgressBar->Value = progress * 100;
-					}));;;;
-		};
-		options.onDone = []() {
-		
-			};
-
-		this->modelManager->loadLLMAsync(file->Path->Data(), options);
+		this->LoadLLModel(file->Path);
 		});
 	//this->modelManager->
 }
@@ -110,6 +124,7 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 
 		options.onTokenReasoning = [self, assistantMessage](std::string token, bool reasoning) {
 		try{
+			//auto path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
 			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, assistantMessage, token, reasoning]()
 					{
 						try {

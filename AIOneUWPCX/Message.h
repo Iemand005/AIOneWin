@@ -54,14 +54,17 @@ namespace AIOneUWPCX
 			{
 				if (_thinking == value) return;
 				_thinking = value;
+				_hasThought = true;
 				OnPropertyChanged("Reasoning");
-				OnPropertyChanged("HasThought");
+				OnPropertyChanged("ReasoningVisibility");
 			}
 		}
 
 		property Visibility ReasoningVisibility
 		{
-			Visibility get() { return _thoughts->IsEmpty() ? Visibility::Collapsed : Visibility::Visible; }
+			Visibility get() {
+				return _hasThought ? Visibility::Visible : Visibility::Collapsed;
+			}
 		}
 
 		Message() {
@@ -98,6 +101,7 @@ namespace AIOneUWPCX
 		String^ _text;
 		String^ _thoughts;
 		Boolean _thinking;
+		bool _hasThought = false;
 	};
 
 }
