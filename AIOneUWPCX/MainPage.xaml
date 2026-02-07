@@ -41,7 +41,7 @@
 
 				<ListView ItemsSource="{x:Bind Messages, Mode=OneWay}" SelectionMode="None">
 					<ListView.ItemTemplate>
-						<DataTemplate x:DataType="local:Message">
+						<DataTemplate x:DataType="local:MessageItem">
 							<StackPanel>
 								<TextBlock Text="{x:Bind Role, Mode=OneWay}" Margin="0,5,5,0" FontWeight="Bold" FontSize="14" />
 								<ToggleButton x:Name="ExpandButton" FontWeight="SemiBold" Background="Transparent" Visibility="{x:Bind HasThought, Mode=OneWay}">

@@ -15,7 +15,7 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::Foundation::Collections;
 
 #include <AIOne>
-#include "Message.h"
+#include "MessageItem.h"
 
 namespace AIOneUWPCX
 {
@@ -27,7 +27,7 @@ namespace AIOneUWPCX
 	public:
 		MainPage();
 
-		property IObservableVector<Message^>^ Messages;
+		property IObservableVector<MessageItem^>^ Messages;
 	private:
 		void LoadModelButton_Click(Platform::Object^ sender, RoutedEventArgs^ e);
 		void SendButton_Click(Platform::Object^ sender, RoutedEventArgs^ e);
@@ -37,7 +37,7 @@ namespace AIOneUWPCX
 		void SendMessage();
 
 		ModelManagerPtr AIManager;
-		Message^ AssistantMessage;
+		MessageItem^ AssistantMessage;
 		//Boolean HasAssistantSent = false;
 
 	};

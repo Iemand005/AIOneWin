@@ -18,11 +18,16 @@ namespace winrt::AIOneWinUI::implementation
         //Vector
 
         //winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> Messages{ nullptr };
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> Messages{ nullptr };
-
+        //winrt::Windows::Foundation::Collections::IObservableVector<winrt::Windows::Foundation::IInspectable> Messages{ nullptr };
+        //winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> Messages {nullptr};
+        //winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> Messages();
+        //winrt::Windows::Foundation::Collections::IObservableVector<winrt::AIOneWinUI::MessageItem> Messages();
         MainWindow()
         {
-            Messages = winrt::single_threaded_observable_vector<MessageItem>();
+            //Messages = winrt::single_threaded_observable_vector<winrt::Windows::Foundation::IInspectable>();
+            //Messages = winrt::single_threaded_observable_vector<winrt::Windows::Foundation::IInspectable>();
+            //Messages = winrt::single_threaded_observable_vector<MessageItem>();
+            //m_messages = single_threaded_observable_vector<MessageItem>();
             modelManager = std::make_unique<ModelManager>();
 
             //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
@@ -36,6 +41,8 @@ namespace winrt::AIOneWinUI::implementation
         void TextBox_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
 
         void Send();
+        private:
+            //winrt::Windows::Foundation::Collections::IObservableVector<winrt::YourApp::MessageItem> m_messages;
     };
 }
 

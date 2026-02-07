@@ -102,9 +102,10 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
 
     options.onToken = [this](const std::string& token) {
         this->DispatcherQueue().TryEnqueue([this, token]() {
-            auto  message  = winrt::make<MessageItem>("assistant", "");
+            //auto  message  = winrt::make<MessageItem>("assistant", "");
             //this->Messages.Append(winrt::to_hstring(token));
-            this->Messages.Append(winrt::make<MessageItem>("assistant", ""));
+            //this->Messages.Append(winrt::make<MessageItem>("assistant", ""));
+            //Messages.Append(winrt::make<MessageItem>(L"user", L"Hello world"));
         });
     };
 
@@ -116,3 +117,9 @@ void winrt::AIOneWinUI::implementation::MainWindow::TextBox_KeyDown(winrt::Windo
     //if ( e.Key == winrt::Microsoft::UI::Xaml::Input::IKeyRoutedEventArgs)
     if ( e.Key() == winrt::Windows::System::VirtualKey::Enter) Send();
 }
+
+
+//Windows::Foundation::Collections::IObservableVector<winrt::AIOneWinUI::implementation::MessageItem> winrt::AIOneWinUI::implementation::MainWindow::Messages()
+//{
+//    return m_messages;
+//}

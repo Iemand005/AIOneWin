@@ -30,7 +30,7 @@ MainPage::MainPage()
 	InitializeComponent();
 
 	AIManager = std::make_unique<ModelManager>();
-	Messages = ref new Vector<Message^>();
+	Messages = ref new Vector<MessageItem^>();
 }
 
 void MainPage::LoadLLModel(String^ path)
@@ -78,8 +78,8 @@ void MainPage::SendMessage()
 	auto message = MessageInput->Text;
 	MessageInput->Text = "";
 
-	Messages->Append(ref new Message("User", message));
-	AssistantMessage = ref new Message("Assistant");
+	Messages->Append(ref new MessageItem("User", message));
+	AssistantMessage = ref new MessageItem("Assistant");
 
 	AsyncTextGenOptions options;
 	auto self = this;

@@ -11,7 +11,7 @@ using namespace Windows::UI::Xaml::Data;
 
 namespace AIOneUWPCX
 {
-	public ref class Message sealed : INotifyPropertyChanged
+	public ref class MessageItem sealed : INotifyPropertyChanged
 	{
 	public:
 		property String^ Role
@@ -69,21 +69,21 @@ namespace AIOneUWPCX
 			}
 		}
 
-		Message() {
+		MessageItem() {
 			_role = "";
 			_text = "";
 			_thoughts = "";
 			_thinking = false;
 		}
 
-		Message(String^ role) {
+		MessageItem(String^ role) {
 			_role = role;
 			_text = "";
 			_thoughts = "";
 			_thinking = false;
 		}
 
-		Message(String^ role, String^ text) {
+		MessageItem(String^ role, String^ text) {
 			_role = role;
 			_text = text;
 			_thoughts = "";
