@@ -114,7 +114,7 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 	//auto message = MexxageInput
 	auto message = MessageInput->Text;
 
-	Messages->Append(ref new Message("User", MessageInput->Text));
+	Messages->Append(ref new Message("User", message));
 	MessageInput->Text = "";
 	auto assistantMessage = ref new Message("Assistant");
 	Messages->Append(assistantMessage);
@@ -168,5 +168,5 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 			assistantMessage->Text += "oopsiee";
 					}
 		};
-	modelManager->getChatManager()->sendAsync(this->MessageInput->Text->Data(), options);
+	modelManager->getChatManager()->sendAsync(message->Data(), options);
 }
