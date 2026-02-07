@@ -1,25 +1,25 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 4781215,
-    "totalActiveTime": 52426
+    "totalFocusTime": 6388054,
+    "totalActiveTime": 146541
   },
   "files": {
     ".gitignore": {
-      "pending": 15660,
-      "focus": 376113
+      "pending": 25232,
+      "focus": 416050
     },
     ".gitmodules": {
       "pending": 1520,
-      "focus": 38727
+      "focus": 40266
     },
     "AIOneWin.slnx": {
       "pending": 0,
-      "focus": 26947
+      "focus": 27891
     },
     "AIOne/CMakeLists.txt": {
-      "pending": 23768,
-      "focus": 477739
+      "pending": 46711,
+      "focus": 639643
     },
     "AIOne/src/AIOneAPI.hpp": {
       "pending": 545,
@@ -38,16 +38,32 @@
       "focus": 11017
     },
     "AIOne/external/llama.cpp/common/common.cpp": {
-      "pending": 1253,
-      "focus": 143309
+      "pending": 7944,
+      "focus": 215768
     },
     "AIOne/external/llama.cpp/src/llama-mmap.cpp": {
-      "pending": 0,
-      "focus": 147508
+      "pending": 26780,
+      "focus": 548848
     },
     "build_uwp.cmd": {
-      "pending": 6188,
-      "focus": 504794
+      "pending": 13458,
+      "focus": 678108
+    },
+    "build/AIOne/llama.cpp_build/common/build-info.cpp": {
+      "pending": 1154,
+      "focus": 36506
+    },
+    "AIOne/src/LLModel.cpp": {
+      "pending": 8445,
+      "focus": 96143
+    },
+    "AIOne/src/TextGenOptions.hpp": {
+      "pending": 1408,
+      "focus": 28304
+    },
+    "AIOne/src/ModelFactory.hpp": {
+      "pending": 9852,
+      "focus": 63768
     }
   }
 }

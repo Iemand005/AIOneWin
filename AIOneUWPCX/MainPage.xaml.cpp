@@ -50,7 +50,8 @@ void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::X
 		if (file == nullptr) return;
 		auto name = file->Name;
 
-		LLModelOptions options;
+		LLModelOptionsAsync options;
+		//options.
 		auto self = this;
 		options.onProgress = [self](float progress) -> void
 		{
@@ -60,8 +61,33 @@ void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::X
 					self->ModelProgressBar->Value = progress * 100;
 					}));;;;
 		};
+		options.onDone = []() {
+		
+			};
 
-		this->modelManager->loadLLMAsync(file->Name->Data(), options);
+		this->modelManager->loadLLMAsync(file->Path->Data(), options);
 		});
 	//this->modelManager->
+}
+
+void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	//auto message = MexxageInput
+	auto message = MessageInput->Text;
+	AsyncTextGenOptions options;
+	auto self = this;
+
+	options.onDone = [](const TextGenResult& output) {
+		
+		};
+
+		options.onToken = [self](std::string token) {
+			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
+				ref new Windows::UI::Core::DispatchedHandler([self, token]()
+					{
+					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+						self->MessageInput->Text = ref new String(converter.from_bytes(token).c_str());
+					}));;;;
+		};
+	modelManager->getChatManager()->sendAsync(this->MessageInput->Text->Data(), options);
 }

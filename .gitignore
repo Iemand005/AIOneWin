@@ -4,3 +4,5 @@ Debug
 Generated Files
 *.pfx
 build*/
+GitMo
+CmakeFiles

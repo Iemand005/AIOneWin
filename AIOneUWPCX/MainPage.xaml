@@ -30,8 +30,8 @@
 				<ColumnDefinition Width="20"/>
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			<TextBox Grid.Column="0"></TextBox>
-			<Button Grid.Column="2">Send</Button>
+			<TextBox x:Name="MessageInput" Grid.Column="0"></TextBox>
+			<Button Grid.Column="2" Click="Button_Click_1">Send</Button>
 		</Grid>
 	</Grid>
 </Page>

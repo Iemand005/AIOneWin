@@ -96,7 +96,7 @@
     <PackageCertificateThumbprint>B70B5CBA486CCA149F45BEE1D04B12F39B37BB5D</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
@@ -133,7 +133,7 @@
       <AdditionalDependencies>AIOneCore.lib;llama.lib;common.lib;ggml.lib;ggml-base.lib;ggml-cpu.lib;stable-diffusion.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOneUWP" -A x64 -DAIONE_UWP=true -DWINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
+      <Command>cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOneUWP" -A x64 -DAIONE_UWP=true -DWINAPI_FAMILY=WINAPI_FAMILY_APP
 cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
