@@ -133,7 +133,7 @@
       <AdditionalDependencies>AIOneCore.lib;llama.lib;common.lib;ggml.lib;ggml-base.lib;ggml-cpu.lib;stable-diffusion.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOneUWP" -A x64 -DAIONE_UWP=true -DWINAPI_FAMILY=WINAPI_FAMILY_APP
+      <Command>cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOne" -A x64 -DAIONE_UWP=true
 cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
