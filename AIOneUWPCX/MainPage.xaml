@@ -6,23 +6,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" d:DesignHeight="484" d:DesignWidth="1152">
 
-    <Grid Margin="20">
+	<Grid Margin="20">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="20"/>
 			<RowDefinition/>
+			<RowDefinition Height="20"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<!--<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="20"/>
-			<ColumnDefinition Width="Auto"/>-->
-		</Grid.ColumnDefinitions>
-		<Button Grid.ColumnSpan="2" Grid.Row="0">Load model</Button>
-		<StackPanel Grid.Row="2" Orientation="Horizontal">
-			<TextBox Grid.Column="0" Grid.Row="2"></TextBox>
-			<Button Grid.Column="2" Grid.Row="2">Send</Button>
-		</StackPanel>
-    </Grid>
+		<Button HorizontalAlignment="Stretch" Click="Button_Click">Load model</Button>
+		<ProgressBar x:Name="ModelProgressBar" Grid.Row="1" Value="24" Maximum="100"/>
+		<ListView Grid.Row="3" SelectionChanged="ListView_SelectionChanged">
+		</ListView>
+		<Grid Grid.Row="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="20"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<TextBox Grid.Column="0"></TextBox>
+			<Button Grid.Column="2">Send</Button>
+		</Grid>
+	</Grid>
 </Page>

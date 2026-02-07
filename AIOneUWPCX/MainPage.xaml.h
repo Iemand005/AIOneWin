@@ -7,6 +7,8 @@
 
 #include "MainPage.g.h"
 
+#include <AIOne>
+
 namespace AIOneUWPCX
 {
 	/// <summary>
@@ -17,5 +19,10 @@ namespace AIOneUWPCX
 	public:
 		MainPage();
 
+	private:
+		void ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
+		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		ModelManagerPtr modelManager;
 	};
 }
