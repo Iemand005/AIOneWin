@@ -90,7 +90,23 @@ void winrt::AIOneWinUI::implementation::MainWindow::LoadModelButton_Click(winrt:
 }
 
 void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
+    auto text = this->MessageInput().Text().c_str();
 
+    //this->MessageInput().Text("");
+
+    //auto message = t
+
+
+
+    AsyncTextGenOptions options;
+
+    options.onToken = [this](const std::string& token) {
+        this->DispatcherQueue().TryEnqueue([this, token]() {
+            this->Messages.Append(winrt::to_hstring(token));
+        });
+    };
+
+    modelManager->getChatManager()->sendAsync(text, options);
 }
 
 void winrt::AIOneWinUI::implementation::MainWindow::TextBox_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)

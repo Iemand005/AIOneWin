@@ -90,17 +90,23 @@ void MainPage::SendMessage()
 		}));
 	};
 
+	options.onGenerationStart = [self]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self]() {
+			self->Messages->Append(self->AssistantMessage);
+		}));
+	};
+
 	options.onDone = [self](const TextGenResult &result) {
-		self->HasAssistantSent = false;
+		//self->HasAssistantSent = false;
 	};
 
 	options.onTokenReasoning = [self](std::string token, bool reasoning) {
 		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, token, reasoning]() {
 			try {
-				if (!self->HasAssistantSent) {
+				/*if (!self->HasAssistantSent) {
 					self->Messages->Append(self->AssistantMessage);
 					self->HasAssistantSent = true;
-				}
+				}*/
 
 				std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 				String^ newToken = ref new String(converter.from_bytes(token).c_str());;

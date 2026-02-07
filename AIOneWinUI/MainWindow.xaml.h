@@ -2,8 +2,15 @@
 
 #include "MainWindow.g.h"
 
-#include <AIOne>
+//#include <AIOne>
 //#pragma comment(lib, "AIOneCore.lib")
+
+#include <winrt/Microsoft.UI.Xaml.h>
+#include <winrt/Microsoft.UI.Xaml.Controls.h>
+#include <winrt/Microsoft.UI.Xaml.Data.h>
+#include <winrt/Windows.Foundation.Collections.h>
+#include <winrt/Windows.Foundation.h>
+#include "MessageItem.h"
 
 namespace winrt::AIOneWinUI::implementation
 {
@@ -11,14 +18,17 @@ namespace winrt::AIOneWinUI::implementation
     {
         ModelManagerPtr modelManager;
 
+        //Vector
+
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::hstring> Messages{ nullptr };
+
         MainWindow()
         {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-
+            Messages = winrt::single_threaded_observable_vector<winrt::hstring>();
             modelManager = std::make_unique<ModelManager>();
 
             //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
+
         }
 
         int32_t MyProperty();

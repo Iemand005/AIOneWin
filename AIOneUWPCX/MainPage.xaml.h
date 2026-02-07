@@ -38,7 +38,7 @@ namespace AIOneUWPCX
 
 		ModelManagerPtr AIManager;
 		Message^ AssistantMessage;
-		Boolean HasAssistantSent = false;
+		//Boolean HasAssistantSent = false;
 
 	};
 }
