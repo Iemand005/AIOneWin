@@ -88,10 +88,10 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 	SendMessage();
 }
 
-template<typename T>
-void MainPage::RunAsync(std::function<T> func) {
-	Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler(func));
-}
+////t/*emplate<typename Fn>
+//void MainPage::RunAsync(std::function<T> func) {
+//	Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler(func));
+//}*/
 
 void MainPage::SendMessage()
 {

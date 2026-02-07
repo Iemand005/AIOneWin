@@ -52,8 +52,18 @@ namespace AIOneUWPCX
 
 		void LoadLLModel(String^ path);
 		void SendMessage();
-		template<typename T>
-		void RunAsync(std::function<void(T)> func);
+		/*template<typename T>
+		void RunAsync(std::function<void(T)> func);*/
+
+		template <typename Fn>
+		void RunAsync(Fn&& fn) {
+			return [this, fn = std::forward<Fn>(fn)](auto &&...args) {
+				auto task = std::bind(fn, std::forward<decltype(args)>(args)...);
+				Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([task = std::move(task)]() {
+					task();
+				}));
+			}
+		}
 
 		ModelManagerPtr AIManager;
 		Message^ AssistantMessage;
