@@ -123,6 +123,5 @@ void MainPage::SendButton_Click(Object^ sender, RoutedEventArgs^ e)
 
 void MainPage::InputTextBox_KeyDown(Object^ sender, KeyRoutedEventArgs^ e)
 {
-	if (e->Key == VirtualKey::Enter)
-		SendMessage();
+	if (e->Key == VirtualKey::Enter) SendMessage();
 }
