@@ -104,7 +104,7 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)AIOne\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOne" -A x64
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cmake -S "$(SolutionDir)AIOne" -B "$(SolutionDir)build\AIOne" -A x64 -DWINAPI_FAMILY=WINAPI_FAMILY_APP
 cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
     </PreBuildEvent>
     <Link>

@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 3154133,
-    "totalActiveTime": 106886
+    "totalFocusTime": 3281634,
+    "totalActiveTime": 107435
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
@@ -27,15 +27,15 @@
     },
     "build_uwp.cmd": {
       "pending": 3585,
-      "focus": 36151
+      "focus": 42593
     },
     "AIOne/CMakeLists.txt": {
       "pending": 19068,
-      "focus": 208233
+      "focus": 218693
     },
     "AIOneWinUI/AIOneWinUI.vcxproj": {
-      "pending": 2231,
-      "focus": 70873
+      "pending": 2780,
+      "focus": 89237
     },
     "AIOne/external/llama.cpp/src/CMakeLists.txt": {
       "pending": 0,
