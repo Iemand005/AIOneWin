@@ -22,6 +22,7 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+//using namespace Windows::UI::Core::;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -92,10 +93,24 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 		
 		};*/
 
+	options.onThinkStart = [self, assistantMessage]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([assistantMessage]()
+			{
+				assistantMessage->Reasoning = true;
+			}));;;;
+			};
+
+	options.onThinkEnd = [self, assistantMessage]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([assistantMessage]()
+			{
+				assistantMessage->Reasoning = false;
+
+			}));;;;
+		};
+
 		options.onTokenReasoning = [self, assistantMessage](std::string token, bool reasoning) {
 		try{
-			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
-				ref new Windows::UI::Core::DispatchedHandler([self, assistantMessage, token, reasoning]()
+			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([self, assistantMessage, token, reasoning]()
 					{
 						try {
 					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;

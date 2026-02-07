@@ -51,19 +51,42 @@ namespace AIOneUWPCX
 			}
 		}
 
+		property Boolean Reasoning
+		{
+			Boolean get() { return _thinking; }
+			void set(Boolean value)
+			{
+				if (_thinking == value) return;
+				_thinking = value;
+				OnPropertyChanged("Reasoning");
+				OnPropertyChanged("HasThought");
+			}
+		}
+
+		property Boolean HasThought
+		{
+			Boolean get() { return !_thoughts->IsEmpty(); }
+		}
+
 		Message() {
 			_role = "";
 			_text = "";
+			_thoughts = "";
+			_thinking = false;
 		}
 
 		Message(String^ role) {
 			_role = role;
 			_text = "";
+			_thoughts = "";
+			_thinking = false;
 		}
 
 		Message(String^ role, String^ text) {
 			_role = role;
 			_text = text;
+			_thoughts = "";
+			_thinking = false;
 		}
 
 		virtual event PropertyChangedEventHandler^ PropertyChanged;
@@ -78,6 +101,7 @@ namespace AIOneUWPCX
 		String^ _role;
 		String^ _text;
 		String^ _thoughts;
+		Boolean _thinking;
 	};
 
 	public ref class BoolToVisibilityConverter sealed : IValueConverter
