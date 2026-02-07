@@ -43,10 +43,10 @@
 				<DataTemplate x:DataType="local:Message">
 					<StackPanel>
 						<TextBlock Text="{x:Bind Role, Mode=OneWay}" Margin="0,5,5,0" FontWeight="Bold" FontSize="14" />
-						<ToggleButton x:Name="ExpandButton" FontWeight="SemiBold" Background="Transparent" Visibility="{x:Bind ReasoningVisibility}">
+						<ToggleButton x:Name="ExpandButton" FontWeight="SemiBold" Background="Transparent" Visibility="{x:Bind ReasoningVisibility, Mode=OneWay}">
 							<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 								<TextBlock Text="▶ Reasoning" Margin="0,0,5,0"/>
-								<ProgressRing Width="16" Height="16" IsActive="{x:Bind Reasoning}"/>
+								<ProgressRing Width="16" Height="16" IsActive="{x:Bind Reasoning, Mode=OneWay}"/>
 							</StackPanel>
 						</ToggleButton>
 						<StackPanel Margin="20,5,0,0" Visibility="{Binding IsChecked, ElementName=ExpandButton, Converter={StaticResource BoolToVisibility}}">

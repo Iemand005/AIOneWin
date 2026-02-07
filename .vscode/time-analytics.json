@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 895972,
-    "totalActiveTime": 39299
+    "totalFocusTime": 2111918,
+    "totalActiveTime": 42596
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
@@ -14,8 +14,8 @@
       "focus": 1874
     },
     "AIOne/src/LLModel.cpp": {
-      "pending": 39299,
-      "focus": 424024
+      "pending": 42596,
+      "focus": 441876
     }
   }
 }

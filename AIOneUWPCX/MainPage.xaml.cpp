@@ -36,13 +36,13 @@ MainPage::MainPage()
 
 	Messages = ref new Vector<Message^>();
 
-	try {
+	/*try {
 		String^ path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
 		this->LoadLLModel(path);
 	}
 	catch (...) {
 
-	}
+	}*/
 }
 
 void AIOneUWPCX::MainPage::ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
@@ -75,13 +75,15 @@ void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::X
 	picker->SuggestedStartLocation = PickerLocationId::DocumentsLibrary;
 	picker->FileTypeFilter->Append(".gguf");
 
-	String^ path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
-	this->LoadLLModel(path);
+	/*String^ path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
+	this->LoadLLModel(path);*/
 	
 	auto operation = picker->PickSingleFileAsync();
 	operation->Completed = ref new AsyncOperationCompletedHandler<StorageFile^>([this](IAsyncOperation<StorageFile^>^ operation, AsyncStatus status)
 	{
 		if (status != AsyncStatus::Completed) return;
+			/*String^ path = "C:\\Users\\Lasse\\AppData\\Local\\Packages\\AIOneUWP_zegaqbnttjt0p\\LocalState\\Qwen3 - 0.6B - Q8_0.gguf";
+			this->LoadLLModel(path);*/
 		auto file = operation->GetResults();
 		if (file == nullptr) return;
 
