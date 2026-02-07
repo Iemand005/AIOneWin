@@ -1,12 +1,21 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 77560
+    "totalFocusTime": 405890,
+    "totalActiveTime": 39299
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
       "pending": 0,
-      "focus": 9442
+      "focus": 29952
+    },
+    "AIOne/src/LLModel.hpp": {
+      "pending": 0,
+      "focus": 1874
+    },
+    "AIOne/src/LLModel.cpp": {
+      "pending": 39299,
+      "focus": 363996
     }
   }
 }
