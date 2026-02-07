@@ -5,6 +5,8 @@
 #include <AIOne>
 #pragma comment(lib, "AIOneCore.lib")
 
+using namespace Microsoft::UI::Windowing;
+
 namespace winrt::AIOneWinUI::implementation
 {
     struct MainWindow : MainWindowT<MainWindow>
@@ -17,6 +19,8 @@ namespace winrt::AIOneWinUI::implementation
             // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
 
             modelManager = std::make_unique<ModelManager>();
+
+            //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
         }
 
         int32_t MyProperty();

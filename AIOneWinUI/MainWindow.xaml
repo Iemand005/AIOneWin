@@ -8,8 +8,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="AIOneWinUI">
+	<!--<Window.SystemBackdrop>
 
-	<Grid>
+	</Window.SystemBackdrop>-->
+	<Window.Resources>
+		<AcrylicBrush x:Key="MicaBrush"
+                  BackgroundSource="HostBackdrop"
+                  TintColor="#00000000"
+                  TintOpacity="0.5"
+                  FallbackColor="#FF1E1E1E"/>
+	</Window.Resources>
+
+	<Grid Margin="20" Background="{StaticResource MicaBrush}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
@@ -17,13 +27,32 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="10"/>
-			<RowDefinition/>
-			<RowDefinition Height="20"/>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<Button x:Name="LoadModelButton" Click="LoadModelButton_Click">Load Model</Button>
-
-		<TextBox></TextBox>
-		<Button x:Name="SendButton" Click="SendButton_Click">Send</Button>
+		<Button x:Name="LoadModelButton" Click="LoadModelButton_Click" HorizontalAlignment="Stretch">Load Model</Button>
+		<ProgressBar Grid.Row="1" Visibility="Collapsed"/>
+		<ContentControl Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsEnabled="False">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="10"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="10"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<ListView>
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="Hi"/>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+				<TextBox Grid.Row="2"></TextBox>
+				<Button Grid.Row="2" Grid.Column="2" x:Name="SendButton" Click="SendButton_Click">Send</Button>
+			</Grid>
+		</ContentControl>
     </Grid>
 </Window>
