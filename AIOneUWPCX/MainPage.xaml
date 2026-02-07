@@ -36,9 +36,9 @@
 			<RowDefinition Height="20"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<Button HorizontalAlignment="Stretch" Click="Button_Click">Load model</Button>
+		<Button HorizontalAlignment="Stretch" Click="LoadModelButton_Click">Load model</Button>
 		<ProgressBar x:Name="ModelProgressBar" Grid.Row="1" Value="0" Maximum="100"/>
-		<ListView Grid.Row="3" ItemsSource="{x:Bind Messages, Mode=OneWay}" SelectionChanged="ListView_SelectionChanged">
+		<ListView Grid.Row="3" ItemsSource="{x:Bind Messages, Mode=OneWay}" SelectionMode="None">
 			<ListView.ItemTemplate>
 				<DataTemplate x:DataType="local:Message">
 					<StackPanel>
@@ -64,7 +64,7 @@
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 			<TextBox x:Name="MessageInput" Grid.Column="0" KeyDown="InputTextBox_KeyDown"></TextBox>
-			<Button Grid.Column="2" Click="Button_Click_1">Send</Button>
+			<Button Grid.Column="2" Click="SendButton_Click">Send</Button>
 		</Grid>
 	</Grid>
 </Page>

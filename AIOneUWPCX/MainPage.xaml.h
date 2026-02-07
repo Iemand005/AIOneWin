@@ -45,25 +45,14 @@ namespace AIOneUWPCX
 
 		property Windows::Foundation::Collections::IObservableVector<Message^>^ Messages;
 	private:
-		void ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e);
-		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		void Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void LoadModelButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void SendButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e);
 
 		void LoadLLModel(String^ path);
 		void SendMessage();
-		/*template<typename T>
-		void RunAsync(std::function<void(T)> func);*/
-
-		template <typename Fn>
-		void RunAsync(Fn&& fn) {
-			return [this, fn = std::forward<Fn>(fn)](auto &&...args) {
-				auto task = std::bind(fn, std::forward<decltype(args)>(args)...);
-				Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler([task = std::move(task)]() {
-					task();
-				}));
-			}
-		}
+		template<typename Fn>
+		void RunAsync(Fn func);
 
 		ModelManagerPtr AIManager;
 		Message^ AssistantMessage;

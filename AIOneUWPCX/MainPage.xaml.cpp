@@ -15,6 +15,7 @@ using namespace Windows::Foundation::Collections;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Pickers;
 using namespace Windows::System;
+using namespace Windows::UI;
 using namespace Windows::UI::Core;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
@@ -23,7 +24,6 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
-//using namespace Windows::UI::Core::;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,39 +35,31 @@ MainPage::MainPage()
 	Messages = ref new Vector<Message^>();
 }
 
-void AIOneUWPCX::MainPage::ListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
+void MainPage::LoadLLModel(String^ path)
 {
-
-}
-
-void AIOneUWPCX::MainPage::LoadLLModel(String^ path)
-{
+	ModelProgressBar->Visibility = Windows::UI::Xaml::Visibility::Visible;
 	LLModelOptionsAsync options;
 	auto self = this;
-	options.onProgress = [self](float progress) -> void
-		{
-			self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal,
-				ref new Windows::UI::Core::DispatchedHandler([self, progress]()
-					{
-						self->ModelProgressBar->Value = progress * 100;
-					}));;;;
-		};
-	options.onDone = []() {
+	options.onProgress = [self](float progress) -> void {
+		self->RunAsync([self, progress]() {
+			self->ModelProgressBar->Value = progress * 100;
+		});
+	};
+	options.onDone = [self]() {
 
-		};
+	};
 
 	AIManager->loadLLMAsync(path->Data(), options);
 }
 
-void AIOneUWPCX::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::LoadModelButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	auto picker	 = ref new FileOpenPicker();
 	picker->SuggestedStartLocation = PickerLocationId::DocumentsLibrary;
 	picker->FileTypeFilter->Append(".gguf");
 
 	auto operation = picker->PickSingleFileAsync();
-	operation->Completed = ref new AsyncOperationCompletedHandler<StorageFile^>([this](IAsyncOperation<StorageFile^>^ operation, AsyncStatus status)
-	{
+	operation->Completed = ref new AsyncOperationCompletedHandler<StorageFile^>([this](IAsyncOperation<StorageFile^>^ operation, AsyncStatus status) {
 		if (status != AsyncStatus::Completed) return;
 			
 		auto file = operation->GetResults();
@@ -83,15 +75,7 @@ std::string trimLeadingNewlines(const std::string& s) {
 	return s.substr(start);
 }
 
-void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-	SendMessage();
-}
 
-////t/*emplate<typename Fn>
-//void MainPage::RunAsync(std::function<T> func) {
-//	Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler(func));
-//}*/
 
 void MainPage::SendMessage()
 {
@@ -104,10 +88,8 @@ void MainPage::SendMessage()
 	AsyncTextGenOptions options;
 	auto self = this;
 
-	options.onThinkStateChange = [self](bool thinking)
-	{
-		self->RunAsync([self, thinking]()
-		{
+	options.onThinkStateChange = [self](bool thinking) {
+		self->RunAsync([self, thinking]() {
 			self->AssistantMessage->Reasoning = thinking;
 		});
 	};
@@ -117,8 +99,7 @@ void MainPage::SendMessage()
 	};
 
 	options.onTokenReasoning = [self](std::string token, bool reasoning) {
-		self->RunAsync([self, token, reasoning]()
-		{
+		self->RunAsync([self, token, reasoning]() {
 			try {
 				if (!self->HasAssistantSent) {
 					self->Messages->Append(self->AssistantMessage);
@@ -137,22 +118,29 @@ void MainPage::SendMessage()
 			catch (...) {
 				self->AssistantMessage->Text += "";
 			}
-		}));
+		});
 	};
 	AIManager->getChatManager()->sendAsync(message->Data(), options);
+}
+
+void MainPage::SendButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	SendMessage();
 }
 
 void MainPage::InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
 {
 	if (e->Key == VirtualKey::Enter)
 	{
-		auto textBox = dynamic_cast<TextBox^>(sender);
-		auto message = textBox->Text;
-
 		SendMessage();
 
-		textBox->Text = "";
-
-		e->Handled = true;
+		//e->Handled = true;
 	}
+}
+
+template<typename Fn>
+void MainPage::RunAsync(Fn task) {
+	Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([task]() {
+		task();
+	}));
 }
