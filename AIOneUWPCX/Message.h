@@ -47,7 +47,7 @@ namespace AIOneUWPCX
 			}
 		}
 
-		property Boolean Reasoning
+		property Boolean IsReasoning
 		{
 			Boolean get() { return _thinking; }
 			void set(Boolean value)

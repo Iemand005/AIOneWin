@@ -46,7 +46,7 @@
 						<ToggleButton x:Name="ExpandButton" FontWeight="SemiBold" Background="Transparent" Visibility="{x:Bind ReasoningVisibility, Mode=OneWay}">
 							<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 								<TextBlock Text="▶ Reasoning" Margin="0,0,5,0"/>
-								<ProgressRing Width="16" Height="16" IsActive="{x:Bind Reasoning, Mode=OneWay}"/>
+								<ProgressRing Width="16" Height="16" IsActive="{x:Bind IsReasoning, Mode=OneWay}"/>
 							</StackPanel>
 						</ToggleButton>
 						<StackPanel Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=ExpandButton, Converter={StaticResource BoolToVisibility}}">

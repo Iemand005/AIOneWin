@@ -51,8 +51,8 @@ namespace AIOneUWPCX
 
 		void LoadLLModel(String^ path);
 		void SendMessage();
-		template<typename Fn>
-		void RunAsync(Fn func);
+		//template<typename Fn>
+		//void RunAsync(Fn func);
 
 		ModelManagerPtr AIManager;
 		Message^ AssistantMessage;

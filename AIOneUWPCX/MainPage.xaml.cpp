@@ -41,9 +41,9 @@ void MainPage::LoadLLModel(String^ path)
 	LLModelOptionsAsync options;
 	auto self = this;
 	options.onProgress = [self](float progress) -> void {
-		self->RunAsync([self, progress]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, progress]() {
 			self->ModelProgressBar->Value = progress * 100;
-		});
+		}));
 	};
 	options.onDone = [self]() {
 
@@ -89,9 +89,9 @@ void MainPage::SendMessage()
 	auto self = this;
 
 	options.onThinkStateChange = [self](bool thinking) {
-		self->RunAsync([self, thinking]() {
-			self->AssistantMessage->Reasoning = thinking;
-		});
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, thinking]() {
+			self->AssistantMessage->IsReasoning = thinking;
+		}));
 	};
 
 	options.onDone = [self](const TextGenResult &result) {
@@ -99,7 +99,7 @@ void MainPage::SendMessage()
 	};
 
 	options.onTokenReasoning = [self](std::string token, bool reasoning) {
-		self->RunAsync([self, token, reasoning]() {
+		self->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([self, token, reasoning]() {
 			try {
 				if (!self->HasAssistantSent) {
 					self->Messages->Append(self->AssistantMessage);
@@ -118,7 +118,7 @@ void MainPage::SendMessage()
 			catch (...) {
 				self->AssistantMessage->Text += "";
 			}
-		});
+		}));
 	};
 	AIManager->getChatManager()->sendAsync(message->Data(), options);
 }
@@ -138,9 +138,9 @@ void MainPage::InputTextBox_KeyDown(Platform::Object^ sender, Windows::UI::Xaml:
 	}
 }
 
-template<typename Fn>
-void MainPage::RunAsync(Fn task) {
-	Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([task]() {
-		task();
-	}));
-}
+//template<typename Fn>
+//void MainPage::RunAsync(Fn task) {
+//	Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new Windows::UI::Core::DispatchedHandler([task]() {
+//		task();
+//	}));
+//}

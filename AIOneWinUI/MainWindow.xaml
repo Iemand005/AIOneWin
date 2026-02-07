@@ -10,7 +10,20 @@
     Title="AIOneWinUI">
 
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="10"/>
+			<RowDefinition/>
+			<RowDefinition Height="20"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Button x:Name="LoadModelButton" Click="LoadModelButton_Click">Load Model</Button>
+
 		<TextBox></TextBox>
-		<Button >Snd</Button>
+		<Button x:Name="SendButton" Click="SendButton_Click">Send</Button>
     </Grid>
 </Window>
