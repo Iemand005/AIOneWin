@@ -59,11 +59,15 @@
     },
     "AIOne/src/TextGenOptions.hpp": {
       "pending": 1408,
-      "focus": 28304
+      "focus": 37525
     },
     "AIOne/src/ModelFactory.hpp": {
       "pending": 9852,
       "focus": 63768
+    },
+    "AIOne/src/LLModelOptions.hpp": {
+      "pending": 0,
+      "focus": 2275
     }
   }
 }
