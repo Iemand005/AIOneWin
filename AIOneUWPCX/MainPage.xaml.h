@@ -20,6 +20,15 @@ namespace AIOneUWPCX
 	public:
 		property Platform::String^ Role;
 		property Platform::String^ Text;
+
+		Message() {
+			Role = "";
+			Text = "";
+		}
+		Message(String^ role, String^ text = "") {
+			Role = role;
+			Text = text;
+		}
 	};
 
 	/// <summary>

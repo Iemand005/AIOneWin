@@ -77,6 +77,9 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 {
 	//auto message = MexxageInput
 	auto message = MessageInput->Text;
+
+	Messages->Append(ref new Message("User", MessageInput->Text));
+
 	AsyncTextGenOptions options;
 	auto self = this;
 
@@ -91,7 +94,9 @@ void AIOneUWPCX::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI:
 					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 						//self->MessageInput->Text = ref new String(converter.from_bytes(token).c_str());
 						String^ msg = ref new String(converter.from_bytes(token).c_str());;
+						self->Messages->Append(ref new Message("Assistant", msg));
 						//self->messages->
+						
 					}));;;;
 		};
 	modelManager->getChatManager()->sendAsync(this->MessageInput->Text->Data(), options);
