@@ -3,9 +3,7 @@
 #include "MainWindow.g.h"
 
 #include <AIOne>
-#pragma comment(lib, "AIOneCore.lib")
-
-using namespace Microsoft::UI::Windowing;
+//#pragma comment(lib, "AIOneCore.lib")
 
 namespace winrt::AIOneWinUI::implementation
 {
@@ -25,7 +23,6 @@ namespace winrt::AIOneWinUI::implementation
 
         int32_t MyProperty();
         void MyProperty(int32_t value);
-        //void Button_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void SendButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void LoadModelButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
     };

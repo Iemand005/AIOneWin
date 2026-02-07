@@ -24,8 +24,8 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Button x:Name="LoadModelButton" Click="LoadModelButton_Click" HorizontalAlignment="Stretch">Load Model</Button>
-		<ProgressBar x:Name="LoadProgressBar" Grid.Row="1" Visibility="Collapsed"/>
-		<ContentControl x:Name="MessageControl" Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsEnabled="False">
+		<ProgressBar Grid.Row="1" Visibility="Collapsed"/>
+		<ContentControl Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsEnabled="False">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>

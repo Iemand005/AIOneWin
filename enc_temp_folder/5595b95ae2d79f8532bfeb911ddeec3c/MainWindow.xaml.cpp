@@ -15,7 +15,6 @@
 #include <winrt/Microsoft.UI.Windowing.h>
 #include <microsoft.ui.xaml.window.h>
 #include <ShObjIdl_core.h>
-#include <winrt/Microsoft.UI.Dispatching.h>
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -58,27 +57,5 @@ void winrt::AIOneWinUI::implementation::MainWindow::LoadModelButton_Click(winrt:
     picker.SuggestedStartLocation(winrt::Windows::Storage::Pickers::PickerLocationId::DocumentsLibrary);
     picker.FileTypeFilter().Append(L".gguf");
 
-    winrt::Windows::Storage::StorageFile file = picker.PickSingleFileAsync().get();
-
-    if (file)
-    {
-        std::wstring path = file.Path().c_str();
-
-        LLModelOptionsAsync options;
-
-        options.onProgress = [this](float progress) {
-            winrt::Microsoft::UI::Dispatching::DispatcherQueue dispatcher = this->DispatcherQueue();
-            dispatcher.TryEnqueue([this, progress]() {
-                this->LoadProgressBar().Value(progress * 100);
-            });
-        };
-
-        options.onDone = [this]() {
-            this->DispatcherQueue().TryEnqueue([this]() {
-                this->MessageControl().IsEnabled(true);
-            });
-        };
-
-        modelManager->loadLLMAsync(path, options);
-    }
+    picker.PickSingleFileAsync();
 }
