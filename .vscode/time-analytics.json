@@ -2,7 +2,7 @@
   "version": "1.0",
   "project": {
     "totalFocusTime": 3281634,
-    "totalActiveTime": 107435
+    "totalActiveTime": 108534
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
@@ -18,8 +18,8 @@
       "focus": 470550
     },
     "AIOne/external/llama.cpp/src/llama-mmap.cpp": {
-      "pending": 31898,
-      "focus": 224625
+      "pending": 32446,
+      "focus": 225173
     },
     "AIOne/external/llama.cpp/common/common.cpp": {
       "pending": 7508,
@@ -48,6 +48,10 @@
     "AIOne/external/llama.cpp/CMakeLists.txt": {
       "pending": 0,
       "focus": 24796
+    },
+    ".gitignore": {
+      "pending": 551,
+      "focus": 551
     }
   }
 }
