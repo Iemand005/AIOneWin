@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 7382425,
+    "totalFocusTime": 8670330,
     "totalActiveTime": 311157
   },
   "files": {
@@ -71,7 +71,7 @@
     },
     "AIOneWinUI/MainWindow.xaml": {
       "pending": 4008,
-      "focus": 1310269
+      "focus": 24859197
     }
   }
 }
