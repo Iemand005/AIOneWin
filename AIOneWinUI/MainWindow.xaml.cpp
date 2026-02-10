@@ -14,7 +14,7 @@
 //#include <Win32Interop.h>
 #include <winrt/Microsoft.UI.Windowing.h>
 #include <microsoft.ui.xaml.window.h>
-//#include <ShObjIdl_core.h>
+#include <ShObjIdl_core.h>
 #include <winrt/Microsoft.UI.Dispatching.h>
 
 using namespace winrt;
