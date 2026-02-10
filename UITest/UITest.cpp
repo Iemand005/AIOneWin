@@ -134,9 +134,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	auto *accept_btn = (Button *)pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardDefaultButton"));
 	auto *reject_btn = (Button *)pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardAlternateButton"));
 
-	auto *edit_box = (Edit *)pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardEditBox"));
+	auto *messageInput = (Edit *)pWizardMain->FindDescendent(StrToID((UCString)L"MessageEditBox"));
 
-	auto *prog = pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
+	auto *progressSpinner = pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
 
 	LogListener lis;
 	hr = pWizardMain->AddListener(&lis);
@@ -147,18 +147,16 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	EventListener click_listener([&](Element*elem, Event*ev) {
 		if (ev->flag != GMF_BUBBLED)
 			return;
-	  if (ev->type == TouchButton::Click) {
+		if (ev->type == TouchButton::Click) {
 			btn_count++;
-			hr = title_elem->SetContentString((UCString)std::format(L"Clicked {} times", btn_count).c_str());
-                        ThrowIfFailed(hr);
-			prog->SetVisible(true);
+            ThrowIfFailed(title_elem->SetContentString((UCString)std::format(L"Clicked {} times", btn_count).c_str()));
+			progressSpinner->SetVisible(true);
 		}
 		if (ev->type == Edit::Enter) {
-			prog->SetVisible(false);
+			progressSpinner->SetVisible(false);
 			Value *txt;
-			edit_box->GetContentString(&txt);
-      hr = title_elem->SetContentString((UCString)std::format(L"Entered: {}", (LPCWSTR)txt->GetString()).c_str());
-                        ThrowIfFailed(hr);
+			messageInput->GetContentString(&txt);
+			ThrowIfFailed(title_elem->SetContentString((UCString)std::format(L"Entered: {}",(LPCWSTR)txt->GetString()).c_str()));
 		}
 	});
 	hr = pWizardMain->AddListener(&click_listener);
