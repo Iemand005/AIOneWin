@@ -7,10 +7,12 @@
 #include <winrt/Microsoft.UI.Xaml.Data.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.Foundation.h>
-#include <winrt/Windows.UI.Core.h>
-#include <winrt/Windows.UI.Xaml.Hosting.h>
-#include <windows.ui.xaml.hosting.h>
-#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
+//#include <winrt/Windows.UI.Core.h>
+//#include <winrt/Microsoft.UI.Core>
+//#include <winrt/Windows.UI.Xaml.Hosting.h>
+#include <winrt/Microsoft.UI.Xaml.Hosting.h>
+//#include <windows.ui.xaml.hosting.h>
+//#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 #include <Windows.h>
 
 #include "MessageControl.h"
