@@ -1,0 +1,9 @@
+namespace AIOneWinUI
+{
+    [default_interface]
+    runtimeclass MessageControl : Microsoft.UI.Xaml.Controls.UserControl, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        MessageControl();
+        String Text { get; };
+    }
+}

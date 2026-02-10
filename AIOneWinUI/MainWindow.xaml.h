@@ -13,7 +13,7 @@
 #include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 #include <Windows.h>
 
-#include "BlankUserControl.h"
+#include "MessageControl.h"
 
 namespace winrt::AIOneWinUI::implementation
 {
@@ -25,13 +25,13 @@ namespace winrt::AIOneWinUI::implementation
         {
             modelManager = std::make_unique<ModelManager>();
 
-            m_messages = winrt::single_threaded_observable_vector<AIOneWinUI::BlankUserControl>();
+            m_messages = winrt::single_threaded_observable_vector<AIOneWinUI::MessageControl>();
 
-            ///*AIOneWinUI::implementation:*/:BlankUserControl control;
-            AIOneWinUI::BlankUserControl control = winrt::make<AIOneWinUI::implementation::BlankUserControl>();
+            ///*AIOneWinUI::implementation:*/:MessageControl control;
+            AIOneWinUI::MessageControl control = winrt::make<AIOneWinUI::implementation::MessageControl>();
             m_messages.Append(control);
 
-            //m_messages.Append(winrt::make<AIOneWinUI::BlankUserControl>());
+            //m_messages.Append(winrt::make<AIOneWinUI::MessageControl>());
 
             //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
 
@@ -45,13 +45,13 @@ namespace winrt::AIOneWinUI::implementation
         void LoadModelButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void TextBox_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
 
-        winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> Messages();
-        void Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> messages);
-        //void Messages(AIOneWinUI::BlankUserControl control);
+        winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> Messages();
+        void Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> messages);
+        //void Messages(AIOneWinUI::MessageControl control);
 
         void Send();
         private:
-            winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> m_messages;
+            winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> m_messages;
     };
 }
 

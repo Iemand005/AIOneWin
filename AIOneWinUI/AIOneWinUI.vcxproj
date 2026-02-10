@@ -131,8 +131,8 @@ cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlankUserControl.h">
-      <DependentUpon>BlankUserControl.xaml</DependentUpon>
+    <ClInclude Include="MessageControl.h">
+      <DependentUpon>MessageControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
@@ -145,14 +145,14 @@ cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
-    <Page Include="BlankUserControl.xaml">
+    <Page Include="MessageControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BlankUserControl.cpp">
-      <DependentUpon>BlankUserControl.xaml</DependentUpon>
+    <ClCompile Include="MessageControl.cpp">
+      <DependentUpon>MessageControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -167,8 +167,8 @@ cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="BlankUserControl.idl">
-      <DependentUpon>BlankUserControl.xaml</DependentUpon>
+    <Midl Include="MessageControl.idl">
+      <DependentUpon>MessageControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
     <Midl Include="MainWindow.idl">

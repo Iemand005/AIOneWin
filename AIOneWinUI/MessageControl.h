@@ -4,13 +4,13 @@
 //#include "winrt/Windows.UI.Xaml.Markup.h"
 //#include "winrt/Windows.UI.Xaml.Interop.h"
 //#include "winrt/Windows.UI.Xaml.Controls.Primitives.h"
-#include "BlankUserControl.g.h"
+#include "MessageControl.g.h"
 
 namespace winrt::AIOneWinUI::implementation
 {
-    struct BlankUserControl : BlankUserControlT<BlankUserControl>
+    struct MessageControl : MessageControlT<MessageControl>
     {
-        BlankUserControl() 
+        MessageControl() 
         {
             m_text = L"Bark";
         }
@@ -32,7 +32,7 @@ namespace winrt::AIOneWinUI::implementation
 
 namespace winrt::AIOneWinUI::factory_implementation
 {
-    struct BlankUserControl : BlankUserControlT<BlankUserControl, implementation::BlankUserControl>
+    struct MessageControl : MessageControlT<MessageControl, implementation::MessageControl>
     {
     };
 }

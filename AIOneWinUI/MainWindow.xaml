@@ -15,8 +15,8 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="32" />
-			<RowDefinition />
+			<RowDefinition Height="32"/>
+			<RowDefinition/>
 		</Grid.RowDefinitions>
 
 		<Grid x:Name="TitleBar">
@@ -55,7 +55,7 @@
 				</Grid.RowDefinitions>
 				<ListView x:Name="MessagesListView" ItemsSource="{x:Bind Messages}">
 					<ListView.ItemTemplate>
-						<DataTemplate x:DataType="local:BlankUserControl">
+						<DataTemplate x:DataType="local:MessageControl">
 							<TextBlock Text="{x:Bind Text}"/>
 						</DataTemplate>
 					</ListView.ItemTemplate>

@@ -14,7 +14,7 @@
 //#include <Win32Interop.h>
 #include <winrt/Microsoft.UI.Windowing.h>
 #include <microsoft.ui.xaml.window.h>
-#include <ShObjIdl_core.h>
+//#include <ShObjIdl_core.h>
 #include <winrt/Microsoft.UI.Dispatching.h>
 
 using namespace winrt;
@@ -37,11 +37,11 @@ namespace winrt::AIOneWinUI::implementation
         throw hresult_not_implemented();
     }
 
-    IObservableVector<AIOneWinUI::BlankUserControl> MainWindow::Messages() {
+    IObservableVector<AIOneWinUI::MessageControl> MainWindow::Messages() {
         return m_messages;
     }
 
-    void MainWindow::Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> messages) {
+    void MainWindow::Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> messages) {
 
     }
 }
