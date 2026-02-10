@@ -282,7 +282,7 @@
     <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>
 
 
-    <element layoutpos="bottom" class="WizardLogoBar" layout="BorderLayout()" id="Atom(SXWizardLogoBar)">
+    <!--<element layoutpos="bottom" class="WizardLogoBar" layout="BorderLayout()" id="Atom(SXWizardLogoBar)">
 
       <element layoutpos="left" class="WizardLogo" contentalign="bottomleft" id="Atom(SXWizardMicrosoftLogo)"
                margin="rect(0rp, 0rp, 6rp, 0rp)" content="icon(104,sysmetric(49),sysmetric(50),library(user32.dll))" />
@@ -303,7 +303,7 @@
 
       </element>
 
-    </element>
+    </element>-->
 
     <!--<element layoutpos="client" layout="FillLayout()" background="rgb(23, 45, 67)" >
       
@@ -320,16 +320,18 @@
                   class="WizardSecondaryButton"
                   accrole="pushbutton" id="Atom(SXWizardAlternateButton)" active="mouse | keyboard"
                   content="Reject" />-->
-
+		<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top"
+						  accrole="text"  id="Atom(SXWizardEditBox)" active="mouse | keyboard"
+						  themedborder="true" />
       <TouchButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)"
                   sheet="RefDui" class="default"
                   accrole="pushbutton"  id="Atom(SXWizardDefaultButton)" active="mouse | keyboard"
-                  content="Accept" />
+                  content="Send" />
 
-      <TouchButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)"
+      <!--<TouchButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)"
                   sheet="RefDui"
                   accrole="pushbutton" id="Atom(SXWizardAlternateButton)" active="mouse | keyboard"
-                  content="Reject" />
+                  content="Reject" />-->
 
     </element>
 
@@ -342,14 +344,14 @@
           <edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top"
                   accrole="text"  id="Atom(SXWizardEditBox)" active="mouse | keyboard"
                   themedborder="true" />
-          <element layout="BorderLayout()" contentalign="wrapleft">
+          <!--<element layout="BorderLayout()" contentalign="wrapleft">
             <richtext layoutpos="bottom" accessible="true" margin="rect(0rp,16rp,0rp,16rp)"
                   accrole="text"  id="Atom(SXWizardContentBox)" active="mouse | keyboard"
                   content="resstr(105)" />
-            <!--<edit accessible="true" margin="rect(0rp,16rp,0rp,16rp)"
+            <edit accessible="true" margin="rect(0rp,16rp,0rp,16rp)"
                   accrole="text"  id="Atom(SXWizardContentBox)" active="mouse | keyboard"
-                  multiline="true" themedborder="true" content="resstr(105)" />-->
-          </element>
+                  multiline="true" themedborder="true" content="resstr(105)" />
+          </element>-->
         </element>
       </scrollviewer>
     </element>

@@ -82,68 +82,30 @@ struct EventListener : public IElementListener {
 std::wstring to_string(ValueType type) {
 	switch (type) {
 		case ValueType::Unavailable: return L"Unavailable";
-    case ValueType::Unset: return L"Unset";
-    case ValueType::Null: return L"Null";
-    case ValueType::Int: return L"Int";
-    case ValueType::Bool: return L"Bool";
-    case ValueType::Element: return L"Element";
-    case ValueType::Ellist: return L"Ellist";
-    case ValueType::String: return L"String";
-    case ValueType::Point: return L"Point";
-    case ValueType::Size: return L"Size";
-    case ValueType::Rect: return L"Rect";
-    case ValueType::Color: return L"Color";
-    case ValueType::Layout: return L"Layout";
+		case ValueType::Unset: return L"Unset";
+		case ValueType::Null: return L"Null";
+		case ValueType::Int: return L"Int";
+		case ValueType::Bool: return L"Bool";
+		case ValueType::Element: return L"Element";
+		case ValueType::Ellist: return L"Ellist";
+		case ValueType::String: return L"String";
+		case ValueType::Point: return L"Point";
+		case ValueType::Size: return L"Size";
+		case ValueType::Rect: return L"Rect";
+		case ValueType::Color: return L"Color";
+		case ValueType::Layout: return L"Layout";
 		case ValueType::Graphic: return L"Graphic";
-    case ValueType::Sheet: return L"Sheet";
-    case ValueType::Expr: return L"Expr";
+		case ValueType::Sheet: return L"Sheet";
+		case ValueType::Expr: return L"Expr";
 		case ValueType::Atom: return L"Atom";
-    case ValueType::Cursor: return L"Cursor";
-    case ValueType::Float: return L"Float";
+		case ValueType::Cursor: return L"Cursor";
+		case ValueType::Float: return L"Float";
 		case ValueType::DblList: return L"DblList";
-    default:
-			throw std::logic_error{"unreachable"};
+		default: throw std::logic_error{"unreachable"};
 	}
-}
-
-void DumpClassInfo(IClassInfo *info) {
-
-	constexpr auto DOC_DIR = LR"(C:\Users\7mile\source\repos\DirectUI\docs)";
-
-	std::wstring name = (LPCWSTR)info->GetName();
-
-	std::wofstream os{std::filesystem::path{DOC_DIR} / (name + L"Class.g.txt")};
-
-  os << (std::format(L"ClassInfo: <{}>\n", name).c_str());
-	
-	auto *base = info->GetBaseClass();
-	os << (std::format(L"  Base Class: <{}>\n", 
-		base ? (LPCWSTR)base->GetName() : L"None").c_str());
-
-	os << (L"  Properties:\n");
-	for (int i = 0; i < info->GetPICount(); i++) {
-		auto prop = info->EnumPropertyInfo(i);
-		os << (std::format(L"    [{}]: {}\n",
-			(LPCWSTR)prop->name, to_string(prop->cap->type)).c_str());
-		if (prop->enum_value_map) {
-			 os << (L"      Enum values:\n");
-      for (auto *ptr = prop->enum_value_map; ptr->str_value; ptr++) {
-			  os << (std::format(L"        {} : 0x{:x} ({})\n",
-					(PCWSTR)ptr->str_value, (UINT32)ptr->int_value, ptr->int_value).c_str());
-			}
-		}
-	}
-
-
-
 }
 
 long (* RealClassFactoryRegister)(CClassFactory *, IClassInfo*) = 0;
-
-HRESULT HookedRegister(CClassFactory *self, IClassInfo*info) {
-	DumpClassInfo(info);
-	return RealClassFactoryRegister(self, info);
-}
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
