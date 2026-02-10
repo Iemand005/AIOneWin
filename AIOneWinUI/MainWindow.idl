@@ -1,3 +1,5 @@
+import "BlankUserControl.idl";
+
 namespace AIOneWinUI
 {
     [default_interface]
@@ -5,5 +7,6 @@ namespace AIOneWinUI
     {
         MainWindow();
         Int32 MyProperty;
+        Windows.Foundation.Collections.IObservableVector<BlankUserControl> Messages{ get; };
     }
 }

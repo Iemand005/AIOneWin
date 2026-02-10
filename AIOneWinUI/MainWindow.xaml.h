@@ -79,6 +79,10 @@ namespace winrt::AIOneWinUI::implementation
         void LoadModelButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
         void TextBox_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
 
+        winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> Messages();
+        void Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> messages);
+        //void Messages(AIOneWinUI::BlankUserControl control);
+
         void Send();
         private:
             winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> m_messages;

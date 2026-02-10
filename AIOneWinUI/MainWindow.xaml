@@ -37,13 +37,13 @@
 					<RowDefinition Height="10"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-				<!--<ListView x:Name="MessagesListView" ItemsSource="{x:Bind Messages}">
+				<ListView x:Name="MessagesListView" ItemsSource="{x:Bind Messages}">
 					<ListView.ItemTemplate>
-						<DataTemplate x:DataType="local:MessageItem">
+						<DataTemplate x:DataType="local:BlankUserControl">
 							<TextBlock Text="Hi"/>
 						</DataTemplate>
 					</ListView.ItemTemplate>
-				</ListView>-->
+				</ListView>
 				<TextBox x:Name="MessageInput" Grid.Row="2" KeyDown="TextBox_KeyDown"></TextBox>
 				<Button Grid.Row="2" Grid.Column="2" x:Name="SendButton" Click="SendButton_Click">Send</Button>
 			</Grid>

@@ -6,10 +6,15 @@ namespace winrt::AIOneWinUI::implementation
 {
     struct MessageViewModel : MessageViewModelT<MessageViewModel>
     {
-        MessageViewModel() = default;
+        MessageViewModel();
 
         int32_t MyProperty();
         void MyProperty(int32_t value);
+
+        winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> Messages();
+
+        private:
+            winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> m_messages;
     };
 }
 

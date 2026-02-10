@@ -19,6 +19,7 @@
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
+using namespace winrt::Windows::Foundation::Collections;
 //using namespace Microsoft::UI::Windowing
 
 // To learn more about WinUI, the WinUI project structure,
@@ -34,6 +35,14 @@ namespace winrt::AIOneWinUI::implementation
     void MainWindow::MyProperty(int32_t /* value */)
     {
         throw hresult_not_implemented();
+    }
+
+    IObservableVector<AIOneWinUI::BlankUserControl> MainWindow::Messages() {
+        return m_messages;
+    }
+
+    void MainWindow::Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> messages) {
+
     }
 }
 
