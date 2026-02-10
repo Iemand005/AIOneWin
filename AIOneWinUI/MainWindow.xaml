@@ -13,16 +13,32 @@
 		<MicaBackdrop Kind="Base"/>
 	</Window.SystemBackdrop>
 
-	<Grid Margin="20">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="32" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Grid x:Name="TitleBar">
+			<TextBlock Text="AIOne" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center" Margin="11,0,0,0" />
+		</Grid>
+
+	<Grid Grid.Row="1" Margin="20">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<!--<RowDefinition Height="32"/>-->
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="10"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
+
+		<!--<Grid x:Name="Titlebar" Grid.Row="0">
+			<TextBlock Text="AIOne" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center" Margin="11,0,0,0" />
+		</Grid>-->
+
 		<Button x:Name="LoadModelButton" Click="LoadModelButton_Click" HorizontalAlignment="Stretch">Load Model</Button>
 		<ProgressBar x:Name="LoadProgressBar" Grid.Row="1" Visibility="Collapsed"/>
 		<ContentControl x:Name="MessageControl" Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsEnabled="False">
@@ -48,5 +64,6 @@
 				<Button Grid.Row="2" Grid.Column="2" x:Name="SendButton" Click="SendButton_Click">Send</Button>
 			</Grid>
 		</ContentControl>
-    </Grid>
+		</Grid>
+	</Grid>
 </Window>
