@@ -10,14 +10,28 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::AIOneWinUI::implementation
 {
-    hstring BlankUserControl::Text()
+    /*BlankUserControl::BlankUserControl() {
+        m_text = winrt::make<hstring>("Bark");
+    }*/
+
+    int32_t BlankUserControl::MyProperty()
     {
         throw hresult_not_implemented();
     }
 
-    void BlankUserControl::Text(hstring /* value */)
+    void BlankUserControl::MyProperty(int32_t /* value */)
     {
         throw hresult_not_implemented();
+    }
+
+    hstring BlankUserControl::Text()
+    {
+        return m_text;
+    }
+
+    void BlankUserControl::Text(hstring value)
+    {
+        m_text = value;
     }
 
     winrt::event_token BlankUserControl::PropertyChanged(Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler)

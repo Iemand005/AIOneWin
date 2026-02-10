@@ -12,9 +12,12 @@ namespace winrt::AIOneWinUI::implementation
     {
         BlankUserControl() 
         {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
+            //m_text = winrt::make<hstring>("Bark");
+            m_text = L"Bark";
         }
+
+        int32_t MyProperty();
+        void MyProperty(int32_t value);
 
         winrt::hstring Text();
         void Text(winrt::hstring value);
@@ -24,6 +27,8 @@ namespace winrt::AIOneWinUI::implementation
 
         private:
         event<winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChanged;
+
+        winrt::hstring m_text;
 
         //void ClickHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
     };
