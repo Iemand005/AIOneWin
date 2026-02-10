@@ -14,21 +14,21 @@
 #include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 #include <Windows.h>
 
-auto GetOrLoadDll(const wchar_t* name) noexcept {
-    auto dll = GetModuleHandleW(name);
-    if (!dll) { dll = LoadLibraryExW(name, nullptr, 0); }
-    return dll;
-}
+//auto GetOrLoadDll(const wchar_t* name) noexcept {
+//    auto dll = GetModuleHandleW(name);
+//    if (!dll) { dll = LoadLibraryExW(name, nullptr, 0); }
+//    return dll;
+//}
 
-void MakeWindowEligibleForDCompResizeSync(HWND hwnd) {
-    // OS expects to synchronize with UWP, so create an XAML Islands window to trick OS.
-    // WARNING: XAML Islands requires a manifest stating support for >=Win10 1903 to work!
-    static Windows::UI::Xaml::Hosting::DesktopWindowXamlSource dwxs;
-    check_hresult(dwxs.as<IDesktopWindowXamlSourceNative>()->AttachToWindow(hwnd));
-
-    // Enable synchronization with DComp.
-    EnableResizeLayoutSynchronization(hwnd, TRUE);
-}
+//void MakeWindowEligibleForDCompResizeSync(HWND hwnd) {
+//    // OS expects to synchronize with UWP, so create an XAML Islands window to trick OS.
+//    // WARNING: XAML Islands requires a manifest stating support for >=Win10 1903 to work!
+//    static Windows::UI::Xaml::Hosting::DesktopWindowXamlSource dwxs;
+//    check_hresult(dwxs.as<IDesktopWindowXamlSourceNative>()->AttachToWindow(hwnd));
+//
+//    // Enable synchronization with DComp.
+//    EnableResizeLayoutSynchronization(hwnd, TRUE);
+//}
 
 namespace winrt::AIOneWinUI::implementation
 {
@@ -44,12 +44,12 @@ namespace winrt::AIOneWinUI::implementation
         //winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> Messages();
         //winrt::Windows::Foundation::Collections::IObservableVector<winrt::AIOneWinUI::MessageItem> Messages();
 
-        HMODULE mod_user32 = GetOrLoadDll(L"user32");
-        using tGetResizeDCompositionSynchronizationObject = void(WINAPI*)(HWND hwnd, LPHANDLE pHandle);
-        tGetResizeDCompositionSynchronizationObject GetResizeDCompositionSynchronizationObject = (tGetResizeDCompositionSynchronizationObject)GetProcAddress(mod_user32, MAKEINTRESOURCEA(2614));
-        using tEnableResizeLayoutSynchronization = void(WINAPI*)(HWND hwnd, BOOL enable);
-        tEnableResizeLayoutSynchronization EnableResizeLayoutSynchronization = (tEnableResizeLayoutSynchronization)GetProcAddress(mod_user32, MAKEINTRESOURCEA(2615));
-        Windows::UI::Core::CoreWindowResizeManager::GetForCurrentView().NotifyLayoutCompleted();
+        //HMODULE mod_user32 = GetOrLoadDll(L"user32");
+        //using tGetResizeDCompositionSynchronizationObject = void(WINAPI*)(HWND hwnd, LPHANDLE pHandle);
+        //tGetResizeDCompositionSynchronizationObject GetResizeDCompositionSynchronizationObject = (tGetResizeDCompositionSynchronizationObject)GetProcAddress(mod_user32, MAKEINTRESOURCEA(2614));
+        //using tEnableResizeLayoutSynchronization = void(WINAPI*)(HWND hwnd, BOOL enable);
+        //tEnableResizeLayoutSynchronization EnableResizeLayoutSynchronization = (tEnableResizeLayoutSynchronization)GetProcAddress(mod_user32, MAKEINTRESOURCEA(2615));
+        //Windows::UI::Core::CoreWindowResizeManager::GetForCurrentView().NotifyLayoutCompleted();
 
         MainWindow()
         {
@@ -71,7 +71,7 @@ namespace winrt::AIOneWinUI::implementation
 
         void Send();
         private:
-            winrt::Windows::Foundation::Collections::IObservableVector<MessageItem> m_messages;
+            winrt::Windows::Foundation::Collections::IObservableVector<MyViewModel> m_messages;
     };
 }
 

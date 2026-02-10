@@ -1,68 +1,36 @@
 #pragma once
-#include "winrt/Microsoft.UI.Xaml.Data.h"
+#include <winrt/Microsoft.UI.Xaml.Data.h>
+#include <winrt/Windows.Foundation.h>
 
-namespace winrt::AIOneWinUI
+struct MyViewModel : winrt::implements<MyViewModel, winrt::Windows::Foundation::IInspectable, winrt::Microsoft::UI::Xaml::Data::INotifyPropertyChanged>
 {
-    class NotifyPropertyChangedBase {
-    public:
+    winrt::event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChanged;
 
-        using PropertyChangedEventHandler = winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler;
-        using PropertyChangedEventArgs = winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs;
+    winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    {
+        return m_propertyChanged.add(handler);
+    }
 
-        NotifyPropertyChangedBase() = default;
+    void PropertyChanged(winrt::event_token const& token)
+    {
+        m_propertyChanged.remove(token);
+    }
 
-        auto PropertyChanged(PropertyChangedEventHandler const& handler) -> winrt::event_token {
+    void RaisePropertyChanged(winrt::hstring const& name)
+    {
+        m_propertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ name });
+    }
 
-            return propertyChangedEvent.add(handler);
+    winrt::hstring Title() const { return m_title; }
+    void Title(winrt::hstring const& value)
+    {
+        if (m_title != value)
+        {
+            m_title = value;
+            RaisePropertyChanged(L"Title");
         }
+    }
 
-        auto PropertyChanged(winrt::event_token token) -> void {
-
-            propertyChangedEvent.remove(token);
-        }
-
-    protected:
-
-        auto OnPropertyChanged(this auto& self, PropertyChangedEventArgs const& args) -> void {
-
-            self.propertyChangedEvent(self, args);
-        }
-
-        auto OnPropertyChanged(this auto& self, winrt::hstring const& propertyName) -> void {
-
-            self.propertyChangedEvent(self, PropertyChangedEventArgs{ propertyName });
-        }
-
-    private:
-
-        winrt::event<PropertyChangedEventHandler> propertyChangedEvent;
-    };
-
-    class MessageItem : NotifyPropertyChangedBase {
-
-    };
-
-    //class MessageItem// : winrt::implements<MessageItem, winrt::Microsoft::UI::Xaml::Data::INotifyPropertyChanged>
-    //{
-    ////    MessageItem() = default;
-
-    ////    // Getter
-    ////    winrt::hstring Text() const { return m_text; }
-
-    ////    // Setter
-    ////    void Text(winrt::hstring const& value)
-    ////    {
-    ////        if (value != m_text)
-    ////        {
-    ////            m_text = value;
-    ////            PropertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Text" });
-    ////        }
-    ////    }
-
-    ////    // INotifyPropertyChanged event
-    ////    winrt::event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> PropertyChanged;
-
-    ////private:
-    ////    winrt::hstring m_text;
-    //};
-}
+private:
+    winrt::hstring m_title;
+};
