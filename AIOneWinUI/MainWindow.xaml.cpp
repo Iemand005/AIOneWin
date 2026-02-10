@@ -97,11 +97,18 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
     //auto message = t
 
 
+        //auto think = winrt::make<AIOneWinUI::implementation::MessageControl>(L"Assistant");
+        m_assistantMessage = winrt::make<AIOneWinUI::implementation::MessageControl>(L"Assistant");
 
     AsyncTextGenOptions options;
 
     options.onToken = [this](const std::string& token) {
         this->DispatcherQueue().TryEnqueue([this, token]() {
+            //think.App
+            // m_assistantMessage
+            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+            hstring newToken = converter.from_bytes(token).c_str();;
+            ((AIOneWinUI::implementation::MessageControl*)&m_assistantMessage)->AppendToken(newToken);
             //Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>("Assistant", message));
 
             //auto  message  = winrt::make<MessageItem>("assistant", "");
@@ -113,7 +120,8 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
 
     options.onGenerationStart = [this]() {
         this->DispatcherQueue().TryEnqueue([this]() {
-        Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>(L"Assistant"));
+        /*think.Role(L"Assistant");*/
+        Messages().Append(m_assistantMessage);
             /*auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
         thing.Role(L"Assistant");
         Messages().Append(thing);*/

@@ -20,7 +20,7 @@ namespace winrt::AIOneWinUI::implementation
     {
         m_role = value;
         //m_propertyChanged("Role");
-        m_propertyChanged(*this, PropertyChangedEventArgs(L"Role"));
+        //m_propertyChanged(*this, PropertyChangedEventArgs(L"Role"));
     }
 
     hstring MessageControl::Text()
@@ -31,14 +31,14 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::Text(hstring value)
     {
         m_text = value;
-        m_propertyChanged(*this, PropertyChangedEventArgs(L"Text"));
+        //m_propertyChanged(*this, PropertyChangedEventArgs(L"Text"));
         //m_propertyChanged("Text");
     }
 
     void MessageControl::AppendReasoningToken(winrt::hstring token)
     {
-        m_text = m_text  + token;;
-        m_propertyChanged(*this, PropertyChangedEventArgs(L"Token"));
+        m_text = m_text  + token;;;;;;;
+        //m_propertyChanged(*this, PropertyChangedEventArgs(L"Token"));
         //m_text.
         //m_propertyChanged(this, L"Text");
     }
@@ -46,7 +46,7 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::AppendToken(winrt::hstring token)
     {
         m_text = m_text + token;;
-        m_propertyChanged(*this, PropertyChangedEventArgs(L"Text"));
+        //m_propertyChanged(*this, PropertyChangedEventArgs(L"Text"));
         //m_text += token;
         //m_propertyChanged(L"Text");
     }

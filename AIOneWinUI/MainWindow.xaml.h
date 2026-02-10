@@ -43,6 +43,8 @@ namespace winrt::AIOneWinUI::implementation
         void Send();
         private:
             winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> m_messages;
+
+            AIOneWinUI::MessageControl m_assistantMessage;
     };
 }
 
