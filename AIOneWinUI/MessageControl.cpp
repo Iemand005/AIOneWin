@@ -53,7 +53,9 @@ namespace winrt::AIOneWinUI::implementation
         auto aeeee = Text();
         const wchar_t * o = aeeee.data();
         if (std::wstring(o).empty()) aeeee = L"";
-        Text(aeeee + token);
+        this;
+        if (std::wstring(o).empty()) Text(token);
+        else Text(aeeee + token);
         //m_propertyChanged(*this, winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
         //m_text += token;
         //m_propertyChanged(L"Text");

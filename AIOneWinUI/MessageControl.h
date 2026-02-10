@@ -19,7 +19,7 @@ namespace winrt::AIOneWinUI::implementation
         MessageControl(winrt::hstring role)
         {
             m_role = role;
-            m_text = L"";
+            m_text = L" ";
         }
 
         MessageControl(winrt::hstring role, winrt::hstring text)
@@ -43,8 +43,8 @@ namespace winrt::AIOneWinUI::implementation
         private:
         event<winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChanged;
 
-        winrt::hstring m_role = L"";
-        winrt::hstring m_text = L"";
+        winrt::hstring m_role = L" ";
+        winrt::hstring m_text = L" ";
     };
 }
 
