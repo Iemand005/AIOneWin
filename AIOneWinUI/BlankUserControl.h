@@ -16,8 +16,8 @@ namespace winrt::AIOneWinUI::implementation
             // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
         }
 
-        int32_t MyProperty();
-        void MyProperty(int32_t value);
+        winrt::hstring Text();
+        void Text(winrt::hstring value);
 
         winrt::event_token PropertyChanged(winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
         void PropertyChanged(winrt::event_token const& token) noexcept;
