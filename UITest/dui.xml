@@ -278,7 +278,7 @@
   <HWNDElement resid="WizardMain" layout="BorderLayout()" id="Atom(SXWizard)" sheet="SXStyles">
 
     <element layoutpos="top" class="WizardPageTitle" id="Atom(SXTitle)" content="Click the buttons to get started" />
-
+	  <TouchButton accessible="true" layoutpos="top" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)" sheet="RefDui" accrole="pushbutton" id="Atom(LoadModelButton)" active="mouse | keyboard" content="Load Model" />
     <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>
 
     <element layoutpos="bottom" class="WizardButtonBar" contentalign="middleright" layout="BorderLayout()" id="Atom(SXWizardButtonBar)">
@@ -286,13 +286,10 @@
 		<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="client" accrole="text"  id="Atom(MessageEditBox)" active="mouse | keyboard" themedborder="true" />
       <TouchButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)" sheet="RefDui" class="default" accrole="pushbutton"  id="Atom(SXWizardDefaultButton)" active="mouse | keyboard" content="Send" />
 			</element>
-		<PushButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)"
-						  class="WizardSecondaryButton"
-						  accrole="pushbutton" id="Atom(SXWizardAlternateButton)" active="mouse | keyboard"
-						  content="Reject" />
     </element>
 
     <element layoutpos="client" class="WizardPageContainer" layout="FillLayout()" id="Atom(SXWizardPageContainer)">
+		
       <scrollviewer xscrollable="false" yscrollable="true"
                     borderthickness="rect(1rp, 1rp, 1rp, 1rp)"
                     bordercolor="gray">
