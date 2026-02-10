@@ -320,13 +320,13 @@
                   class="WizardSecondaryButton"
                   accrole="pushbutton" id="Atom(SXWizardAlternateButton)" active="mouse | keyboard"
                   content="Reject" />-->
-		<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top"
-						  accrole="text"  id="Atom(SXWizardEditBox)" active="mouse | keyboard"
-						  themedborder="true" />
+		<element layoutpos="client" class="WizardPageContainer" layout="BorderLayout()">
+		<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top" accrole="text"  id="Atom(SXWizardEditBox)" active="mouse | keyboard" themedborder="true" />
       <TouchButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)"
                   sheet="RefDui" class="default"
                   accrole="pushbutton"  id="Atom(SXWizardDefaultButton)" active="mouse | keyboard"
                   content="Send" />
+			</element>
 
       <!--<TouchButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)"
                   sheet="RefDui"

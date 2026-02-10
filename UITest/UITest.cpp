@@ -79,32 +79,6 @@ struct EventListener : public IElementListener {
 	void OnListenedInput(Element*elem, struct InputEvent*ev) override { }
 };
 
-std::wstring to_string(ValueType type) {
-	switch (type) {
-		case ValueType::Unavailable: return L"Unavailable";
-		case ValueType::Unset: return L"Unset";
-		case ValueType::Null: return L"Null";
-		case ValueType::Int: return L"Int";
-		case ValueType::Bool: return L"Bool";
-		case ValueType::Element: return L"Element";
-		case ValueType::Ellist: return L"Ellist";
-		case ValueType::String: return L"String";
-		case ValueType::Point: return L"Point";
-		case ValueType::Size: return L"Size";
-		case ValueType::Rect: return L"Rect";
-		case ValueType::Color: return L"Color";
-		case ValueType::Layout: return L"Layout";
-		case ValueType::Graphic: return L"Graphic";
-		case ValueType::Sheet: return L"Sheet";
-		case ValueType::Expr: return L"Expr";
-		case ValueType::Atom: return L"Atom";
-		case ValueType::Cursor: return L"Cursor";
-		case ValueType::Float: return L"Float";
-		case ValueType::DblList: return L"DblList";
-		default: throw std::logic_error{"unreachable"};
-	}
-}
-
 long (* RealClassFactoryRegister)(CClassFactory *, IClassInfo*) = 0;
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
