@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="Button">Click Me</Button>
-    </StackPanel>
+    <StackPanel VerticalAlignment="Center">
+		<TextBlock Text="{x:Bind Text}" FontWeight="Bold" FontSize="14"/>
+		<TextBlock Text="{x:Bind Text}" TextWrapping="Wrap"/>
+	</StackPanel>
 </UserControl>

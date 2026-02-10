@@ -10,6 +10,17 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::AIOneWinUI::implementation
 {
+
+    hstring MessageControl::Role()
+    {
+        return m_role;
+    }
+
+    void MessageControl::Role(hstring value)
+    {
+        m_role = value;
+    }
+
     hstring MessageControl::Text()
     {
         return m_text;

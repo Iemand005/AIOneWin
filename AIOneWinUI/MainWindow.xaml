@@ -56,7 +56,8 @@
 				<ListView x:Name="MessagesListView" ItemsSource="{x:Bind Messages}">
 					<ListView.ItemTemplate>
 						<DataTemplate x:DataType="local:MessageControl">
-							<TextBlock Text="{x:Bind Text}"/>
+								<local:MessageControl/>
+								<!--<TextBlock Text="{x:Bind Text}"/>-->
 						</DataTemplate>
 					</ListView.ItemTemplate>
 				</ListView>

@@ -12,8 +12,18 @@ namespace winrt::AIOneWinUI::implementation
     {
         MessageControl() 
         {
+            m_role = L"User";
             m_text = L"Bark";
         }
+
+        MessageControl(winrt::hstring role, winrt::hstring text)
+        {
+            m_role = role;
+            m_text = text;
+        }
+
+        winrt::hstring Role();
+        void Role(winrt::hstring value);
 
         winrt::hstring Text();
         void Text(winrt::hstring value);
@@ -24,6 +34,7 @@ namespace winrt::AIOneWinUI::implementation
         private:
         event<winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChanged;
 
+        winrt::hstring m_role;
         winrt::hstring m_text;
 
         //void ClickHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
