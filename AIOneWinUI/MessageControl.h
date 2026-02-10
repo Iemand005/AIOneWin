@@ -34,8 +34,8 @@ namespace winrt::AIOneWinUI::implementation
         winrt::hstring Text();
         void Text(winrt::hstring value);
 
-        void AppendReasoningToken(winrt::hstring token);
         void AppendToken(winrt::hstring token);
+        void AppendReasoningToken(winrt::hstring token);
 
         winrt::event_token PropertyChanged(winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
         void PropertyChanged(winrt::event_token const& token) noexcept;
@@ -43,8 +43,8 @@ namespace winrt::AIOneWinUI::implementation
         private:
         event<winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChanged;
 
-        winrt::hstring m_role;
-        winrt::hstring m_text;
+        winrt::hstring m_role = L"";
+        winrt::hstring m_text = L"";
     };
 }
 

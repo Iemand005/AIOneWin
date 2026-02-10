@@ -48,8 +48,13 @@ namespace winrt::AIOneWinUI::implementation
     
     void MessageControl::AppendToken(winrt::hstring token)
     {
-        m_text = m_text + token;;
-        m_propertyChanged(*this, winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
+    /*wchar_t *abab = m_text.c_str();
+        m_text = m_text.c_str() + token.c_str();;*/
+        auto aeeee = Text();
+        const wchar_t * o = aeeee.data();
+        if (std::wstring(o).empty()) aeeee = L"";
+        Text(aeeee + token);
+        //m_propertyChanged(*this, winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
         //m_text += token;
         //m_propertyChanged(L"Text");
     }

@@ -6,5 +6,7 @@ namespace AIOneWinUI
         MessageControl();
         String Role;
         String Text;
+       /* void AppendToken(String text);
+        void AppendReasoningToken(String text);*/
     }
 }
