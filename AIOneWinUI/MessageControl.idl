@@ -1,12 +1,11 @@
 namespace AIOneWinUI
 {
     [default_interface]
-    runtimeclass MessageControl : Microsoft.UI.Xaml.Controls.UserControl, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    [Microsoft.UI.Xaml.Data.Bindable]
+    runtimeclass MessageControl : Microsoft.UI.Xaml.Controls.UserControl, Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         MessageControl();
         String Role;
         String Text;
-       /* void AppendToken(String text);
-        void AppendReasoningToken(String text);*/
     }
 }

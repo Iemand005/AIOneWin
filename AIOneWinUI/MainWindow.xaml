@@ -53,7 +53,7 @@
 					<RowDefinition Height="10"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-				<ListView x:Name="MessagesListView" Grid.ColumnSpan="3" ItemsSource="{x:Bind Messages}">
+					<ListView x:Name="MessagesListView" Grid.ColumnSpan="3" ItemsSource="{x:Bind Messages, Mode=OneWay}">
 					<!--<ListView.ItemTemplate>
 						<DataTemplate x:DataType="local:MessageControl">
 								<local:MessageControl Text="{x:Bind Text}"/>

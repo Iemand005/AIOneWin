@@ -108,7 +108,10 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
             // m_assistantMessage
             std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
             hstring newToken = converter.from_bytes(token).c_str();;
-            m_assistantMessage.as<AIOneWinUI::implementation::MessageControl>()->AppendToken(newToken);;;;;;;;;;;;;;
+            //m_assistantMessage.as<AIOneWinUI::implementation::MessageControl>()->AppendToken(newToken);;;;;;;;;;;;;;
+            //m_assistantMessage.AppendToken(newToken);;;;
+            auto ee = m_assistantMessage.as<AIOneWinUI::implementation::MessageControl>();
+            ee->AppendToken(newToken);
             //((AIOneWinUI::implementation::MessageControl*)&m_assistantMessage)->AppendToken(newToken);
             //Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>("Assistant", message));
 
@@ -122,7 +125,7 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
     options.onGenerationStart = [this]() {
         this->DispatcherQueue().TryEnqueue([this]() {
         /*think.Role(L"Assistant");*/
-        Messages().Append(m_assistantMessage);
+        Messages().Append(*m_assistantMessage.as<AIOneWinUI::implementation::MessageControl>());
             /*auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
         thing.Role(L"Assistant");
         Messages().Append(thing);*/

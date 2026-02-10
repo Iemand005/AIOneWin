@@ -21,7 +21,7 @@ namespace winrt::AIOneWinUI::implementation
         m_role = value;
         //m_propertyChanged("Role");
         //m_propertyChanged(*this, PropertyChangedEventArgs(L"Role"));
-        m_propertyChanged(*this, winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(L"Role"));
+        m_propertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Role"));
     }
 
     hstring MessageControl::Text()
@@ -34,7 +34,7 @@ namespace winrt::AIOneWinUI::implementation
         m_text = value;
         //m_propertyChanged(*this, PropertyChangedEventArgs(L"Text"));
         //m_propertyChanged("Text");
-        m_propertyChanged(*this, winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
+        m_propertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
     }
 
     void MessageControl::AppendReasoningToken(winrt::hstring token)
@@ -43,7 +43,7 @@ namespace winrt::AIOneWinUI::implementation
         //m_propertyChanged(*this, PropertyChangedEventArgs(L"Token"));
         //m_text.
         //m_propertyChanged(this, L"Text");
-        m_propertyChanged(*this, winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
+        //m_propertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
     }
     
     void MessageControl::AppendToken(winrt::hstring token)
@@ -61,7 +61,7 @@ namespace winrt::AIOneWinUI::implementation
         //m_propertyChanged(L"Text");
     }
 
-    winrt::event_token MessageControl::PropertyChanged(Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    winrt::event_token MessageControl::PropertyChanged(Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
     {
         return m_propertyChanged.add(handler);
     }
