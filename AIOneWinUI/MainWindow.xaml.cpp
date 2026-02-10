@@ -125,6 +125,7 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
     options.onGenerationStart = [this]() {
         this->DispatcherQueue().TryEnqueue([this]() {
         /*think.Role(L"Assistant");*/
+            //m_assistantMessage.as<AIOneWinUI::implementation::MessageControl>()->PropertyChanged()
         Messages().Append(*m_assistantMessage.as<AIOneWinUI::implementation::MessageControl>());
             /*auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
         thing.Role(L"Assistant");

@@ -53,15 +53,17 @@
 					<RowDefinition Height="10"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
-					<ListView x:Name="MessagesListView" Grid.ColumnSpan="3" ItemsSource="{x:Bind Messages, Mode=OneWay}">
+					<ListView x:Name="MessagesListView" Grid.ColumnSpan="3" ItemsSource="{x:Bind Messages, Mode=OneWay}"/>
 					<!--<ListView.ItemTemplate>
 						<DataTemplate x:DataType="local:MessageControl">
 								<local:MessageControl Text="{x:Bind Text}"/>
-								--><!--<TextBlock Text="{x:Bind Text}"/>--><!--
+								-->
+					<!--<TextBlock Text="{x:Bind Text}"/>-->
+					<!--
 						</DataTemplate>
 					</ListView.ItemTemplate>-->
-				</ListView>
-				<TextBox x:Name="MessageInput" Grid.Row="2" KeyDown="TextBox_KeyDown"></TextBox>
+
+					<TextBox x:Name="MessageInput" Grid.Row="2" KeyDown="TextBox_KeyDown"></TextBox>
 				<Button Grid.Row="2" Grid.Column="2" x:Name="SendButton" Click="SendButton_Click">Send</Button>
 			</Grid>
 		</ContentControl>
