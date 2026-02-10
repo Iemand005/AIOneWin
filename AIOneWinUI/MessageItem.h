@@ -2,7 +2,7 @@
 #include <winrt/Microsoft.UI.Xaml.Data.h>
 #include <winrt/Windows.Foundation.h>
 
-struct MyViewModel : winrt::implements<MyViewModel, winrt::Windows::Foundation::IInspectable, winrt::Microsoft::UI::Xaml::Data::INotifyPropertyChanged>
+struct MyViewModel : winrt::Windows::Foundation::IInspectable, winrt::Microsoft::UI::Xaml::Data::INotifyPropertyChanged
 {
     winrt::event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChanged;
 
