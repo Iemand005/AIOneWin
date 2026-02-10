@@ -28,6 +28,9 @@ namespace winrt::AIOneWinUI::implementation
         winrt::hstring Text();
         void Text(winrt::hstring value);
 
+        void AppendReasoningToken(winrt::hstring token);
+        void AppendToken(winrt::hstring token);
+
         winrt::event_token PropertyChanged(winrt::Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
         void PropertyChanged(winrt::event_token const& token) noexcept;
 

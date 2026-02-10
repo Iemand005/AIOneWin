@@ -27,10 +27,6 @@ namespace winrt::AIOneWinUI::implementation
     IObservableVector<AIOneWinUI::MessageControl> MainWindow::Messages() {
         return m_messages;
     }
-
-    void MainWindow::Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> messages) {
-
-    }
 }
 
 void winrt::AIOneWinUI::implementation::MainWindow::SendButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)

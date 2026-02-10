@@ -19,6 +19,7 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::Role(hstring value)
     {
         m_role = value;
+        //m_propertyChanged("Role");
     }
 
     hstring MessageControl::Text()
@@ -29,6 +30,20 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::Text(hstring value)
     {
         m_text = value;
+        //m_propertyChanged("Text");
+    }
+
+    void MessageControl::AppendReasoningToken(winrt::hstring token)
+    {
+        m_text = m_text  + token;;
+        //m_propertyChanged(L"Text");
+    }
+    
+    void MessageControl::AppendToken(winrt::hstring token)
+    {
+        m_text = m_text + token;;
+        //m_text += token;
+        //m_propertyChanged(L"Text");
     }
 
     winrt::event_token MessageControl::PropertyChanged(Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
@@ -40,9 +55,4 @@ namespace winrt::AIOneWinUI::implementation
     {
         m_propertyChanged.remove(token);
     }
-
-    /*void MessageControl::ClickHandler(IInspectable const&, RoutedEventArgs const&)
-    {
-        Button().Content(box_value(L"Clicked"));
-    }*/
 }

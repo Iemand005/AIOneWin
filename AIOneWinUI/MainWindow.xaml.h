@@ -31,10 +31,6 @@ namespace winrt::AIOneWinUI::implementation
             AIOneWinUI::MessageControl control = winrt::make<AIOneWinUI::implementation::MessageControl>();
             m_messages.Append(control);
 
-            //m_messages.Append(winrt::make<AIOneWinUI::MessageControl>());
-
-            //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
-
             ExtendsContentIntoTitleBar(true);
         }
 
@@ -43,8 +39,6 @@ namespace winrt::AIOneWinUI::implementation
         void TextBox_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e);
 
         winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> Messages();
-        void Messages(winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::MessageControl> messages);
-        //void Messages(AIOneWinUI::MessageControl control);
 
         void Send();
         private:
