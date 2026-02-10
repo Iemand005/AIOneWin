@@ -45,8 +45,6 @@ namespace winrt::AIOneWinUI::implementation
 
         winrt::hstring m_role;
         winrt::hstring m_text;
-
-        //void ClickHandler(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& args);
     };
 }
 
