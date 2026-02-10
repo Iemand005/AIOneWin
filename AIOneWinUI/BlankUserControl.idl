@@ -1,7 +1,7 @@
 namespace AIOneWinUI
 {
     [default_interface]
-    runtimeclass BlankUserControl : Microsoft.UI.Xaml.Controls.UserControl
+    runtimeclass BlankUserControl : Microsoft.UI.Xaml.Controls.UserControl, Windows.UI.Xaml.Data.INotifyPropertyChanged
     {
         BlankUserControl();
         Int32 MyProperty;

@@ -20,6 +20,16 @@ namespace winrt::AIOneWinUI::implementation
         throw hresult_not_implemented();
     }
 
+    winrt::event_token BlankUserControl::PropertyChanged(Windows::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    {
+        return m_propertyChanged.add(handler);
+    }
+
+    void BlankUserControl::PropertyChanged(winrt::event_token const& token) noexcept
+    {
+        m_propertyChanged.remove(token);
+    }
+
     /*void BlankUserControl::ClickHandler(IInspectable const&, RoutedEventArgs const&)
     {
         Button().Content(box_value(L"Clicked"));
