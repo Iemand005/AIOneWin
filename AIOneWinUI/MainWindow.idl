@@ -6,7 +6,6 @@ namespace AIOneWinUI
     runtimeclass MainWindow : Microsoft.UI.Xaml.Window
     {
         MainWindow();
-        Int32 MyProperty;
         Windows.Foundation.Collections.IObservableVector<MessageControl> Messages{ get; };
     }
 }
