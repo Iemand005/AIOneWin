@@ -1,0 +1,10 @@
+namespace AIOneWinUI
+{
+    [bindable]
+    [default_interface]
+    runtimeclass MessageViewModel 
+    {
+        MessageViewModel();
+        Int32 MyProperty;
+    }
+}

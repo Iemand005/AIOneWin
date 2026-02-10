@@ -14,6 +14,8 @@
 #include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 #include <Windows.h>
 
+#include "BlankUserControl.h"
+
 //auto GetOrLoadDll(const wchar_t* name) noexcept {
 //    auto dll = GetModuleHandleW(name);
 //    if (!dll) { dll = LoadLibraryExW(name, nullptr, 0); }
@@ -59,6 +61,14 @@ namespace winrt::AIOneWinUI::implementation
             //m_messages = single_threaded_observable_vector<MessageItem>();
             modelManager = std::make_unique<ModelManager>();
 
+            m_messages = winrt::single_threaded_observable_vector<AIOneWinUI::BlankUserControl>();
+
+            ///*AIOneWinUI::implementation:*/:BlankUserControl control;
+            AIOneWinUI::BlankUserControl control = winrt::make<AIOneWinUI::implementation::BlankUserControl>();
+            m_messages.Append(control);
+
+            //m_messages.Append(winrt::make<AIOneWinUI::BlankUserControl>());
+
             //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
 
         }
@@ -71,7 +81,7 @@ namespace winrt::AIOneWinUI::implementation
 
         void Send();
         private:
-            winrt::Windows::Foundation::Collections::IObservableVector<MyViewModel> m_messages;
+            winrt::Windows::Foundation::Collections::IObservableVector<AIOneWinUI::BlankUserControl> m_messages;
     };
 }
 
