@@ -10,12 +10,12 @@ using namespace Microsoft::UI::Xaml;
 
 namespace winrt::AIOneWinUI::implementation
 {
-    int32_t BlankUserControl::MyProperty()
+    hstring BlankUserControl::Text()
     {
         throw hresult_not_implemented();
     }
 
-    void BlankUserControl::MyProperty(int32_t /* value */)
+    void BlankUserControl::Text(hstring /* value */)
     {
         throw hresult_not_implemented();
     }

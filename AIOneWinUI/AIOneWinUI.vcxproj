@@ -135,11 +135,6 @@ cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
       <DependentUpon>BlankUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="MessageItem.h" />
-    <ClInclude Include="MessageViewModel.h">
-      <DependentUpon>MessageViewModel.idl</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -158,11 +153,6 @@ cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
   <ItemGroup>
     <ClCompile Include="BlankUserControl.cpp">
       <DependentUpon>BlankUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="MessageItem.cpp" />
-    <ClCompile Include="MessageViewModel.cpp">
-      <DependentUpon>MessageViewModel.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -184,9 +174,6 @@ cmake --build "$(SolutionDir)build\AIOne" --config $(Configuration)</Command>
     <Midl Include="MainWindow.idl">
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="MessageViewModel.idl">
-      <SubType>Designer</SubType>
     </Midl>
   </ItemGroup>
   <ItemGroup>

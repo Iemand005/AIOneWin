@@ -27,16 +27,6 @@ using namespace winrt::Windows::Foundation::Collections;
 
 namespace winrt::AIOneWinUI::implementation
 {
-    int32_t MainWindow::MyProperty()
-    {
-        throw hresult_not_implemented();
-    }
-
-    void MainWindow::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
-    }
-
     IObservableVector<AIOneWinUI::BlankUserControl> MainWindow::Messages() {
         return m_messages;
     }
