@@ -36,7 +36,8 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::AppendReasoningToken(winrt::hstring token)
     {
         m_text = m_text  + token;;
-        m_propertyChanged(this, L"Text");
+        //m_text.
+        //m_propertyChanged(this, L"Text");
     }
     
     void MessageControl::AppendToken(winrt::hstring token)

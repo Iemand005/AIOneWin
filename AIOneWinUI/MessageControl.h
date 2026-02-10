@@ -16,6 +16,12 @@ namespace winrt::AIOneWinUI::implementation
             m_text = L"Bark";
         }
 
+        MessageControl(winrt::hstring role)
+        {
+            m_role = role;
+            m_text = L"";
+        }
+
         MessageControl(winrt::hstring role, winrt::hstring text)
         {
             m_role = role;

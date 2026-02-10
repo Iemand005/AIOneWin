@@ -31,7 +31,7 @@ namespace winrt::AIOneWinUI::implementation
 
 void winrt::AIOneWinUI::implementation::MainWindow::SendButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
 {
-
+    Send();
 }
 
 void winrt::AIOneWinUI::implementation::MainWindow::LoadModelButton_Click(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -82,9 +82,17 @@ void winrt::AIOneWinUI::implementation::MainWindow::LoadModelButton_Click(winrt:
 }
 
 void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
-    auto text = this->MessageInput().Text().c_str();
+    auto message = this->MessageInput().Text();
+    //auto text = this->MessageInput().Text().c_str();
 
-    //this->MessageInput().Text("");
+    this->MessageInput().Text(L"");
+
+    auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
+    thing.Role(L"User");
+    thing.Text(message);
+    Messages().Append(thing);
+    //Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>("User", message));
+
 
     //auto message = t
 
@@ -94,6 +102,8 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
 
     options.onToken = [this](const std::string& token) {
         this->DispatcherQueue().TryEnqueue([this, token]() {
+            //Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>("Assistant", message));
+
             //auto  message  = winrt::make<MessageItem>("assistant", "");
             //this->Messages.Append(winrt::to_hstring(token));
             //this->Messages.Append(winrt::make<MessageItem>("assistant", ""));
@@ -101,7 +111,17 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
         });
     };
 
-    modelManager->getChatManager()->sendAsync(text, options);
+    options.onGenerationStart = [this]() {
+        this->DispatcherQueue().TryEnqueue([this]() {
+        //Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>("Assistant", ""));
+            auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
+        thing.Role(L"Assistant");
+        Messages().Append(thing);
+            });
+
+        };
+
+    modelManager->getChatManager()->sendAsync(message.c_str(), options);
 }
 
 void winrt::AIOneWinUI::implementation::MainWindow::TextBox_KeyDown(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& e)
