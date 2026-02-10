@@ -87,11 +87,11 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
 
     this->MessageInput().Text(L"");
 
-    auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
+    /*auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
     thing.Role(L"User");
     thing.Text(message);
-    Messages().Append(thing);
-    //Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>("User", message));
+    Messages().Append(thing);*/
+    Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>(L"User", message));
 
 
     //auto message = t
@@ -113,10 +113,10 @@ void  winrt::AIOneWinUI::implementation::MainWindow::Send() {
 
     options.onGenerationStart = [this]() {
         this->DispatcherQueue().TryEnqueue([this]() {
-        //Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>("Assistant", ""));
-            auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
+        Messages().Append(winrt::make<AIOneWinUI::implementation::MessageControl>(L"Assistant"));
+            /*auto thing = winrt::make<AIOneWinUI::implementation::MessageControl>();
         thing.Role(L"Assistant");
-        Messages().Append(thing);
+        Messages().Append(thing);*/
             });
 
         };

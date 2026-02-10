@@ -9,7 +9,7 @@
 
     <StackPanel VerticalAlignment="Center" Margin="0, 10, 0, 10">
 		<TextBlock Text="{x:Bind Role}" FontWeight="Bold" FontSize="14"/>
-		<Expander>
+		<Expander Visibility="Collapsed">
 			<Expander.Header>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Reasoning" VerticalAlignment="Center"/>
