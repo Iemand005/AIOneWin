@@ -1,10 +1,10 @@
 ﻿#pragma once
 
 #include <winrt/Microsoft.UI.Xaml.h>
-//#include "winrt/Windows.UI.Xaml.Markup.h"
-//#include "winrt/Windows.UI.Xaml.Interop.h"
-//#include "winrt/Windows.UI.Xaml.Controls.Primitives.h"
 #include "MessageControl.g.h"
+
+using namespace winrt;
+using namespace Microsoft::UI::Xaml::Data;
 
 namespace winrt::AIOneWinUI::implementation
 {
@@ -19,7 +19,7 @@ namespace winrt::AIOneWinUI::implementation
         MessageControl(winrt::hstring role)
         {
             m_role = role;
-            m_text = L" ";
+            m_text = L"";
         }
 
         MessageControl(winrt::hstring role, winrt::hstring text)
@@ -34,17 +34,29 @@ namespace winrt::AIOneWinUI::implementation
         winrt::hstring Text();
         void Text(winrt::hstring value);
 
+        winrt::hstring Thoughts();
+        void Thoughts(winrt::hstring value);
+
+        bool Thinking();
+        void Thinking(bool thinking);
+
+        bool HasThought();
+
         void AppendToken(winrt::hstring token);
         void AppendReasoningToken(winrt::hstring token);
 
-        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
+        winrt::event_token PropertyChanged(PropertyChangedEventHandler const& handler);
         void PropertyChanged(winrt::event_token const& token) noexcept;
 
         private:
-        event<winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> m_propertyChanged;
+        event<PropertyChangedEventHandler> m_propertyChanged;
 
-        winrt::hstring m_role = L" ";
-        winrt::hstring m_text = L" ";
+        winrt::hstring m_role = L"";
+        winrt::hstring m_text = L"";
+        winrt::hstring m_thoughts = L"";
+        bool m_thinking = false;
+
+        void ReportPropertyChanged(hstring functionName);
     };
 }
 

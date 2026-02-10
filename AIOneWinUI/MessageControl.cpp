@@ -6,7 +6,7 @@
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
-//using namespace Microsoft::Foundation;
+using namespace Microsoft::UI::Xaml::Data;
 
 namespace winrt::AIOneWinUI::implementation
 {
@@ -19,9 +19,7 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::Role(hstring value)
     {
         m_role = value;
-        //m_propertyChanged("Role");
-        //m_propertyChanged(*this, PropertyChangedEventArgs(L"Role"));
-        m_propertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Role"));
+        ReportPropertyChanged(L"Role");
     }
 
     hstring MessageControl::Text()
@@ -32,33 +30,45 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::Text(hstring value)
     {
         m_text = value;
-        //m_propertyChanged(*this, PropertyChangedEventArgs(L"Text"));
-        //m_propertyChanged("Text");
-        m_propertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
+        ReportPropertyChanged(L"Text");
+    }
+
+    hstring MessageControl::Thoughts()
+    {
+        return m_thoughts;
+    }
+
+    void MessageControl::Thoughts(hstring value)
+    {
+        m_thoughts = value;
+        ReportPropertyChanged(L"Thoughts");
+        ReportPropertyChanged(L"HasThought");
+    }
+
+    bool MessageControl::Thinking()
+    {
+        return m_thinking;
+    }
+
+    bool MessageControl::HasThought()
+    {
+        return m_thoughts.size();
+    }
+
+    void MessageControl::Thinking(bool thinking)
+    {
+        m_thinking = thinking;
+        ReportPropertyChanged(L"Thinking");
     }
 
     void MessageControl::AppendReasoningToken(winrt::hstring token)
     {
-        m_text = m_text  + token;;;;;;;
-        //m_propertyChanged(*this, PropertyChangedEventArgs(L"Token"));
-        //m_text.
-        //m_propertyChanged(this, L"Text");
-        //m_propertyChanged(*this, winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
+        Text(Text() + token);
     }
     
     void MessageControl::AppendToken(winrt::hstring token)
     {
-    /*wchar_t *abab = m_text.c_str();
-        m_text = m_text.c_str() + token.c_str();;*/
-        auto aeeee = Text();
-        const wchar_t * o = aeeee.data();
-        if (std::wstring(o).empty()) aeeee = L"";
-        this;
-        if (std::wstring(o).empty()) Text(token);
-        else Text(aeeee + token);
-        //m_propertyChanged(*this, winrt::Windows::UI::Xaml::Data::PropertyChangedEventArgs(L"Text"));
-        //m_text += token;
-        //m_propertyChanged(L"Text");
+        Text(Text() + token);
     }
 
     winrt::event_token MessageControl::PropertyChanged(Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
@@ -69,5 +79,10 @@ namespace winrt::AIOneWinUI::implementation
     void MessageControl::PropertyChanged(winrt::event_token const& token) noexcept
     {
         m_propertyChanged.remove(token);
+    }
+
+    void MessageControl::ReportPropertyChanged(hstring functionName)
+    {
+        m_propertyChanged(*this, PropertyChangedEventArgs(functionName));
     }
 }

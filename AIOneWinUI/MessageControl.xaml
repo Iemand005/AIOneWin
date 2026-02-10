@@ -16,7 +16,7 @@
 					<ProgressRing Margin="10, 0, 0, 0"/>
 				</StackPanel>
 			</Expander.Header>
-			<TextBlock Text="{x:Bind Text, Mode=OneWay}" TextWrapping="Wrap"/>
+			<TextBlock Text="{x:Bind Thoughts, Mode=OneWay}" TextWrapping="Wrap"/>
 		</Expander>
 		<TextBlock Text="{x:Bind Text, Mode=OneWay}" TextWrapping="Wrap"/>
 	</StackPanel>
