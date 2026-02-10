@@ -12,12 +12,8 @@ namespace winrt::AIOneWinUI::implementation
     {
         BlankUserControl() 
         {
-            //m_text = winrt::make<hstring>("Bark");
             m_text = L"Bark";
         }
-
-        int32_t MyProperty();
-        void MyProperty(int32_t value);
 
         winrt::hstring Text();
         void Text(winrt::hstring value);

@@ -35,6 +35,7 @@ namespace winrt::AIOneWinUI::implementation
 
             //AppWindow().TitleBar().ExtendsContentIntoTitleBar(true);
 
+            ExtendsContentIntoTitleBar(true);
         }
 
         int32_t MyProperty();
