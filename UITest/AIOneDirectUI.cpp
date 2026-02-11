@@ -169,7 +169,13 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	ATOM loadButtonId = StrToID(UCString(L"LoadModelButton"));
     auto *loadButton = (Button *)pMainElement->FindDescendent(loadButtonId);
 
-	auto *messageInput = (Edit *)pMainElement->FindDescendent(StrToID((UCString)L"MessageEditBox"));
+	auto *modelLoadingProgressBar = (Progress *)pMainElement->FindDescendent(StrToID((UCString)L"ModelLoadingProgress"));
+
+	modelLoadingProgressBar->SetAccState(24);
+
+
+    auto *messageInput = (Edit *)pMainElement->FindDescendent(
+        StrToID((UCString)L"MessageEditBox"));
 
 	auto *progressSpinner = pMainElement->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
 

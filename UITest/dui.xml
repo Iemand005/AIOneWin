@@ -278,7 +278,7 @@
   <HWNDElement resid="AIOneMain" layout="BorderLayout()" id="Atom(SXWizard)" sheet="SXStyles">
 
 	<TouchButton accessible="true" layoutpos="top" minsize="size(144rp,32rp)" margin="rect(6rp,16rp,16rp,16rp)" sheet="RefDui" accrole="pushbutton" id="Atom(LoadModelButton)" active="mouse | keyboard" content="Load Model" />
-	  <ModernProgressBar layoutpos="top" minsize="size(50rp, 50rp)" id="Atom(ModelLoadingProgress)" />
+	  <ModernProgressBar layoutpos="top" id="Atom(ModelLoadingProgress)" determinate="true" />
     <element layoutpos="bottom" class="WizardButtonBar" contentalign="middleright" layout="BorderLayout()" id="Atom(SXWizardButtonBar)">
 		<element layoutpos="client" class="WizardPageContainer" layout="BorderLayout()">
 		<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="client" accrole="text"  id="Atom(MessageEditBox)" active="mouse | keyboard" themedborder="true" />
