@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 11035257,
+    "totalFocusTime": 11138216,
     "totalActiveTime": 352849
   },
   "files": {
@@ -112,6 +112,10 @@
     "DirectUI/DirectUI/parser.h": {
       "pending": 0,
       "focus": 1545
+    },
+    "UITest/UITest.vcxproj": {
+      "pending": 0,
+      "focus": 19078
     }
   }
 }

@@ -137,8 +137,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	pParser->SetParseErrorCallback([](UCString err1, UCString err2, int unk, void*ctx) {
               auto messg = std::format(L"err: {}; {}; {}\n", (LPCWSTR)err1,
-                                       (LPCWSTR)err2, unk)
-                               ;
+                                       (LPCWSTR)err2, unk);
               OutputDebugString(messg.c_str());
               MessageBox(NULL, messg.c_str(), L"XML Parsing failed",
                          WN_WINDOWS_ERROR);
