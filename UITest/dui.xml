@@ -6,7 +6,7 @@
     <!-- ressheet(ImmersiveStyles, library(dui70.dll), Dark) -->
     <style resid="SXStyles">
 
-      <HWNDElement height="492rp" width="800rp" accessible="true" layoutpos="client" padding="rect(24rp,0rp,24rp,20rp)"/>
+      <HWNDElement height="492rp" width="800rp" accessible="true" layoutpos="client" padding="rect(24rp,20rp,24rp,20rp)"/>
 
 
       <if class="WizardPrimaryButton">
@@ -293,7 +293,7 @@
 		
       <ScrollViewer  id="Atom(ScrollViewer)" xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)" bordercolor="gray">
 		  <element id="Atom(MessageList)" layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
-          <ModernProgressRing layoutpos="left" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)" />
+          <ModernProgressRing layoutpos="left" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)"   sheet="RefDark" />
 			  
             <element layoutpos="top" class="WizardPageTitle" id="Atom(SXTitle)" content="Click the buttons to get started" />
             <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>

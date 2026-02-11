@@ -149,8 +149,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	auto hr=pParser->SetXMLFromResource(IDR_UIFILE1, hInstance,(HINSTANCE)hInstance);
 
 	unsigned long deferKey;
-	TouchHWNDElement* hwndElement;
-	TouchHWNDElement::Create(pwnd->GetHWND(), true, 0, NULL, &deferKey,(Element **) & hwndElement);
+	HWNDElement* hwndElement;
+	HWNDElement::Create(pwnd->GetHWND(), true, 0, NULL, &deferKey,(Element **) & hwndElement);
 
 	Element* pMainElement;
 
@@ -205,24 +205,24 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
   //        pNewMessage->SetLayoutPos(0); // Omdat je parent BorderLayout heeft
   //      }
 	
-	auto pScrollViewer = (ScrollViewer *)pMainElement->FindDescendent(
-            StrToID((UCString)L"ScrollViewer"));
+	//auto pScrollViewer = (ScrollViewer *)pMainElement->FindDescendent(
+ //           StrToID((UCString)L"ScrollViewer"));
 
-	ModernProgressRing *newItem = new DirectUI::ModernProgressRing();
+	//ModernProgressRing *newItem = new DirectUI::ModernProgressRing();
 
-         //deferKey = 0;
-        //pScrollViewer->Add()
+ //        //deferKey = 0;
+ //       //pScrollViewer->Add()
 
-	ModernProgressRing::Create(messageList, &deferKey, (Element **)&newItem);
-        newItem->Initialize(0, messageList, &deferKey);
+	//ModernProgressRing::Create(messageList, &deferKey, (Element **)&newItem);
+ //       newItem->Initialize(0, messageList, &deferKey);
 
-        //messageList->Add(newItem);
-        pScrollViewer->Add((Element **)&newItem, 1);
+ //       //messageList->Add(newItem);
+ //       pScrollViewer->Add((Element **)&newItem, 1);
 
-        // If you want to insert at a specific index
-        // parent->Insert(&child, index);
+ //       // If you want to insert at a specific index
+ //       // parent->Insert(&child, index);
 
-        messageList->UpdateLayout(); // Mark for redraw
+ //       messageList->UpdateLayout(); // Mark for redraw
 
 	LogListener lis;
 	hr = pMainElement->AddListener(&lis);
