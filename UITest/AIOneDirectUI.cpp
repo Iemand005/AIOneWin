@@ -149,9 +149,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	auto hr=pParser->SetXMLFromResource(IDR_UIFILE1, hInstance,(HINSTANCE)hInstance);
 
 	unsigned long deferKey;
-	HWNDElement* hwndElement;
-
-	HWNDElement::Create(pwnd->GetHWND(),true,0,NULL,&deferKey,(Element**)&hwndElement);
+	TouchHWNDElement* hwndElement;
+        HWND newHwnd;
+        TouchHWNDElement::Create(&newHwnd, true, 0, NULL, &deferKey,
+                                 (Element **)&hwndElement);
 
 	Element* pMainElement;
 

@@ -96,9 +96,7 @@ namespace DirectUI
 		virtual ProviderProxyCall GetProxyCreator(void);
 
 		//IRawElementProviderFragmentRoot
-		//1
 		virtual long __stdcall ElementProviderFromPoint(double, double, IRawElementProviderFragment * *);
-		//2
 		virtual long __stdcall GetFocus(IRawElementProviderFragment * *);
 
 	protected:
