@@ -81,6 +81,7 @@ struct EventListener : public IElementListener {
 };
 
 #define WM_DIRECTUI_INVOKE (WM_USER + 101)
+#define WM_DIRECTUI_PROGRESS (WM_USER + 102)
 
 static std::string output = "";
 
@@ -97,6 +98,10 @@ LRESULT CALLBACK InvokeSubclass(HWND hWnd, UINT uMsg, WPARAM wParam,
     std::wstring wide = converter.from_bytes(output);
     title->SetContentString(UCString(wide.c_str()));
     return 0;
+  } else if (wMsg == WM_DIRECTUI_PROGRESS) {
+    auto pProgressBar = (Progress *)lParam;
+    auto progress = (int)wParam;
+    pProgressBar->SetPosition(progress);
   }
   return DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
@@ -173,7 +178,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	pModelLoadingProgressBar->SetMinimum(0);
         pModelLoadingProgressBar->SetMaximum(100);
-	pModelLoadingProgressBar->SetPosition(24);
+	
 
 
     auto *messageInput = (Edit *)pMainElement->FindDescendent(
@@ -217,6 +222,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 			options.onDone = [&]() {
                           progressSpinner->SetVisible(false);
+                        };
+
+			options.onProgress = [&]() {
+
                         };
 
             modelManager->loadLLMAsync(fileName, options);
