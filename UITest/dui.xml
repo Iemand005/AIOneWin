@@ -270,15 +270,18 @@
 
     </style>
 
-    <style resid="RefDui" base="ressheet(ImmersiveStyles, library(dui70.dll), Light)">
+	  <style resid="RefDui" base="ressheet(ImmersiveStyles, library(dui70.dll), Light)">
+		  
       
     </style>
+	  <style resid="RefDark" base="ressheet(ImmersiveStyles, library(dui70.dll), Dark)">
+	  </style>
     
   </stylesheets>
-  <HWNDElement resid="AIOneMain" layout="BorderLayout()" id="Atom(SXWizard)" sheet="SXStyles">
+  <HWNDElement resid="AIOneMain" layout="BorderLayout()" id="Atom(SXWizard)" sheet="SXStyles" >
 
-	<TouchButton accessible="true" layoutpos="top" minsize="size(144rp,32rp)" margin="rect(6rp,16rp,16rp,16rp)" sheet="RefDui" accrole="pushbutton" id="Atom(LoadModelButton)" active="mouse | keyboard" content="Load Model" />
-	  <ModernProgressBar layoutpos="top" id="Atom(ModelLoadingProgress)" determinate="true" />
+	<TouchButton accessible="true" layoutpos="top" minsize="size(144rp,32rp)" margin="rect(6rp,16rp,16rp,16rp)" sheet="RefDark" accrole="pushbutton" id="Atom(LoadModelButton)" active="mouse | keyboard" content="Load Model" />
+	  <ModernProgressBar layoutpos="top" id="Atom(ModelLoadingProgress)" determinate="true"  sheet="RefDark" class="default" />
     <element layoutpos="bottom" class="WizardButtonBar" contentalign="middleright" layout="BorderLayout()" id="Atom(SXWizardButtonBar)">
 		<element layoutpos="client" class="WizardPageContainer" layout="BorderLayout()">
 		<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="client" accrole="text"  id="Atom(MessageEditBox)" active="mouse | keyboard" themedborder="true" />
