@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 12983629,
-    "totalActiveTime": 387143
+    "totalFocusTime": 13053647,
+    "totalActiveTime": 387821
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
@@ -82,8 +82,8 @@
       "focus": 113455
     },
     "DirectUI/DirectUI/DirectUI.cpp": {
-      "pending": 34294,
-      "focus": 1318514
+      "pending": 34972,
+      "focus": 1338051
     },
     "DirectUI/DirectUI/DirectUI.h": {
       "pending": 0,
