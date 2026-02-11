@@ -2,7 +2,7 @@
   "version": "1.0",
   "project": {
     "totalFocusTime": 10675745,
-    "totalActiveTime": 311896
+    "totalActiveTime": 352849
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
@@ -15,7 +15,7 @@
     },
     "AIOne/src/LLModel.cpp": {
       "pending": 89457,
-      "focus": 934952
+      "focus": 943611
     },
     "AIOne/external/llama.cpp/src/llama-mmap.cpp": {
       "pending": 41932,
@@ -76,6 +76,10 @@
     "AIOne/src/Message.hpp": {
       "pending": 0,
       "focus": 3483
+    },
+    "RE": {
+      "pending": 40953,
+      "focus": 67068
     }
   }
 }
