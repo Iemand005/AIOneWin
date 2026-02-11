@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UITest.cpp">
+    <ClCompile Include="AIOneDirectUI.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
