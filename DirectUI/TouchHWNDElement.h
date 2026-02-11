@@ -31,11 +31,11 @@ namespace DirectUI
         TouchHWNDElement& operator=(TouchHWNDElement const&) = delete;
         virtual ~TouchHWNDElement();
 
-        static long __stdcall Create(HWND, bool, unsigned int, Element*, unsigned long*, Element**);
+        static long __stdcall Create(HWND, bool, unsigned int, Element*parent, unsigned long* deferKey, Element**newElement);
         static IClassInfo* __stdcall GetClassInfoPtr();
         static long __stdcall Register();
 
-        long Initialize(HWND, bool, unsigned int, Element*, unsigned long*);
+        long Initialize(HWND, bool, unsigned int, Element* parent, unsigned long* deferKey);
 
         void ActivateTooltip(Element*, unsigned long);
         long DismissIHMAsync();

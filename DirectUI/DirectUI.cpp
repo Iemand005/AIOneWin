@@ -11320,7 +11320,7 @@ namespace DirectUI
 	TouchHWNDElement::TouchHWNDElement() {}
 	TouchHWNDElement::~TouchHWNDElement() {}
 
-	long __stdcall TouchHWNDElement::Create(HWND hwnd, bool bFlag, unsigned int uiFlags, Element* parent, unsigned long* cookie, Element** out)
+	long __stdcall TouchHWNDElement::Create(HWND hwnd, bool bFlag, unsigned int uiFlags, Element* parent, unsigned long* deferKey, Element** out)
 	{
 		return 0;
 	}
@@ -11335,7 +11335,7 @@ namespace DirectUI
 		return 0;
 	}
 
-	long TouchHWNDElement::Initialize(HWND hwnd, bool bFlag, unsigned int uiFlags, Element* parent, unsigned long* cookie)
+	long TouchHWNDElement::Initialize(HWND hwnd, bool bFlag, unsigned int uiFlags, Element* parent, unsigned long* deferKey)
 	{
 		return 0;
 	}

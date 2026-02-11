@@ -150,9 +150,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	unsigned long deferKey;
 	TouchHWNDElement* hwndElement;
-        HWND newHwnd;
-        TouchHWNDElement::Create(&newHwnd, true, 0, NULL, &deferKey,
-                                 (Element **)&hwndElement);
+	TouchHWNDElement::Create(pwnd->GetHWND(), true, 0, NULL, &deferKey,(Element **) & hwndElement);
 
 	Element* pMainElement;
 
