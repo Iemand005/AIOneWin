@@ -336,6 +336,9 @@
     <ClInclude Include="ModernProgressRing.h">
       <Filter>Headers\DirectUI</Filter>
     </ClInclude>
+    <ClInclude Include="ModernProgressBar.h">
+      <Filter>Headers\DirectUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">
@@ -348,9 +351,6 @@
   <ItemGroup>
     <ClCompile Include="DirectUI.cpp">
       <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ModernProgressBar.h">
-      <Filter>Headers\DirectUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

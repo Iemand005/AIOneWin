@@ -2,75 +2,83 @@
 
 namespace DirectUI
 {
-	class UILIB_API ModernProgressBar : public Element
-	{
-	public:
-		Progress(Progress const&);
-		Progress(void);
-		virtual ~Progress(void);
-		Progress& operator=(Progress const&);
+    class UILIB_API ModernProgressBar : public Element
+    {
+    public:
+        ModernProgressBar(void);
+        ModernProgressBar(ModernProgressBar const&) = delete;
+        ModernProgressBar& operator=(ModernProgressBar const&) = delete;
+        virtual ~ModernProgressBar(void);
 
-		static long __stdcall Create(Element*, unsigned long*, Element**);
-		static IClassInfo* __stdcall GetClassInfoPtr(void);
-		static PropertyInfo const* __stdcall PositionProp(void);
-		static long __stdcall Register(void);
-		static void __stdcall SetClassInfoPtr(IClassInfo*);
-		static PropertyInfo const* __stdcall MaximumProp(void);
-		static PropertyInfo const* __stdcall MinimumProp(void);
+        static long __stdcall Create(Element*, unsigned long*, Element**);
+        static IClassInfo* __stdcall GetClassInfoPtr(void);
+        static PropertyInfo const* __stdcall PositionProp(void);
+        static PropertyInfo const* __stdcall MaximumProp(void);
+        static PropertyInfo const* __stdcall MinimumProp(void);
+        static PropertyInfo const* __stdcall StateProp(void);
+        static PropertyInfo const* __stdcall DeterminateProp(void);
+        static long __stdcall Register(void);
 
-		int GetMaximum(void);
-		int GetMinimum(void);
-		int GetPosition(void);
-		long Initialize(Element*, unsigned long*);
-		long SetMaximum(int);
-		long SetMinimum(int);
-		long SetPosition(int);
+        int  GetMaximum(void);
+        int  GetMinimum(void);
+        int  GetPosition(void);
+        int  GetState(void);
 
-		int DeterminateProp(void);
-		int GetClassInfoPtr(void);
-		int GetState(void);
-		int IsActivityOccuring(void);
-		int IsAddLayeredRef(void);
-		int IsAutoHeight(void);
-		int IsDeterminate(void);
-		int IsIndependentAnimations(void);
-		int IsSmoothFillAnimation(void);
-		int MaximumProp(void);
-		int MinimumProp(void);
-		int ModernProgressBar(void);
-		int OnDestroy(void);
-		//int OnHosted(Element*);
-		//int OnPropertyChanged(PropertyInfo const*, int, DirectUI::Value*, DirectUI::Value*);
-		//int OnUnHosted(Element*);
-		int PositionProp(void);
-		int Register(void);
-		int SetActivityOccuring(bool);
-		int SetAddLayeredRef(bool);
-		int SetAutoHeight(bool);
-		int SetDeterminate(bool);
-		int SetIndependentAnimations(bool);
-		int SetSmoothFillAnimation(bool);
-		int SetState(int);
-		int StateProp(void);
+        bool IsDeterminate(void);
+        bool IsActivityOccuring(void);
+        bool IsAddLayeredRef(void);
+        bool IsAutoHeight(void);
+        bool IsIndependentAnimations(void);
+        bool IsSmoothFillAnimation(void);
 
-		virtual IClassInfo* GetClassInfoW(void);
-		virtual SIZE GetContentSize(int, int, Surface*);
-		virtual void Paint(HDC, RECT const*, RECT const*, RECT*, RECT*);
+        long SetMaximum(int);
+        long SetMinimum(int);
+        long SetPosition(int);
+        long SetState(int);
 
-	private:
-		static IClassInfo* s_pClassInfo;
+        long SetDeterminate(bool);
+        long SetActivityOccuring(bool);
+        long SetAddLayeredRef(bool);
+        long SetAutoHeight(bool);
+        long SetIndependentAnimations(bool);
+        long SetSmoothFillAnimation(bool);
 
-	};
+        virtual IClassInfo* GetClassInfoW(void);
+        virtual void Paint(
+            HDC,
+            RECT const*,
+            RECT const*,
+            RECT*,
+            RECT*);
 
-	class UILIB_API ProgressRangeValueProxy : public IProxy
-	{
-	public:
-		ProgressRangeValueProxy(ProgressRangeValueProxy const&);
-		ProgressRangeValueProxy(void);
-		ProgressRangeValueProxy& operator=(ProgressRangeValueProxy const&);
+        virtual void OnHosted(Element*);
+        virtual void OnUnHosted(Element*);
+        virtual void OnDestroy(void);
+        virtual void OnPropertyChanged(
+            PropertyInfo const*,
+            int,
+            Value*,
+            Value*);
 
-		virtual long DoMethod(int, char*);
-	protected:
-		virtual void Init(Element*);
-	};
+    private:
+        static IClassInfo* s_pClassInfo;
+    };
+
+    class UILIB_API ModernProgressBarRangeValueProxy : public IProxy
+    {
+    public:
+        ModernProgressBarRangeValueProxy(void);
+        ModernProgressBarRangeValueProxy(ModernProgressBarRangeValueProxy const&);
+        ModernProgressBarRangeValueProxy(ModernProgressBarRangeValueProxy&&);
+
+        ModernProgressBarRangeValueProxy&
+            operator=(ModernProgressBarRangeValueProxy const&);
+        ModernProgressBarRangeValueProxy&
+            operator=(ModernProgressBarRangeValueProxy&&);
+
+        virtual long DoMethod(int, char*);
+
+    protected:
+        virtual void Init(Element*);
+    };
 }

@@ -7967,6 +7967,302 @@ namespace DirectUI
 	{
 	}
 
+	ModernProgressBar::ModernProgressBar(void)
+	{
+	}
+
+	ModernProgressBar::~ModernProgressBar(void)
+	{
+	}
+
+	long ModernProgressBar::Create(Element*, unsigned long*, Element**)
+	{
+		return 0;
+	}
+
+	IClassInfo* ModernProgressBar::GetClassInfoPtr(void)
+	{
+		return nullptr;
+	}
+
+	PropertyInfo const* ModernProgressBar::PositionProp(void)
+	{
+		return nullptr;
+	}
+
+	PropertyInfo const* ModernProgressBar::MaximumProp(void)
+	{
+		return nullptr;
+	}
+
+	PropertyInfo const* ModernProgressBar::MinimumProp(void)
+	{
+		return nullptr;
+	}
+
+	PropertyInfo const* ModernProgressBar::StateProp(void)
+	{
+		return nullptr;
+	}
+
+	PropertyInfo const* ModernProgressBar::DeterminateProp(void)
+	{
+		return nullptr;
+	}
+
+	long ModernProgressBar::Register(void)
+	{
+		return 0;
+	}
+
+	int ModernProgressBar::GetMaximum(void)
+	{
+		return 0;
+	}
+
+	int ModernProgressBar::GetMinimum(void)
+	{
+		return 0;
+	}
+
+	int ModernProgressBar::GetPosition(void)
+	{
+		return 0;
+	}
+
+	int ModernProgressBar::GetState(void)
+	{
+		return 0;
+	}
+
+	bool ModernProgressBar::IsDeterminate(void)
+	{
+		return false;
+	}
+
+	bool ModernProgressBar::IsActivityOccuring(void)
+	{
+		return false;
+	}
+
+	bool ModernProgressBar::IsAddLayeredRef(void)
+	{
+		return false;
+	}
+
+	bool ModernProgressBar::IsAutoHeight(void)
+	{
+		return false;
+	}
+
+	bool ModernProgressBar::IsIndependentAnimations(void)
+	{
+		return false;
+	}
+
+	bool ModernProgressBar::IsSmoothFillAnimation(void)
+	{
+		return false;
+	}
+
+	long ModernProgressBar::SetMaximum(int)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetMinimum(int)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetPosition(int)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetState(int)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetDeterminate(bool)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetActivityOccuring(bool)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetAddLayeredRef(bool)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetAutoHeight(bool)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetIndependentAnimations(bool)
+	{
+		return 0;
+	}
+
+	long ModernProgressBar::SetSmoothFillAnimation(bool)
+	{
+		return 0;
+	}
+
+	IClassInfo* ModernProgressBar::GetClassInfoW(void)
+	{
+		return nullptr;
+	}
+
+	void ModernProgressBar::Paint(
+		HDC,
+		RECT const*,
+		RECT const*,
+		RECT*,
+		RECT*)
+	{
+	}
+
+	void ModernProgressBar::OnHosted(Element*)
+	{
+	}
+
+	void ModernProgressBar::OnUnHosted(Element*)
+	{
+	}
+
+	void ModernProgressBar::OnDestroy(void)
+	{
+	}
+
+	void ModernProgressBar::OnPropertyChanged(
+		PropertyInfo const*,
+		int,
+		Value*,
+		Value*)
+	{
+	}
+
+	ModernProgressBarRangeValueProxy::ModernProgressBarRangeValueProxy(void)
+	{
+	}
+
+	ModernProgressBarRangeValueProxy::ModernProgressBarRangeValueProxy(
+		ModernProgressBarRangeValueProxy const&)
+	{
+	}
+
+	ModernProgressBarRangeValueProxy::ModernProgressBarRangeValueProxy(
+		ModernProgressBarRangeValueProxy&&)
+	{
+	}
+
+	ModernProgressBarRangeValueProxy&
+		ModernProgressBarRangeValueProxy::operator=(
+			ModernProgressBarRangeValueProxy const&)
+	{
+		return *this;
+	}
+
+	ModernProgressBarRangeValueProxy&
+		ModernProgressBarRangeValueProxy::operator=(
+			ModernProgressBarRangeValueProxy&&)
+	{
+		return *this;
+	}
+
+	long ModernProgressBarRangeValueProxy::DoMethod(int, char*)
+	{
+		return 0;
+	}
+
+	void ModernProgressBarRangeValueProxy::Init(Element*)
+	{
+	}
+
+	ModernProgressRing::ModernProgressRing(void)
+	{
+	}
+
+	ModernProgressRing::~ModernProgressRing(void)
+	{
+	}
+
+	long ModernProgressRing::Create(Element*, unsigned long*, Element**)
+	{
+		return 0;
+	}
+
+	IClassInfo* ModernProgressRing::GetClassInfoPtr(void)
+	{
+		return nullptr;
+	}
+
+	long ModernProgressRing::Register(void)
+	{
+		return 0;
+	}
+
+	bool ModernProgressRing::IsActivityOccuring(void)
+	{
+		return false;
+	}
+
+	bool ModernProgressRing::IsAddLayeredRef(void)
+	{
+		return false;
+	}
+
+	long ModernProgressRing::SetActivityOccuring(bool)
+	{
+		return 0;
+	}
+
+	long ModernProgressRing::SetAddLayeredRef(bool)
+	{
+		return 0;
+	}
+
+	IClassInfo* ModernProgressRing::GetClassInfoW(void)
+	{
+		return nullptr;
+	}
+
+	void ModernProgressRing::Paint(
+		HDC,
+		RECT const*,
+		RECT const*,
+		RECT*,
+		RECT*)
+	{
+	}
+
+	void ModernProgressRing::OnHosted(Element*)
+	{
+	}
+
+	void ModernProgressRing::OnUnHosted(Element*)
+	{
+	}
+
+	void ModernProgressRing::OnDestroy(void)
+	{
+	}
+
+	void ModernProgressRing::OnPropertyChanged(
+		PropertyInfo const*,
+		int,
+		Value*,
+		Value*)
+	{
+	}
+
 	template<class X, class Y, int i>
 	inline DirectUI::PatternProvider<X, Y, i>::PatternProvider()
 	{

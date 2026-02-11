@@ -169,9 +169,11 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	ATOM loadButtonId = StrToID(UCString(L"LoadModelButton"));
     auto *loadButton = (Button *)pMainElement->FindDescendent(loadButtonId);
 
-	auto *modelLoadingProgressBar = (Progress *)pMainElement->FindDescendent(StrToID((UCString)L"ModelLoadingProgress"));
+	auto *pModelLoadingProgressBar = (ModernProgressBar *)pMainElement->FindDescendent(StrToID((UCString)L"ModelLoadingProgress"));
 
-	modelLoadingProgressBar->SetAccState(24);
+	pModelLoadingProgressBar->SetMinimum(0);
+        pModelLoadingProgressBar->SetMaximum(100);
+	pModelLoadingProgressBar->SetPosition(24);
 
 
     auto *messageInput = (Edit *)pMainElement->FindDescendent(

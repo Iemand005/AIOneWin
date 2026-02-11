@@ -2,57 +2,42 @@
 
 namespace DirectUI
 {
-	class UILIB_API ModernProgressRing : public Element
-	{
-	public:
-		Progress(Progress const&);
-		Progress(void);
-		virtual ~Progress(void);
-		Progress& operator=(Progress const&);
+    class UILIB_API ModernProgressRing : public Element
+    {
+    public:
+        ModernProgressRing(void);
+        ModernProgressRing(ModernProgressRing const&) = delete;
+        ModernProgressRing& operator=(ModernProgressRing const&) = delete;
+        virtual ~ModernProgressRing(void);
 
-		static long __stdcall Create(Element*, unsigned long*, Element**);
-		static IClassInfo* __stdcall GetClassInfoPtr(void);
-		static PropertyInfo const* __stdcall PositionProp(void);
-		static long __stdcall Register(void);
-		static void __stdcall SetClassInfoPtr(IClassInfo*);
-		static PropertyInfo const* __stdcall MaximumProp(void);
-		static PropertyInfo const* __stdcall MinimumProp(void);
+        static long __stdcall Create(Element*, unsigned long*, Element**);
+        static IClassInfo* __stdcall GetClassInfoPtr(void);
+        static long __stdcall Register(void);
 
-		int GetMaximum(void);
-		int GetMinimum(void);
-		int GetPosition(void);
-		long Initialize(Element*, unsigned long*);
-		long SetMaximum(int);
-		long SetMinimum(int);
-		long SetPosition(int);
+        bool IsActivityOccuring(void);
+        bool IsAddLayeredRef(void);
 
-		bool IsActivityOccuring(void);
-		long SetActivityOccuring(bool);
-		IsAddLayeredRef(void);
-		ModernProgressRing(void);
-		virtual void OnDestroy(void);
-		virtual void OnHosted(Element*);
-		virtual void OnUnHosted(Element*);
-		virtual void OnPropertyChanged(PropertyInfo const*, int, Value*, Value*);
-		SetAddLayeredRef(bool);
+        long SetActivityOccuring(bool);
+        long SetAddLayeredRef(bool);
 
-		virtual IClassInfo* GetClassInfoW(void);
-		virtual SIZE GetContentSize(int, int, Surface*);
-		virtual void Paint(HDC, RECT const*, RECT const*, RECT*, RECT*);
-	private:
-		static IClassInfo* s_pClassInfo;
+        virtual IClassInfo* GetClassInfoW(void);
+        virtual void Paint(
+            HDC,
+            RECT const*,
+            RECT const*,
+            RECT*,
+            RECT*);
 
-	};
+        virtual void OnHosted(Element*);
+        virtual void OnUnHosted(Element*);
+        virtual void OnDestroy(void);
+        virtual void OnPropertyChanged(
+            PropertyInfo const*,
+            int,
+            Value*,
+            Value*);
 
-	class UILIB_API ProgressRangeValueProxy : public IProxy
-	{
-	public:
-		ProgressRangeValueProxy(ProgressRangeValueProxy const&);
-		ProgressRangeValueProxy(void);
-		ProgressRangeValueProxy& operator=(ProgressRangeValueProxy const&);
-
-		virtual long DoMethod(int, char*);
-	protected:
-		virtual void Init(Element*);
-	};
+    private:
+        static IClassInfo* s_pClassInfo;
+    };
 }
