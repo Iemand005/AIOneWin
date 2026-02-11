@@ -152,16 +152,15 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	int btn_count = 0;
 
 	auto loadModel = [&]() {
-          OPENFILENAME ofn;        // common dialog box structure
-          TCHAR szFile[260] = {0}; // if using TCHAR macros
+          OPENFILENAME ofn;
+          TCHAR szFile[260] = {0};
 
-          // Initialize OPENFILENAME
           ZeroMemory(&ofn, sizeof(ofn));
           ofn.lStructSize = sizeof(ofn);
           ofn.hwndOwner = pwnd->GetHWND();
           ofn.lpstrFile = szFile;
           ofn.nMaxFile = sizeof(szFile);
-          ofn.lpstrFilter = L"All\0*.*\0Text\0*.TXT\0";
+          ofn.lpstrFilter = L"All\0*.*\GGUF\0*.gguf\0";
           ofn.nFilterIndex = 1;
           ofn.lpstrFileTitle = NULL;
           ofn.nMaxFileTitle = 0;
@@ -169,7 +168,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
           ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
           if (GetOpenFileName(&ofn) == TRUE) {
-            // use ofn.lpstrFile
+            auto fileName = ofn.lpstrFile;
+
           }
 	};
 
