@@ -80,6 +80,17 @@ struct EventListener : public IElementListener {
 	void OnListenedInput(Element*elem, struct InputEvent*ev) override { }
 };
 
+class AIOneHost : public NativeHWNDHost {
+public:
+  HRESULT OnMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
+                    LRESULT *lResult) override {
+    std::cout << "barkf";
+    return S_OK;
+  }
+
+	std::string output;
+};
+
 #define WM_DIRECTUI_INVOKE (WM_USER + 101)
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -104,11 +115,14 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	ModelManager *modelManager = new ModelManager();
 
-	NativeHWNDHost* pwnd;
+    AIOneHost *pwnd = new AIOneHost();
 
-	NativeHWNDHost::Create((UCString)L"Microsoft DirectUI Test", NULL, NULL,
-		600, 400, 800, 600,
-		WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0,&pwnd);
+	NativeHWNDHost::Create((UCString)L"AIOne", NULL, NULL,
+		600, 400, 800, 600, WS_EX_WINDOWEDGE,
+                               WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0,
+                               (NativeHWNDHost **)&pwnd);
+
+	//AIOneHost *pwnd = (AIOneHost *)nativePwnd;
 
 	DUIXmlParser* pParser;
 
@@ -191,14 +205,13 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 		  AsyncTextGenOptions options;
 
-		  std::string output;
 
 		  options.onToken = [&](auto token) {
 			  //title_elem->
-                    output += token;
+                    pwnd->output += token;
 
 					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-                    std::wstring wide = converter.from_bytes(output);
+                    std::wstring wide = converter.from_bytes(pwnd->output);
                                         std::wstring ee =
                                             std::format(L"Entered: {}",
                                                         (LPCWSTR)wide.c_str());
