@@ -126,58 +126,63 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	HWND hMainWnd = pwnd->GetHWND();
     SetWindowSubclass(hMainWnd, InvokeSubclass, 1, 0);
-	//AIOneHost *pwnd = (AIOneHost *)nativePwnd;
 
 	DUIXmlParser* pParser;
 
 	ThrowIfFailed(DUIXmlParser::Create(&pParser, NULL, NULL, NULL, NULL));
 
 	pParser->SetParseErrorCallback([](UCString err1, UCString err2, int unk, void*ctx) {
-		OutputDebugString(std::format(L"err: {}; {}; {}\n", (LPCWSTR)err1, (LPCWSTR)err2, unk).c_str());
+              auto messg = std::format(L"err: {}; {}; {}\n", (LPCWSTR)err1,
+                                       (LPCWSTR)err2, unk)
+                               ;
+              OutputDebugString(messg.c_str());
+              MessageBox(NULL, messg.c_str(), L"XML Parsing failed",
+                         WN_WINDOWS_ERROR);
 		DebugBreak();
 	}, NULL);
 
 	auto hr=pParser->SetXMLFromResource(IDR_UIFILE1, hInstance,(HINSTANCE)hInstance);
 
 	unsigned long deferKey;
-	HWNDElement* hwnd_element;
+	HWNDElement* hwndElement;
 
-	HWNDElement::Create(pwnd->GetHWND(),true,0,NULL,&deferKey,(Element**)&hwnd_element);
+	HWNDElement::Create(pwnd->GetHWND(),true,0,NULL,&deferKey,(Element**)&hwndElement);
 
-	Element* pWizardMain;
-	hr = pParser->CreateElement((UCString)L"WizardMain", hwnd_element,NULL,NULL,(Element**)&pWizardMain);
+	Element* pMainElement;
 
-	ThrowIfFailed(hr);
+	ThrowIfFailed(pParser->CreateElement(UCString(L"AIOneMain"),hwndElement, NULL, NULL, &pMainElement));
 
+	//DoubleBuffered
+        pMainElement->DoubleBuffered(true);
 
-	pWizardMain->SetVisible(true);
-	pWizardMain->EndDefer(deferKey);
-	pwnd->Host(pWizardMain);
+	pMainElement->SetVisible(true);
+	pMainElement->EndDefer(deferKey);
+	pwnd->Host(pMainElement);
 
 	pwnd->ShowWindow(SW_SHOW);
 
-	auto *title_elem = pWizardMain->FindDescendent(StrToID((UCString)L"SXTitle"));
+	auto *title_elem = pMainElement->FindDescendent(StrToID((UCString)L"SXTitle"));
 
 	ATOM sendButtonId = StrToID(UCString(L"SXWizardDefaultButton"));
-    auto *sendButton = (Button *)pWizardMain->FindDescendent(sendButtonId);
+    auto *sendButton = (Button *)pMainElement->FindDescendent(sendButtonId);
     
 	ATOM loadButtonId = StrToID(UCString(L"LoadModelButton"));
-    auto *loadButton = (Button *)pWizardMain->FindDescendent(loadButtonId);
+    auto *loadButton = (Button *)pMainElement->FindDescendent(loadButtonId);
 
-	auto *messageInput = (Edit *)pWizardMain->FindDescendent(StrToID((UCString)L"MessageEditBox"));
+	auto *messageInput = (Edit *)pMainElement->FindDescendent(StrToID((UCString)L"MessageEditBox"));
 
-	auto *progressSpinner = pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
+	auto *progressSpinner = pMainElement->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
 
-	auto messageList = pWizardMain->FindDescendent(StrToID((UCString)L"MessageList"));
+	auto messageList = pMainElement->FindDescendent(StrToID((UCString)L"MessageList"));
 
 
 	Element  *newItem = nullptr;
-        unsigned long status = 0;
-        Element::Create(10, messageList, &status, &newItem);
+        //Element::Create(10, messageList, NULL, &newItem);
+        pMainElement->Create(1, messageList, NULL, &newItem);
         newItem->SetContentString(UCString(L"Heeeeeeeeeeey"));
 
 	LogListener lis;
-	hr = pWizardMain->AddListener(&lis);
+	hr = pMainElement->AddListener(&lis);
     ThrowIfFailed(hr);
 
 
@@ -262,9 +267,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
             send();
 	});
 
-    ThrowIfFailed(pWizardMain->AddListener(&clickListener));
+    ThrowIfFailed(pMainElement->AddListener(&clickListener));
 
-	DumpDuiTree(pWizardMain, 0);
+	DumpDuiTree(pMainElement, 0);
 
 	StartMessagePump();
 
