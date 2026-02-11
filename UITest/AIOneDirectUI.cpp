@@ -80,25 +80,29 @@ struct EventListener : public IElementListener {
 	void OnListenedInput(Element*elem, struct InputEvent*ev) override { }
 };
 
-class AIOneHost : public NativeHWNDHost {
-public:
-  HRESULT OnMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
-                    LRESULT *lResult) override {
-    std::cout << "barkf";
-    return S_OK;
-  }
-
-	std::string output = "";
-};
-
 #define WM_DIRECTUI_INVOKE (WM_USER + 101)
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-  if (message == WM_DIRECTUI_INVOKE) {
+static std::string output = "";
 
+LRESULT CALLBACK InvokeSubclass(HWND hWnd, UINT uMsg, WPARAM wParam,
+                                  LPARAM lParam, UINT_PTR uIdSubclass,
+                                  DWORD_PTR dwRefData) {
+  if (uMsg == WM_DIRECTUI_INVOKE) {
+    std::string *token = (std::string *)lParam;
+    std::string thing = *token;
+    output += thing;
+    auto title = (Element *)wParam;
+    //Value *content;
+    //title->GetContentString(&content);
+     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    std::wstring wide = converter.from_bytes(output);
+     //auto bibi = std::format(L"{}{}", (LPCWSTR)content, wide);
+    title->SetContentString(UCString(wide.c_str()));
+        //    .c_str() content +
+        //token);
     return 0;
   }
-  return DefWindowProc(hWnd, message, wParam, lParam);
+  return DefSubclassProc(hWnd, uMsg, wParam, lParam);
 }
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -115,13 +119,15 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	ModelManager *modelManager = new ModelManager();
 
-    AIOneHost *pwnd = new AIOneHost();
+    NativeHWNDHost *pwnd;
 
 	NativeHWNDHost::Create((UCString)L"AIOne", NULL, NULL,
 		600, 400, 800, 600, WS_EX_WINDOWEDGE,
                                WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0,
                                (NativeHWNDHost **)&pwnd);
 
+	HWND hMainWnd = pwnd->GetHWND();
+    SetWindowSubclass(hMainWnd, InvokeSubclass, 1, 0);
 	//AIOneHost *pwnd = (AIOneHost *)nativePwnd;
 
 	DUIXmlParser* pParser;
@@ -207,18 +213,20 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 
 		  options.onToken = [&](std::string token) {
+                    std::string *wawa = new std ::string(
+                    token);
 			  //title_elem->
      //               pwnd->output += token;
 
 					//std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-     //               std::wstring wide = converter.from_bytes(pwnd->output);
+     //                     std::wstring wide = converter.from_bytes(token);
+     //                                   UCString finaly = UCString(wide.c_str());
      //                                   std::wstring ee =
      //                                       std::format(L"Entered: {}",
      //                                                   (LPCWSTR)wide.c_str());
 
 					PostMessage(pwnd->GetHWND(), WM_DIRECTUI_INVOKE,
-                                      0,
-                                      (LPARAM)&token); 
+                                      (WPARAM)title_elem, (LPARAM)wawa); 
 
                      //ThrowIfFailed(title_elem->SetContentString(UCString(ee.c_str())));
                   };
