@@ -98,8 +98,8 @@ LRESULT CALLBACK InvokeSubclass(HWND hWnd, UINT uMsg, WPARAM wParam,
     std::wstring wide = converter.from_bytes(output);
     title->SetContentString(UCString(wide.c_str()));
     return 0;
-  } else if (wMsg == WM_DIRECTUI_PROGRESS) {
-    auto pProgressBar = (Progress *)lParam;
+  } else if (uMsg == WM_DIRECTUI_PROGRESS) {
+    auto pProgressBar = (ModernProgressBar *)lParam;
     auto progress = (int)wParam;
     pProgressBar->SetPosition(progress);
   }
@@ -178,6 +178,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	pModelLoadingProgressBar->SetMinimum(0);
         pModelLoadingProgressBar->SetMaximum(100);
+        pModelLoadingProgressBar->SetPosition(0);
 	
 
 
@@ -224,8 +225,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
                           progressSpinner->SetVisible(false);
                         };
 
-			options.onProgress = [&]() {
-
+			options.onProgress = [&](float progress) {
+                          int steps = progress * 100;
+                          PostMessage(pwnd->GetHWND(), WM_DIRECTUI_PROGRESS, (WPARAM)steps, (LPARAM)pModelLoadingProgressBar);
                         };
 
             modelManager->loadLLMAsync(fileName, options);
