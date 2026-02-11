@@ -339,6 +339,9 @@
     <ClInclude Include="ModernProgressBar.h">
       <Filter>Headers\DirectUI</Filter>
     </ClInclude>
+    <ClInclude Include="TouchHWNDElement.h">
+      <Filter>Headers\DirectUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">

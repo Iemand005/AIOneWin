@@ -2,7 +2,6 @@
 
 namespace DirectUI
 {
-	//32位结构体大小 0x94
 	class UILIB_API HWNDElement : public ElementWithHWND
 	{
 	public:
@@ -11,53 +10,31 @@ namespace DirectUI
 		virtual ~HWNDElement();
 		HWNDElement& operator=(const HWNDElement &);
 
-		//0
 		virtual void OnPropertyChanged(const PropertyInfo*, int, Value*, Value*);
-		//1
 		virtual void OnGroupChanged(int, bool);
-		//2
 		virtual void OnInput(InputEvent*);
-		//3
 		virtual void OnDestroy();
-		//4
 		virtual void OnEvent(Event*);
-		//5
 		virtual void UpdateTooltip(Element*);
 
-		//6
 		virtual void ActivateTooltip(Element*, unsigned long);
-		//7
 		virtual void RemoveTooltip(Element*);
 
-		//8
 		virtual IClassInfo* GetClassInfoW();
-		//9
 		virtual long GetAccessibleImpl(IAccessible**);
 
-
-		//HWNDElement 新增函数
-		//10
 		virtual HWND GetHWND();
 
-		//11
 		virtual void OnThemeChanged(ThemeChangedEvent*);
-
-		//12
 		virtual void OnNoChildWithShortcutFound(KeyboardEvent*);
-
-		//13
 		virtual void OnGetDlgCode(LPMSG, LRESULT*);
-		//14
 		virtual void OnWmThemeChanged(WPARAM wParam, LPARAM lParam);
-		//15
 		virtual void OnCompositionChanged();
 
-		//16
 		virtual bool CanSetFocus();
 
 		static UID WINAPI CompositionChange();
 		static HRESULT WINAPI Create(HWND, bool, unsigned int, Element*, unsigned long*, Element**pOut);
-		//17
 		virtual long CreateStyleParser(DUIXmlParser**);
 		void DelayActivateTooltip();
 		Element* ElementFromPoint(LPPOINT);
@@ -91,7 +68,6 @@ namespace DirectUI
 		static const PropertyInfo* WINAPI WrapKeyboardNavigateProp();
 
 		static LRESULT WINAPI StaticWndProc(HWND, UINT uMsg, WPARAM wParam, LPARAM lParam);
-		//18
 		virtual LRESULT WndProc(HWND, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	protected:
@@ -130,7 +106,7 @@ namespace DirectUI
 
 	};
 
-	//此类存在问题，看虚表3有个，但是导出只有2个，怪异……
+	//此类存在问题，看虚表3有个，但是导出只有2个，怪异…… yup 
 	class UILIB_API HWNDElementProxy : public IProxy
 	{
 	public:

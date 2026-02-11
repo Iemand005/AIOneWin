@@ -185,15 +185,45 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     auto *messageInput = (Edit *)pMainElement->FindDescendent(
         StrToID((UCString)L"MessageEditBox"));
 
-	auto *progressSpinner = pMainElement->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
+	auto *progressSpinner = (ModernProgressRing *)pMainElement->FindDescendent(
+        StrToID((UCString)L"SXWizardLoadingProgress"));
 
 	auto messageList = pMainElement->FindDescendent(StrToID((UCString)L"MessageList"));
 
 
-	Element  *newItem = nullptr;
-        //Element::Create(10, messageList, NULL, &newItem);
-        pMainElement->Create(1, messageList, NULL, &newItem);
-        newItem->SetContentString(UCString(L"Heeeeeeeeeeey"));
+	//Element  *newItem = nullptr;
+ //       //Element::Create(10, messageList, NULL, &newItem);
+ //       pMainElement->Create(1, messageList, NULL, &newItem);
+ //       newItem->SetContentString(UCString(L"Heeeeeeeeeeey"));
+
+		//Element *pNewMessage = nullptr;
+
+  //      // Optie A: Maak een simpel basis-element
+  //      HRESULT hr = DirectUI::Element::Create(0, (Element *)&pNewMessage);
+
+  //      if (SUCCEEDED(hr)) {
+  //        pNewMessage->SetContentString(L"Dit is e");
+  //        pNewMessage->SetLayoutPos(0); // Omdat je parent BorderLayout heeft
+  //      }
+	
+	auto pScrollViewer = (ScrollViewer *)pMainElement->FindDescendent(
+            StrToID((UCString)L"ScrollViewer"));
+
+	ModernProgressRing *newItem = new DirectUI::ModernProgressRing();
+
+         //deferKey = 0;
+        //pScrollViewer->Add()
+
+	ModernProgressRing::Create(messageList, &deferKey, (Element **)&newItem);
+        newItem->Initialize(0, messageList, &deferKey);
+
+        //messageList->Add(newItem);
+        pScrollViewer->Add((Element **)&newItem, 1);
+
+        // If you want to insert at a specific index
+        // parent->Insert(&child, index);
+
+        messageList->UpdateLayout(); // Mark for redraw
 
 	LogListener lis;
 	hr = pMainElement->AddListener(&lis);

@@ -45,6 +45,7 @@
 #include "Movie.h"
 #include "ElementWithHWND.h"
 #include "HWNDElement.h"
+#include "TouchHWNDElement.h"
 #include "DialogElement.h"
 #include "NativeHWNDHost.h"
 #include "HWNDHost.h"

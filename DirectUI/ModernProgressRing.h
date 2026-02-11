@@ -10,7 +10,7 @@ namespace DirectUI
         ModernProgressRing& operator=(ModernProgressRing const&) = delete;
         virtual ~ModernProgressRing(void);
 
-        static long __stdcall Create(Element*, unsigned long*, Element**);
+        static long __stdcall Create(Element* parent, unsigned long* deferKey, Element** newElement);
         static IClassInfo* __stdcall GetClassInfoPtr(void);
         static long __stdcall Register(void);
 
@@ -20,22 +20,22 @@ namespace DirectUI
         long SetActivityOccuring(bool);
         long SetAddLayeredRef(bool);
 
-        virtual IClassInfo* GetClassInfoW(void);
-        virtual void Paint(
-            HDC,
-            RECT const*,
-            RECT const*,
-            RECT*,
-            RECT*);
+        //virtual IClassInfo* GetClassInfoW(void);
+        //virtual void Paint(
+        //    HDC,
+        //    RECT const*,
+        //    RECT const*,
+        //    RECT*,
+        //    RECT*);
 
-        virtual void OnHosted(Element*);
-        virtual void OnUnHosted(Element*);
-        virtual void OnDestroy(void);
-        virtual void OnPropertyChanged(
-            PropertyInfo const*,
-            int,
-            Value*,
-            Value*);
+        ////virtual void OnHosted(Element*);
+        ////virtual void OnUnHosted(Element*);
+        ////void OnDestroy(void)    ;
+        //virtual void OnPropertyChanged(
+        //    PropertyInfo const*,
+        //    int,
+        //    Value*,
+        //    Value*);
 
     private:
         static IClassInfo* s_pClassInfo;

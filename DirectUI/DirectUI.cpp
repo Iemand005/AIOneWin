@@ -3678,7 +3678,7 @@ namespace DirectUI
 	void BaseScrollViewer::OnEvent(Event *)
 	{
 	}
-	long BaseScrollViewer::Add(Element **, unsigned int)
+	long BaseScrollViewer::Add(Element **, unsigned int amount)
 	{
 		return 0;
 	}
@@ -8194,7 +8194,7 @@ namespace DirectUI
 	{
 	}
 
-	long ModernProgressRing::Create(Element*, unsigned long*, Element**)
+	long ModernProgressRing::Create(Element*parent, unsigned long *deferKey, Element**newElement)
 	{
 		return 0;
 	}
@@ -8229,39 +8229,39 @@ namespace DirectUI
 		return 0;
 	}
 
-	IClassInfo* ModernProgressRing::GetClassInfoW(void)
-	{
-		return nullptr;
-	}
+	//IClassInfo* ModernProgressRing::GetClassInfoW(void)
+	//{
+	//	return nullptr;
+	//}
 
-	void ModernProgressRing::Paint(
-		HDC,
-		RECT const*,
-		RECT const*,
-		RECT*,
-		RECT*)
-	{
-	}
+	//void ModernProgressRing::Paint(
+	//	HDC,
+	//	RECT const*,
+	//	RECT const*,
+	//	RECT*,
+	//	RECT*)
+	//{
+	//}
 
-	void ModernProgressRing::OnHosted(Element*)
-	{
-	}
+	////void ModernProgressRing::OnHosted(Element*)
+	////{
+	////}
 
-	void ModernProgressRing::OnUnHosted(Element*)
-	{
-	}
+	////void ModernProgressRing::OnUnHosted(Element*)
+	////{
+	////}
 
-	void ModernProgressRing::OnDestroy(void)
-	{
-	}
+	////void ModernProgressRing::OnDestroy(void)
+	////{
+	////}
 
-	void ModernProgressRing::OnPropertyChanged(
-		PropertyInfo const*,
-		int,
-		Value*,
-		Value*)
-	{
-	}
+	//void ModernProgressRing::OnPropertyChanged(
+	//	PropertyInfo const*,
+	//	int,
+	//	Value*,
+	//	Value*)
+	//{
+	//}
 
 	template<class X, class Y, int i>
 	inline DirectUI::PatternProvider<X, Y, i>::PatternProvider()
@@ -11222,6 +11222,8 @@ namespace DirectUI
 	//	return S_OK;
 	//}
 
+	IClassInfo* TouchHWNDElement::s_pClassInfo = nullptr;
+
 	PropertyInfo * WINAPI RichText::BaselineProp(void) { return 0; }
   IClassInfo * WINAPI RichText::GetClassInfoPtr(void) { return 0; }
   PropertyInfo * WINAPI RichText::LineSpacingProp(void) { return 0; }
@@ -11313,4 +11315,88 @@ namespace DirectUI
 		return UID();
 	}
 
+
+
+	TouchHWNDElement::TouchHWNDElement() {}
+	TouchHWNDElement::~TouchHWNDElement() {}
+
+	long __stdcall TouchHWNDElement::Create(HWND* hwnd, bool bFlag, unsigned int uiFlags, Element* parent, unsigned long* cookie, Element** out)
+	{
+		return 0;
+	}
+
+	IClassInfo* __stdcall TouchHWNDElement::GetClassInfoPtr()
+	{
+		return s_pClassInfo;
+	}
+
+	long __stdcall TouchHWNDElement::Register()
+	{
+		return 0;
+	}
+
+	long TouchHWNDElement::Initialize(HWND* hwnd, bool bFlag, unsigned int uiFlags, Element* parent, unsigned long* cookie)
+	{
+		return 0;
+	}
+
+	void TouchHWNDElement::ActivateTooltip(Element*, unsigned long) {}
+	long TouchHWNDElement::DismissIHMAsync() { return 0; }
+	long TouchHWNDElement::HideTouchTooltip() { return 0; }
+	long TouchHWNDElement::IHMNotify() { return 0; }
+	unsigned int TouchHWNDElement::MessageCallback(tagGMSG*) { return 0; }
+	long TouchHWNDElement::MonitorPowerSettingsChange() { return 0; }
+	long TouchHWNDElement::ProcessingKeyboardNavigation() { return 0; }
+	long TouchHWNDElement::RegisterForAnimationStatusChanges() { return 0; }
+	long TouchHWNDElement::RegisterForIHMChanges() { return 0; }
+	long TouchHWNDElement::RegisterForMonitorPowerChanges() { return 0; }
+	void TouchHWNDElement::RemoveTooltip(Element*) {}
+	long TouchHWNDElement::ScaleChanged() { return 0; }
+	void TouchHWNDElement::SetFlags(TouchHWNDElementFlags, TouchHWNDElementFlags) {}
+	void TouchHWNDElement::SetLightDismissIHM(bool) {}
+	void TouchHWNDElement::SetTooltipMaximumLineCount(int) {}
+	void TouchHWNDElement::SetWindowAccessGradientColor(Value*) {}
+	void TouchHWNDElement::ShowRichTooltip(TOUCHTOOLTIP_INPUT, TOUCHTOOLTIP_OPTION_FLAGS, Element*) {}
+	void TouchHWNDElement::StartRichTooltipTimer(TOUCHTOOLTIP_INPUT) {}
+	void TouchHWNDElement::UpdateTooltip(Element*) {}
+	void TouchHWNDElement::UsePerMonitorScaling(HMONITOR*) {}
+	LRESULT TouchHWNDElement::WndProc(HWND*, UINT, WPARAM, LPARAM) { return 0; }
+	void TouchHWNDElement::_ClearTooltipState() {}
+	void TouchHWNDElement::_DestroyTooltip() {}
+	void TouchHWNDElement::_OnUIStateChanged(unsigned short, unsigned short) {}
+	void TouchHWNDElement::UnregisterForAnimationStatusChanges() {}
+	void TouchHWNDElement::UnregisterForIHMChanges() {}
+	void TouchHWNDElement::UnregisterForMonitorPowerChanges() {}
+
+	bool TouchHWNDElement::IsActivityOccuring() const { return false; }
+	bool TouchHWNDElement::IsAddLayeredRef() const { return false; }
+	bool TouchHWNDElement::IsMSAAEnabled() const { return false; }
+	bool TouchHWNDElement::IsRegisteredForAnimationStatusChanges() const { return false; }
+	bool TouchHWNDElement::ShouldUsePerMonitorScaling() const { return false; }
+
+	TouchHWNDElementFlags TouchHWNDElement::GetFlags() const { return TouchHWNDElementFlags::None; }
+	int TouchHWNDElement::GetIHMState() const { return 0; }
+	int TouchHWNDElement::GetTooltipMaximumLineCount() const { return 0; }
+
+	void TouchHWNDElement::GetIHMRect(RECT*) const {}
+	Value* TouchHWNDElement::GetWindowAccessGradientColor() const { return nullptr; }
+	bool TouchHWNDElement::GetLightDismissIHM() const { return false; }
+	bool TouchHWNDElement::TextTooltipShowing() const { return false; }
+	bool TouchHWNDElement::RichTooltipShowing() const { return false; }
+
+	IClassInfo* TouchHWNDElement::GetClassInfoW() { return s_pClassInfo; }
+	void TouchHWNDElement::OnHosted(Element*) {}
+	void TouchHWNDElement::OnUnHosted(Element*) {}
+	void TouchHWNDElement::OnDestroy() {}
+	void TouchHWNDElement::OnPropertyChanged(PropertyInfo const*, int, Value*, Value*) {}
+	void TouchHWNDElement::OnEvent(Event*) {}
+	void TouchHWNDElement::OnInput(InputEvent*) {}
+	void TouchHWNDElement::OnKeyFocusMoved(Element*, Element*) {}
+	void TouchHWNDElement::Paint(HDC, RECT const*, RECT const*, RECT*, RECT*) {}
+
+	const PropertyInfo* __stdcall TouchHWNDElement::FlagsProp() { return nullptr; }
+	const PropertyInfo* __stdcall TouchHWNDElement::LightDismissIHMProp() { return nullptr; }
+	const PropertyInfo* __stdcall TouchHWNDElement::TooltipMaximumLineCountProp() { return nullptr; }
+	const PropertyInfo* __stdcall TouchHWNDElement::ForwardingWindowMessage() { return nullptr; }
+	const PropertyInfo* __stdcall TouchHWNDElement::WindowAccessGradientColorProp() { return nullptr; }
 }
