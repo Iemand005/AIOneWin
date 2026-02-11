@@ -15,12 +15,11 @@
 #include <codecvt>
 #include <string>
 
-
-#include "..\DirectUI\DirectUI.h"
+#include <DirectUI.h>
 
 #include <AIOne>
 
-#pragma comment(lib,"dui70.lib")
+#pragma comment(lib, "dui70.lib")
 #pragma comment(lib, "comctl32.lib")
 #pragma comment(lib, "AIOneCore.lib")
 #include "resource.h"

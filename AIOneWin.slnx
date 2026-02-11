@@ -10,7 +10,7 @@
   <Project Path="AIOneWinUI/AIOneWinUI.vcxproj" Id="0852111d-f90d-43c2-bb75-0e61a5ce5de6">
     <Deploy />
   </Project>
-  <Project Path="DirectUI/DirectUI.vcxproj" Id="0b7de49a-33c6-41b1-a9ce-d353031f8454">
+  <Project Path="DirectUI/DirectUI/DirectUI.vcxproj" Id="0b7de49a-33c6-41b1-a9ce-d353031f8454">
     <Platform Solution="*|ARM64" Project="x64" />
   </Project>
   <Project Path="UITest/UITest.vcxproj" Id="868c2d90-15dc-476a-a566-787a069f44a8">

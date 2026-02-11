@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 10909349,
+    "totalFocusTime": 11035257,
     "totalActiveTime": 352849
   },
   "files": {
@@ -79,7 +79,39 @@
     },
     "RE": {
       "pending": 40953,
-      "focus": 75422
+      "focus": 113455
+    },
+    "DirectUI/DirectUI/DirectUI.cpp": {
+      "pending": 0,
+      "focus": 197
+    },
+    "DirectUI/DirectUI/DirectUI.h": {
+      "pending": 0,
+      "focus": 24969
+    },
+    "DirectUI/DirectUI/DirectUI.vcxproj": {
+      "pending": 0,
+      "focus": 15773
+    },
+    "DirectUI/DirectUI/DirectUI.vcxproj.filters": {
+      "pending": 0,
+      "focus": 3571
+    },
+    "DirectUI/DirectUI/HWNDElement.h": {
+      "pending": 0,
+      "focus": 1660
+    },
+    "DirectUI/DirectUI/ModernProgressBar.h": {
+      "pending": 0,
+      "focus": 1689
+    },
+    "DirectUI/DirectUI/ModernProgressRing.h": {
+      "pending": 0,
+      "focus": 3334
+    },
+    "DirectUI/DirectUI/parser.h": {
+      "pending": 0,
+      "focus": 1545
     }
   }
 }

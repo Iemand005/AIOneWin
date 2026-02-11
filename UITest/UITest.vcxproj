@@ -106,12 +106,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)AIOne\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectUI\DirectUI;$(SolutionDir)AIOne\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)build\AIOne\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\lib;$(SolutionDir)build\AIOne\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>llama.lib;common.lib;ggml.lib;ggml-base.lib;ggml-cpu.lib;stable-diffusion.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -165,11 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="dui.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DirectUI\DirectUI.vcxproj">
-      <Project>{0b7de49a-33c6-41b1-a9ce-d353031f8454}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang-format" />
