@@ -11,6 +11,10 @@
 #include <format>
 #include <functional>
 #include <filesystem>
+#include <locale>
+#include <codecvt>
+#include <string>
+
 
 #include "..\DirectUI\DirectUI.h"
 
@@ -76,11 +80,15 @@ struct EventListener : public IElementListener {
 	void OnListenedInput(Element*elem, struct InputEvent*ev) override { }
 };
 
-long (* RealClassFactoryRegister)(CClassFactory *, IClassInfo*) = 0;
+#define WM_DIRECTUI_INVOKE (WM_USER + 101)
 
-//void Send(UCString message) {
-//
-//}
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+  if (message == WM_DIRECTUI_INVOKE) {
+
+    return 0;
+  }
+  return DefWindowProc(hWnd, message, wParam, lParam);
+}
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -99,7 +107,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	NativeHWNDHost* pwnd;
 
 	NativeHWNDHost::Create((UCString)L"Microsoft DirectUI Test", NULL, NULL,
-		//CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 		600, 400, 800, 600,
 		WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0,&pwnd);
 
@@ -114,10 +121,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	auto hr=pParser->SetXMLFromResource(IDR_UIFILE1, hInstance,(HINSTANCE)hInstance);
 
-	unsigned long defer_key;
+	unsigned long deferKey;
 	HWNDElement* hwnd_element;
 
-	HWNDElement::Create(pwnd->GetHWND(),true,0,NULL,&defer_key,(Element**)&hwnd_element);
+	HWNDElement::Create(pwnd->GetHWND(),true,0,NULL,&deferKey,(Element**)&hwnd_element);
 
 	Element* pWizardMain;
 	hr = pParser->CreateElement((UCString)L"WizardMain", hwnd_element,NULL,NULL,(Element**)&pWizardMain);
@@ -126,7 +133,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 
 	pWizardMain->SetVisible(true);
-	pWizardMain->EndDefer(defer_key);
+	pWizardMain->EndDefer(deferKey);
 	pwnd->Host(pWizardMain);
 
 	pwnd->ShowWindow(SW_SHOW);
@@ -147,7 +154,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	hr = pWizardMain->AddListener(&lis);
     ThrowIfFailed(hr);
 
-	int btn_count = 0;
 
 	auto loadModel = [&]() {
           OPENFILENAME ofn;
@@ -181,51 +187,53 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	auto send = [&]() {
           Value *txt;
           messageInput->GetContentString(&txt);
-          UCString message = txt->GetString();
+          std::wstring message = (LPCWSTR)txt->GetString();
 
 		  AsyncTextGenOptions options;
 
+		  std::string output;
+
 		  options.onToken = [&](auto token) {
 			  //title_elem->
-                     ThrowIfFailed(title_elem->SetContentString(
-                        (UCString)std::format(L"Entered: {}",
-                        (LPCWSTR)txt->GetString())
-                            .c_str()));
+                    output += token;
+
+					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+                    std::wstring wide = converter.from_bytes(output);
+                                        std::wstring ee =
+                                            std::format(L"Entered: {}",
+                                                        (LPCWSTR)wide.c_str());
+
+					PostMessage(pwnd->GetHWND(), WM_DIRECTUI_INVOKE, 0, 0); 
+
+                     //ThrowIfFailed(title_elem->SetContentString(UCString(ee.c_str())));
                   };
 
-		  modelManager->getChatManager()->sendAsync((LPCWSTR)message, options);
+		  modelManager->getChatManager()->sendAsync(message, options);
           //ThrowIfFailed(title_elem->SetContentString(
           //    (UCString)std::format(L"Entered: {}", (LPCWSTR)txt->GetString())
           //        .c_str()));
 
     };
 
-	EventListener click_listener([&](Element*elem, Event*ev) {
+	EventListener clickListener([&](Element*elem, Event*ev) {
 
 		if (ev->flag != GMF_BUBBLED)
 			return;
 
+        auto id = ev->target->GetID();
 		if (ev->type == TouchButton::Click) {
-                  auto tid = ev->target->GetID();
-				  /*switch (tid) { case sendButton->GetID():
-                                    break;
-				  }*/
-                  if (loadButtonId == tid)
-                    loadModel();
+          if (loadButtonId == id)
+            loadModel();
                     
-                    return;
-                  if (tid == sendButtonId)
-                    send();
-			btn_count++;
-            ThrowIfFailed(title_elem->SetContentString((UCString)std::format(L"Clicked {} times", btn_count).c_str()));
+            return;
+            if (id == sendButtonId)
+              send();
 			progressSpinner->SetVisible(true);
-		} else if (ev->type == Edit::Enter) {
-			progressSpinner->SetVisible(false);
-			
-		}
+          } else if (ev->type == Edit::Enter)
+            send();
 	});
-	hr = pWizardMain->AddListener(&click_listener);
-        ThrowIfFailed(hr);
+
+    ThrowIfFailed(pWizardMain->AddListener(&clickListener));
 
 	DumpDuiTree(pWizardMain, 0);
 
