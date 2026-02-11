@@ -14,8 +14,11 @@
 
 #include "..\DirectUI\DirectUI.h"
 
+#include <AIOne>
+
 #pragma comment(lib,"dui70.lib")
 #pragma comment(lib, "comctl32.lib")
+#pragma comment(lib, "AIOneCore.lib")
 #include "resource.h"
 
 using namespace DirectUI;
@@ -28,30 +31,24 @@ void ThrowIfFailed(HRESULT hr) {
 
 struct LogListener : public IElementListener {
 
-	//0
 	void OnListenerAttach(Element *elem) override {
 		OutputDebugString(std::format(L"attach: {:p}\n", (void*)elem).c_str());
 	}
-	//1
 	void OnListenerDetach(Element *elem) override {
 		OutputDebugString(std::format(L"detach: {:p}\n", (void*)elem).c_str());
 	}
-	//2
 	bool OnPropertyChanging(Element* elem, const PropertyInfo *prop, int unk, Value* v1, Value* v2) override {
 		OutputDebugString(std::format(L"prop change: {:p} {} {} {:p}<{}> {:p}<{}>\n",
 			(void*)elem, (PCWSTR)prop->name, unk, (void*)v1, v1->GetType(), (void*)v2, v2->GetType()).c_str());
 		return true;
 	}
-	//3
 	void OnListenedPropertyChanged(Element *elem, const PropertyInfo*prop, int type, Value*v1, Value*v2) override {
 		OutputDebugString(std::format(L"listened prop change: {:p} {} {} {:p}<{}> {:p}<{}>\n",
 			(void*)elem, (PCWSTR)prop->name, type, (void*)v1, v1->GetType(), (void*)v2, v2->GetType()).c_str());
 	}
-	//4
 	void OnListenedEvent(Element*elem, struct Event*ev) override {
 		 OutputDebugString(std::format(L"listened event: {:p} {:p}\n", (void*)elem, (void*)ev).c_str());
 	}
-	//5
 	void OnListenedInput(Element*elem, struct InputEvent*iev) override {
 		OutputDebugString(std::format(L"listened input: {:p} {:p}\n", (void*)elem, (void*)iev).c_str());
 	}
@@ -97,6 +94,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	// HookClassFactoryRegister();
     ThrowIfFailed(RegisterAllControls());
 
+	ModelManager *modelManager = new ModelManager();
 
 	NativeHWNDHost* pwnd;
 
@@ -170,10 +168,35 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
           if (GetOpenFileName(&ofn) == TRUE) {
             auto fileName = ofn.lpstrFile;
 
+			LLModelOptionsAsync options;
+
+			options.onDone = [&]() {
+                          progressSpinner->SetVisible(false);
+                        };
+
+            modelManager->loadLLMAsync(fileName, options);
           }
 	};
 
 	auto send = [&]() {
+          Value *txt;
+          messageInput->GetContentString(&txt);
+          UCString message = txt->GetString();
+
+		  AsyncTextGenOptions options;
+
+		  options.onToken = [&](auto token) {
+			  //title_elem->
+                     ThrowIfFailed(title_elem->SetContentString(
+                        (UCString)std::format(L"Entered: {}",
+                        (LPCWSTR)txt->GetString())
+                            .c_str()));
+                  };
+
+		  modelManager->getChatManager()->sendAsync((LPCWSTR)message, options);
+          //ThrowIfFailed(title_elem->SetContentString(
+          //    (UCString)std::format(L"Entered: {}", (LPCWSTR)txt->GetString())
+          //        .c_str()));
 
     };
 
@@ -198,9 +221,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			progressSpinner->SetVisible(true);
 		} else if (ev->type == Edit::Enter) {
 			progressSpinner->SetVisible(false);
-			Value *txt;
-			messageInput->GetContentString(&txt);
-			ThrowIfFailed(title_elem->SetContentString((UCString)std::format(L"Entered: {}",(LPCWSTR)txt->GetString()).c_str()));
+			
 		}
 	});
 	hr = pWizardMain->AddListener(&click_listener);
