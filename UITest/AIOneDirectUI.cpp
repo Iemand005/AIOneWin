@@ -169,9 +169,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	auto messageList = pWizardMain->FindDescendent(StrToID((UCString)L"MessageList"));
 
 
-	RichText *newItem = nullptr;
+	Element  *newItem = nullptr;
         unsigned long status = 0;
-        DirectUI::RichText::Create(0, messageList, &status,(Element **)&newItem);
+        Element::Create(10, messageList, &status, &newItem);
         newItem->SetContentString(UCString(L"Heeeeeeeeeeey"));
 
 	LogListener lis;
