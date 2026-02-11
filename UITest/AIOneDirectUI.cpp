@@ -92,14 +92,10 @@ LRESULT CALLBACK InvokeSubclass(HWND hWnd, UINT uMsg, WPARAM wParam,
     std::string thing = *token;
     output += thing;
     auto title = (Element *)wParam;
-    //Value *content;
-    //title->GetContentString(&content);
-     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     std::wstring wide = converter.from_bytes(output);
-     //auto bibi = std::format(L"{}{}", (LPCWSTR)content, wide);
     title->SetContentString(UCString(wide.c_str()));
-        //    .c_str() content +
-        //token);
     return 0;
   }
   return DefSubclassProc(hWnd, uMsg, wParam, lParam);
@@ -169,6 +165,14 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	auto *messageInput = (Edit *)pWizardMain->FindDescendent(StrToID((UCString)L"MessageEditBox"));
 
 	auto *progressSpinner = pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
+
+	auto messageList = pWizardMain->FindDescendent(StrToID((UCString)L"MessageList"));
+
+
+	RichText *newItem = nullptr;
+        unsigned long status = 0;
+        DirectUI::RichText::Create(0, messageList, &status,(Element **)&newItem);
+        newItem->SetContentString(UCString(L"Heeeeeeeeeeey"));
 
 	LogListener lis;
 	hr = pWizardMain->AddListener(&lis);

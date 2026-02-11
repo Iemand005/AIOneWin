@@ -291,7 +291,7 @@
       <scrollviewer xscrollable="false" yscrollable="true"
                     borderthickness="rect(1rp, 1rp, 1rp, 1rp)"
                     bordercolor="gray">
-        <element layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
+		  <element id="Atom(MessageList)" layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
           <modernprogressring layoutpos="left" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)" />
     <element layoutpos="top" class="WizardPageTitle" id="Atom(SXTitle)" content="Click the buttons to get started" />
     <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>
