@@ -113,6 +113,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	// HookClassFactoryRegister();
     ThrowIfFailed(RegisterAllControls());
 
+	EnableAnimations();
+
 	ModelManager *modelManager = new ModelManager();
 
     NativeHWNDHost *pwnd;
