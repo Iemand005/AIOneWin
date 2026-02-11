@@ -277,9 +277,7 @@
   </stylesheets>
   <HWNDElement resid="WizardMain" layout="BorderLayout()" id="Atom(SXWizard)" sheet="SXStyles">
 
-    <element layoutpos="top" class="WizardPageTitle" id="Atom(SXTitle)" content="Click the buttons to get started" />
-	  <TouchButton accessible="true" layoutpos="top" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)" sheet="RefDui" accrole="pushbutton" id="Atom(LoadModelButton)" active="mouse | keyboard" content="Load Model" />
-    <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>
+	  <TouchButton accessible="true" layoutpos="top" minsize="size(144rp,32rp)" margin="rect(6rp,16rp,16rp,16rp)" sheet="RefDui" accrole="pushbutton" id="Atom(LoadModelButton)" active="mouse | keyboard" content="Load Model" />
 
     <element layoutpos="bottom" class="WizardButtonBar" contentalign="middleright" layout="BorderLayout()" id="Atom(SXWizardButtonBar)">
 		<element layoutpos="client" class="WizardPageContainer" layout="BorderLayout()">
@@ -294,10 +292,12 @@
                     borderthickness="rect(1rp, 1rp, 1rp, 1rp)"
                     bordercolor="gray">
         <element layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
-          <modernprogressring layoutpos="top" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)" />
-          <edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top"
+          <modernprogressring layoutpos="left" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)" />
+    <element layoutpos="top" class="WizardPageTitle" id="Atom(SXTitle)" content="Click the buttons to get started" />
+    <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>
+          <!--<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top"
                   accrole="text"  id="Atom(SXWizardEditBox)" active="mouse | keyboard"
-                  themedborder="true" />
+                  themedborder="true" />-->
         </element>
       </scrollviewer>
     </element>

@@ -23,7 +23,7 @@ using namespace DirectUI;
 void ThrowIfFailed(HRESULT hr) {
   if (hr == S_OK)
     return;
-  throw std::exception();
+  throw hr;
 }
 
 struct LogListener : public IElementListener {
@@ -81,132 +81,135 @@ struct EventListener : public IElementListener {
 
 long (* RealClassFactoryRegister)(CClassFactory *, IClassInfo*) = 0;
 
-class MainWindow {
-
-	NativeHWNDHost *pHWnd;
-    Element *pWizardMain;
-
-public:
-
-	MainWindow() {
-		ThrowIfFailed(CoInitializeEx(NULL, 0));
-
-		ThrowIfFailed(InitProcessPriv(14, NULL, 0, true));
-		ThrowIfFailed(InitThread(2));
-		ThrowIfFailed(RegisterAllControls());
-
-		
-	}
-
-    ~MainWindow() { UnInitProcessPriv(NULL); }
-
-    ATOM GetElementID(UCString string) { return StrToID(string); }
-    ATOM GetElementByID(UCString string) { return StrToID(string); }
-
-	void Init(HINSTANCE hInstance) {
-      NativeHWNDHost::Create(UCString(L"AIOne"), NULL, NULL, 600, 400, 800, 600,
-                             WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-                             0, &pHWnd);
-
-      DUIXmlParser *pParser;
-
-      ThrowIfFailed(DUIXmlParser::Create(&pParser, NULL, NULL, NULL, NULL));
-
-      pParser->SetParseErrorCallback(
-          [](UCString err1, UCString err2, int unk, void *ctx) {
-            OutputDebugString(std::format(L"err: {}; {}; {}\n", (LPCWSTR)err1,
-                                          (LPCWSTR)err2, unk)
-                                  .c_str());
-            DebugBreak();
-          },
-          NULL);
-
-      ThrowIfFailed(pParser->SetXMLFromResource(IDR_UIFILE1, hInstance,
-                                            (HINSTANCE)hInstance));
-
-      unsigned long deferKey;
-      HWNDElement *hwnd_element;
-
-      HWNDElement::Create(pHWnd->GetHWND(), true, 0, NULL, &deferKey,
-                          (Element **)&hwnd_element);
-
-
-      ThrowIfFailed(pParser->CreateElement((UCString)L"WizardMain",
-                                           hwnd_element, NULL, NULL,
-                                           (Element **)&pWizardMain));
-
-      pWizardMain->SetVisible(true);
-      pWizardMain->EndDefer(deferKey);
-      pHWnd->Host(pWizardMain);
-
-      pHWnd->ShowWindow(SW_SHOW);
-
-      auto *title_elem =
-          pWizardMain->FindDescendent(StrToID((UCString)L"SXTitle"));
-
-      auto *accept_btn = (Button *)pWizardMain->FindDescendent(
-          StrToID((UCString)L"SXWizardDefaultButton"));
-      auto loadButtonId = StrToID((UCString)L"LoadModelButton");
-      auto *reject_btn = (Button *)pWizardMain->FindDescendent(
-          StrToID((UCString)L"LoadModelButton"));
-      // auto loadButtonId = reject_btn->GetID();
-
-      auto *messageInput = (Edit *)pWizardMain->FindDescendent(
-          StrToID((UCString)L"MessageEditBox"));
-
-      auto *progressSpinner = pWizardMain->FindDescendent(
-          StrToID((UCString)L"SXWizardLoadingProgress"));
-
-      LogListener lis;
-      ThrowIfFailed(pWizardMain->AddListener(&lis));
-
-      int btn_count = 0;
-
-      EventListener click_listener([&](Element *elem, Event *ev) {
-        if (ev->flag != GMF_BUBBLED)
-          return;
-
-        if (ev->type == TouchButton::Click) {
-          auto id = elem->GetID();
-          auto tid = ev->target->GetID();
-          if (loadButtonId == tid)
-
-            return;
-          btn_count++;
-          ThrowIfFailed(title_elem->SetContentString(
-              (UCString)std::format(L"Clicked {} times", btn_count).c_str()));
-          progressSpinner->SetVisible(true);
-        } else if (ev->type == Edit::Enter) {
-          progressSpinner->SetVisible(false);
-          Value *txt;
-          messageInput->GetContentString(&txt);
-          ThrowIfFailed(title_elem->SetContentString(
-              (UCString)std::format(L"Entered: {}", (LPCWSTR)txt->GetString())
-                  .c_str()));
-        }
-      });
-      ThrowIfFailed(pWizardMain->AddListener(&click_listener));
-
-      DumpDuiTree(pWizardMain, 0);
-	}
-
-    void Run() {
-      StartMessagePump();
-    }
-
-	void Send(UCString message) {
-
-	}
-};
-
+//void Send(UCString message) {
+//
+//}
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	
-	MainWindow *window = new MainWindow();
+	ThrowIfFailed(CoInitializeEx(NULL, 0));
 
-    window->Init(hInstance);
-    window->Run();
+	ThrowIfFailed(InitProcessPriv(14, NULL, 0, true));
+    ThrowIfFailed(InitThread(2));
 
+	// uncomment to update class definitions
+	// HookClassFactoryRegister();
+    ThrowIfFailed(RegisterAllControls());
+
+
+	NativeHWNDHost* pwnd;
+
+	NativeHWNDHost::Create((UCString)L"Microsoft DirectUI Test", NULL, NULL,
+		//CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+		600, 400, 800, 600,
+		WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0,&pwnd);
+
+	DUIXmlParser* pParser;
+
+	ThrowIfFailed(DUIXmlParser::Create(&pParser, NULL, NULL, NULL, NULL));
+
+	pParser->SetParseErrorCallback([](UCString err1, UCString err2, int unk, void*ctx) {
+		OutputDebugString(std::format(L"err: {}; {}; {}\n", (LPCWSTR)err1, (LPCWSTR)err2, unk).c_str());
+		DebugBreak();
+	}, NULL);
+
+	auto hr=pParser->SetXMLFromResource(IDR_UIFILE1, hInstance,(HINSTANCE)hInstance);
+
+	unsigned long defer_key;
+	HWNDElement* hwnd_element;
+
+	HWNDElement::Create(pwnd->GetHWND(),true,0,NULL,&defer_key,(Element**)&hwnd_element);
+
+	Element* pWizardMain;
+	hr = pParser->CreateElement((UCString)L"WizardMain", hwnd_element,NULL,NULL,(Element**)&pWizardMain);
+
+	ThrowIfFailed(hr);
+
+
+	pWizardMain->SetVisible(true);
+	pWizardMain->EndDefer(defer_key);
+	pwnd->Host(pWizardMain);
+
+	pwnd->ShowWindow(SW_SHOW);
+
+	auto *title_elem = pWizardMain->FindDescendent(StrToID((UCString)L"SXTitle"));
+
+	ATOM sendButtonId = StrToID(UCString(L"SXWizardDefaultButton"));
+    auto *sendButton = (Button *)pWizardMain->FindDescendent(sendButtonId);
+    
+	ATOM loadButtonId = StrToID(UCString(L"LoadModelButton"));
+    auto *loadButton = (Button *)pWizardMain->FindDescendent(loadButtonId);
+
+	auto *messageInput = (Edit *)pWizardMain->FindDescendent(StrToID((UCString)L"MessageEditBox"));
+
+	auto *progressSpinner = pWizardMain->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
+
+	LogListener lis;
+	hr = pWizardMain->AddListener(&lis);
+    ThrowIfFailed(hr);
+
+	int btn_count = 0;
+
+	auto loadModel = [&]() {
+          OPENFILENAME ofn;        // common dialog box structure
+          TCHAR szFile[260] = {0}; // if using TCHAR macros
+
+          // Initialize OPENFILENAME
+          ZeroMemory(&ofn, sizeof(ofn));
+          ofn.lStructSize = sizeof(ofn);
+          ofn.hwndOwner = pwnd->GetHWND();
+          ofn.lpstrFile = szFile;
+          ofn.nMaxFile = sizeof(szFile);
+          ofn.lpstrFilter = L"All\0*.*\0Text\0*.TXT\0";
+          ofn.nFilterIndex = 1;
+          ofn.lpstrFileTitle = NULL;
+          ofn.nMaxFileTitle = 0;
+          ofn.lpstrInitialDir = NULL;
+          ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+          if (GetOpenFileName(&ofn) == TRUE) {
+            // use ofn.lpstrFile
+          }
+	};
+
+	auto send = [&]() {
+
+    };
+
+	EventListener click_listener([&](Element*elem, Event*ev) {
+
+		if (ev->flag != GMF_BUBBLED)
+			return;
+
+		if (ev->type == TouchButton::Click) {
+                  auto tid = ev->target->GetID();
+				  /*switch (tid) { case sendButton->GetID():
+                                    break;
+				  }*/
+                  if (loadButtonId == tid)
+                    loadModel();
+                    
+                    return;
+                  if (tid == sendButtonId)
+                    send();
+			btn_count++;
+            ThrowIfFailed(title_elem->SetContentString((UCString)std::format(L"Clicked {} times", btn_count).c_str()));
+			progressSpinner->SetVisible(true);
+		} else if (ev->type == Edit::Enter) {
+			progressSpinner->SetVisible(false);
+			Value *txt;
+			messageInput->GetContentString(&txt);
+			ThrowIfFailed(title_elem->SetContentString((UCString)std::format(L"Entered: {}",(LPCWSTR)txt->GetString()).c_str()));
+		}
+	});
+	hr = pWizardMain->AddListener(&click_listener);
+        ThrowIfFailed(hr);
+
+	DumpDuiTree(pWizardMain, 0);
+
+	StartMessagePump();
+
+	UnInitProcessPriv(NULL);
 	return 0;
 }
