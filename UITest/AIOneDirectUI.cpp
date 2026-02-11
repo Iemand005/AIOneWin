@@ -88,7 +88,7 @@ public:
     return S_OK;
   }
 
-	std::string output;
+	std::string output = "";
 };
 
 #define WM_DIRECTUI_INVOKE (WM_USER + 101)
@@ -206,17 +206,19 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		  AsyncTextGenOptions options;
 
 
-		  options.onToken = [&](auto token) {
+		  options.onToken = [&](std::string token) {
 			  //title_elem->
-                    pwnd->output += token;
+     //               pwnd->output += token;
 
-					std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-                    std::wstring wide = converter.from_bytes(pwnd->output);
-                                        std::wstring ee =
-                                            std::format(L"Entered: {}",
-                                                        (LPCWSTR)wide.c_str());
+					//std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+     //               std::wstring wide = converter.from_bytes(pwnd->output);
+     //                                   std::wstring ee =
+     //                                       std::format(L"Entered: {}",
+     //                                                   (LPCWSTR)wide.c_str());
 
-					PostMessage(pwnd->GetHWND(), WM_DIRECTUI_INVOKE, 0, 0); 
+					PostMessage(pwnd->GetHWND(), WM_DIRECTUI_INVOKE,
+                                      0,
+                                      (LPARAM)&token); 
 
                      //ThrowIfFailed(title_elem->SetContentString(UCString(ee.c_str())));
                   };
