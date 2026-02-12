@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 13053647,
+    "totalFocusTime": 13199630,
     "totalActiveTime": 387821
   },
   "files": {
@@ -83,7 +83,7 @@
     },
     "DirectUI/DirectUI/DirectUI.cpp": {
       "pending": 34972,
-      "focus": 1338051
+      "focus": 1365366
     },
     "DirectUI/DirectUI/DirectUI.h": {
       "pending": 0,

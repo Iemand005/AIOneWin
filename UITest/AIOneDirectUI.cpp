@@ -119,7 +119,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         },
         NULL);
 
-    auto hr = pParser->SetXMLFromResource(IDR_UIFILE1, hInstance, (HINSTANCE)hInstance);
+    pParser->SetXMLFromResource(IDR_UIFILE1, hInstance, (HINSTANCE)hInstance);
 
     unsigned long deferKey;
     HWNDElement *hwndElement;
@@ -193,8 +193,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     //       messageList->UpdateLayout(); // Mark for redraw
 
     LogListener lis;
-    hr = pMainElement->AddListener(&lis);
-    ThrowIfFailed(hr);
+    ThrowIfFailed(pMainElement->AddListener(&lis));
 
     auto loadModel = [&]() {
         OPENFILENAME ofn;
@@ -236,26 +235,11 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         AsyncTextGenOptions options;
 
         options.onToken = [&](std::string token) {
-            std::string *wawa = new std ::string(token);
-            // title_elem->
-            //               pwnd->output += token;
-
-            // std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-            //                     std::wstring wide = converter.from_bytes(token);
-            //                                   UCString finaly = UCString(wide.c_str());
-            //                                   std::wstring ee =
-            //                                       std::format(L"Entered: {}",
-            //                                                   (LPCWSTR)wide.c_str());
-
+            std::string *wawa = new std::string(token);
             PostMessage(pwnd->GetHWND(), WM_DIRECTUI_INVOKE, (WPARAM)title_elem, (LPARAM)wawa);
-
-            // ThrowIfFailed(title_elem->SetContentString(UCString(ee.c_str())));
         };
 
         modelManager->getChatManager()->sendAsync(message, options);
-        // ThrowIfFailed(title_elem->SetContentString(
-        //     (UCString)std::format(L"Entered: {}", (LPCWSTR)txt->GetString())
-        //         .c_str()));
     };
 
     EventListener clickListener([&](Element *elem, Event *ev) {
