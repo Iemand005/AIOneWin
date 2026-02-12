@@ -274,7 +274,7 @@
 		  
       
     </style>
-		  <style resid="c" base="ressheet(ImmersiveStyles, library(dui70.dll), Light)"/>
+		  <style resid="ImmersiveLight" base="ressheet(ImmersiveStyles, library(dui70.dll), Light)"/>
 	  <style resid="RefDark" base="ressheet(ImmersiveStyles, library(dui70.dll), Dark)">
 	  </style>
     
