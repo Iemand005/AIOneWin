@@ -199,7 +199,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         ThrowIfFailed(peParent->Add(peTouchEdit2));
         //peTouchEdit2Cleaner.release();
     }
-    ScrollViewer *peMessageList = (ScrollViewer *)pMainElement->FindDescendent(StrToID(L"MessageList"));
+    Element *peMessageList = (Element *)pMainElement->FindDescendent(StrToID(L"MessageList"));
     ;
 
     {
@@ -209,7 +209,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         //ThrowIfFailed(peTouchEdit2->SetSheet(pvRefDuiSheet->GetStyleSheet()));
         ThrowIfFailed(peTouchEdit2->SetContentString(L"Meow"));
 
-        ThrowIfFailed(peMessageList->Add((Element **)&peTouchEdit2, 1));
+        ThrowIfFailed(peMessageList->Add(peTouchEdit2));
     }
 
 
