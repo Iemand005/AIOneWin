@@ -291,8 +291,8 @@
     </element>
 
     <element layoutpos="client" class="WizardPageContainer" layout="FillLayout()" id="Atom(SXWizardPageContainer)">
-		<ScrollViewer id="Atom(MessageList)" xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)" bordercolor="gray">
-			<element layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
+		<ScrollViewer xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)" bordercolor="gray">
+			<element id="Atom(MessageList)" layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
 				<modernprogressring layoutpos="top" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)"/>
 				<!--<TouchEdit2 accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top" accrole="text"
 					  id="Atom(SXWizardEditBox)" active="mouse | keyboard"/>-->

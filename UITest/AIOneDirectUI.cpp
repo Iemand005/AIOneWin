@@ -199,16 +199,17 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         ThrowIfFailed(peParent->Add(peTouchEdit2));
         //peTouchEdit2Cleaner.release();
     }
+    ScrollViewer *peMessageList = (ScrollViewer *)pMainElement->FindDescendent(StrToID(L"MessageList"));
+    ;
+
     {
         PText *peTouchEdit2;
-        ThrowIfFailed(PText::Create(peParent, nullptr, (DirectUI::Element **)&peTouchEdit2));
-        // auto peTouchEdit2Cleaner = wil::scope_exit([&] { peTouchEdit2->Destroy(false); });
+        ThrowIfFailed(PText::Create(peMessageList, nullptr, (Element **)&peTouchEdit2));
 
         //ThrowIfFailed(peTouchEdit2->SetSheet(pvRefDuiSheet->GetStyleSheet()));
-        ThrowIfFailed(peTouchEdit2->SetContentString(L"Test TouchEdit2 here"));
+        ThrowIfFailed(peTouchEdit2->SetContentString(L"Meow"));
 
-        ThrowIfFailed(peParent->Add(peTouchEdit2));
-        // peTouchEdit2Cleaner.release();
+        ThrowIfFailed(peMessageList->Add((Element **)&peTouchEdit2, 1));
     }
 
 
