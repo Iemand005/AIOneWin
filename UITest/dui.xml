@@ -274,6 +274,7 @@
 		  
       
     </style>
+		  <style resid="ImmersiveLight" base="ressheet(ImmersiveStyles, library(dui70.dll), Light)"/>
 	  <style resid="RefDark" base="ressheet(ImmersiveStyles, library(dui70.dll), Dark)">
 	  </style>
     
@@ -290,10 +291,22 @@
     </element>
 
     <element layoutpos="client" class="WizardPageContainer" layout="FillLayout()" id="Atom(SXWizardPageContainer)">
+		<scrollviewer xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)"
+                          bordercolor="gray">
+			<element layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
+				<modernprogressring layoutpos="top" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)"/>
+				<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top" accrole="text"
+					  id="Atom(SXWizardEditBox)" active="mouse | keyboard" themedborder="true"/>
+				<element layout="BorderLayout()" contentalign="wrapleft">
+					<richtext layoutpos="bottom" accessible="true" margin="rect(0rp,16rp,0rp,16rp)" accrole="text"
+							  id="Atom(SXWizardContentBox)" active="mouse | keyboard" content="resstr(105)"/>
+				</element>
+			</element>
+		</scrollviewer>
 		
-      <ScrollViewer  id="Atom(ScrollViewer)" xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)" bordercolor="gray">
+      <!--<ScrollViewer  id="Atom(ScrollViewer)" xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)" bordercolor="gray">
 		<element id="Atom(MessageItem)" layout="BorderLayout()" contentalign="TopLeft" padding="rect(6rp, 16rp, 6rp, 16rp)">
-            <ModernProgressRing layoutpos="client" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)"   sheet="RefDark" />
+            --><!--<ModernProgressRing layoutpos="client" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)"   sheet="RefDark" />--><!--
 			  
             <element layoutpos="top" class="WizardPageTitle" id="Atom(SXTitle)" content="Click the buttons to get started" />
             <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>
@@ -304,7 +317,7 @@
 			  <element layoutpos="top" class="WizardPageTitle" id="Atom(SXTitle)" content="Click the buttons to get started" />
 			  <element layoutpos="top" class="WizardPageSubTitle" id="Atom(SXSubTitle)" content="This is subtitle, or instruction, or body text."/>
 		  </element>
-      </ScrollViewer>
+      </ScrollViewer>-->
     </element>
   </HWNDElement>
 </duixml>
