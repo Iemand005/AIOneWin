@@ -200,12 +200,12 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         //peTouchEdit2Cleaner.release();
     }
     {
-        TouchEdit2 *peTouchEdit2;
-        ThrowIfFailed(TouchEdit2::Create(peParent, nullptr, (DirectUI::Element **)&peTouchEdit2));
+        PText *peTouchEdit2;
+        ThrowIfFailed(PText::Create(peParent, nullptr, (DirectUI::Element **)&peTouchEdit2));
         // auto peTouchEdit2Cleaner = wil::scope_exit([&] { peTouchEdit2->Destroy(false); });
 
-        ThrowIfFailed(peTouchEdit2->SetSheet(pvRefDuiSheet->GetStyleSheet()));
-        ThrowIfFailed(peTouchEdit2->SetPromptText(L"Test TouchEdit2 here"));
+        //ThrowIfFailed(peTouchEdit2->SetSheet(pvRefDuiSheet->GetStyleSheet()));
+        ThrowIfFailed(peTouchEdit2->SetContentString(L"Test TouchEdit2 here"));
 
         ThrowIfFailed(peParent->Add(peTouchEdit2));
         // peTouchEdit2Cleaner.release();
