@@ -146,7 +146,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     Element *pMainElement;
 
-    ThrowIfFailed(pParser->CreateElement(L"AIOneMain", hwndElement, NULL, NULL, &pMainElement));
+    c(pParser->CreateElement(L"AIOneMain", hwndElement, NULL, NULL, &pMainElement));
 
     // DoubleBuffered
     pMainElement->DoubleBuffered(true);
@@ -176,6 +176,19 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     auto *progressSpinner = (ModernProgressRing *)pMainElement->FindDescendent(StrToID((WCHAR*)L"SXWizardLoadingProgress"));
 
     auto messageList = pMainElement->FindDescendent(StrToID((WCHAR*)L"MessageList"));
+
+    Value *pvRefDuiSheet;
+    //ThrowIfFailed(TouchEdit2::Create(messageList, nullptr, (DirectUI::Element **)&peTouchEdit2));
+    (pParser->GetSheet(L"ImmersiveLight", &pvRefDuiSheet));
+
+
+    TouchEdit2 *peTouchEdit2;
+    ThrowIfFailed(TouchEdit2::Create(messageList, nullptr, (DirectUI::Element **)&peTouchEdit2));
+
+    ThrowIfFailed(peTouchEdit2->SetSheet(pvRefDuiSheet->GetStyleSheet()));
+    ThrowIfFailed(peTouchEdit2->SetPromptText(L"Test TouchEdit2 here"));
+
+    ThrowIfFailed(messageList->Add(peTouchEdit2));
 
     // Element  *newItem = nullptr;
     //       //Element::Create(10, messageList, NULL, &newItem);
