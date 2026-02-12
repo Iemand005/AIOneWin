@@ -274,7 +274,7 @@
 		  
       
     </style>
-		  <style resid="ImmersiveLight" base="ressheet(ImmersiveStyles, library(dui70.dll), Light)"/>
+		  <style resid="c" base="ressheet(ImmersiveStyles, library(dui70.dll), Light)"/>
 	  <style resid="RefDark" base="ressheet(ImmersiveStyles, library(dui70.dll), Dark)">
 	  </style>
     
@@ -285,24 +285,24 @@
 	  <ModernProgressBar layoutpos="top" id="Atom(ModelLoadingProgress)" determinate="true"  sheet="RefDark" class="default" />
     <element layoutpos="bottom" class="WizardButtonBar" contentalign="middleright" layout="BorderLayout()" id="Atom(SXWizardButtonBar)">
 		<element layoutpos="client" class="WizardPageContainer" layout="BorderLayout()">
-		<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="client" accrole="text"  id="Atom(MessageEditBox)" active="mouse | keyboard" themedborder="true" sheet="RefDark" />
+			<TouchEdit2 accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="client" accrole="text"  id="Atom(MessageEditBox)" active="mouse | keyboard" sheet="ImmersiveLight" />
       <TouchButton accessible="true" layoutpos="right" minsize="size(144rp,32rp)" margin="rect(6rp,0rp,0rp,0rp)" sheet="RefDark" class="default" accrole="pushbutton"  id="Atom(SXWizardDefaultButton)" active="mouse | keyboard" content="Send" />
 			</element>
     </element>
 
     <element layoutpos="client" class="WizardPageContainer" layout="FillLayout()" id="Atom(SXWizardPageContainer)">
-		<scrollviewer xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)"
+		<ScrollViewer xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)"
                           bordercolor="gray">
 			<element layout="BorderLayout()" contentalign="topcenter" padding="rect(6rp, 16rp, 6rp, 16rp)">
 				<modernprogressring layoutpos="top" minsize="size(50rp, 50rp)" id="Atom(SXWizardLoadingProgress)"/>
-				<edit accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top" accrole="text"
-					  id="Atom(SXWizardEditBox)" active="mouse | keyboard" themedborder="true"/>
+				<!--<TouchEdit2 accessible="true" margin="rect(16rp,16rp,16rp,16rp)" layoutpos="top" accrole="text"
+					  id="Atom(SXWizardEditBox)" active="mouse | keyboard"/>-->
 				<element layout="BorderLayout()" contentalign="wrapleft">
-					<richtext layoutpos="bottom" accessible="true" margin="rect(0rp,16rp,0rp,16rp)" accrole="text"
+					<TouchEdit2 layoutpos="bottom" accessible="true" margin="rect(0rp,16rp,0rp,16rp)" accrole="text"
 							  id="Atom(SXWizardContentBox)" active="mouse | keyboard" content="resstr(105)"/>
 				</element>
 			</element>
-		</scrollviewer>
+		</ScrollViewer>
 		
       <!--<ScrollViewer  id="Atom(ScrollViewer)" xscrollable="false" yscrollable="true" borderthickness="rect(1rp, 1rp, 1rp, 1rp)" bordercolor="gray">
 		<element id="Atom(MessageItem)" layout="BorderLayout()" contentalign="TopLeft" padding="rect(6rp, 16rp, 6rp, 16rp)">
