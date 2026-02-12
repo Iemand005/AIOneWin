@@ -34,12 +34,12 @@ void ThrowIfFailed(HRESULT hr) {
 struct LogListener : public IElementListener {
     void OnListenerAttach(Element *elem) override { OutputDebugString(std::format(L"attach: {:p}\n", (void *)elem).c_str()); }
     void OnListenerDetach(Element *elem) override { OutputDebugString(std::format(L"detach: {:p}\n", (void *)elem).c_str()); }
-    bool OnPropertyChanging(Element *elem, const PropertyInfo *prop, int unk, Value *v1, Value *v2) override {
-        OutputDebugString(std::format(L"prop change: {:p} {} {} {:p}<{}> {:p}<{}>\n", (void *)elem, (PCWSTR)prop->name, unk, (void *)v1, v1->GetType(), (void *)v2, v2->GetType()).c_str());
+    bool OnListenedPropertyChanging(Element *peFrom, const PropertyInfo *ppi, int iIndex, Value *pvOld, Value *pvNew) override {
+        //OutputDebugString(std::format(L"prop change: {:p} {} {} {:p}<{}> {:p}<{}>\n", (void *)peFrom, (PCWSTR)prop->name, unk, (void *)v1, v1->GetType(), (void *)v2, v2->GetType()).c_str());
         return true;
     }
     void OnListenedPropertyChanged(Element *elem, const PropertyInfo *prop, int type, Value *v1, Value *v2) override {
-        OutputDebugString(std::format(L"listened prop change: {:p} {} {} {:p}<{}> {:p}<{}>\n", (void *)elem, (PCWSTR)prop->name, type, (void *)v1, v1->GetType(), (void *)v2, v2->GetType()).c_str());
+        //OutputDebugString(std::format(L"listened prop change: {:p} {} {} {:p}<{}> {:p}<{}>\n", (void *)elem, (PCWSTR)prop->name, type, (void *)v1, v1->GetType(), (void *)v2, v2->GetType()).c_str());
     }
     void OnListenedEvent(Element *elem, struct Event *ev) override { OutputDebugString(std::format(L"listened event: {:p} {:p}\n", (void *)elem, (void *)ev).c_str()); }
     void OnListenedInput(Element *elem, struct InputEvent *iev) override { OutputDebugString(std::format(L"listened input: {:p} {:p}\n", (void *)elem, (void *)iev).c_str()); }
@@ -55,7 +55,8 @@ struct EventListener : public IElementListener {
 
     void OnListenerAttach(Element *elem) override {}
     void OnListenerDetach(Element *elem) override {}
-    bool OnPropertyChanging(Element *elem, const PropertyInfo *prop, int unk, Value *v1, Value *v2) override { return true; }
+    //booIElementListenerl OnPropertyChanging(DirectUI::Element *peFrom, const DirectUI::PropertyInfo *ppi, int iIndex, DirectUI::Value *pvOld, DirectUI::Value *pvNew, BOOL *pfAllowProcess) override { return true; }
+    bool OnListenedPropertyChanging(Element *peFrom, const PropertyInfo *ppi, int iIndex, Value *pvOld, Value *pvNew) override { return true; }
     void OnListenedPropertyChanged(Element *elem, const PropertyInfo *prop, int type, Value *v1, Value *v2) override {}
     void OnListenedEvent(Element *elem, struct Event *iev) override { f(elem, iev); }
     void OnListenedInput(Element *elem, struct InputEvent *ev) override {}
@@ -75,7 +76,7 @@ LRESULT CALLBACK InvokeSubclass(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
         std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
         std::wstring wide = converter.from_bytes(output);
-        title->SetContentString(UCString(wide.c_str()));
+        title->SetContentString(wide.c_str());
         return 0;
     } else if (uMsg == WM_DIRECTUI_PROGRESS) {
         auto pProgressBar = (ModernProgressBar *)lParam;
@@ -86,10 +87,28 @@ LRESULT CALLBACK InvokeSubclass(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 }
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+    //SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+
     ThrowIfFailed(CoInitializeEx(NULL, 0));
 
-    ThrowIfFailed(InitProcessPriv(14, NULL, 0, true));
+    //ThrowIfFailed(InitProcessPriv(14, NULL, 0, true, false, false));
+
+    HRESULT hr = S_OK;
+
+    hr = DirectUI::InitProcess(DUI_VERSION);
+    if (SUCCEEDED(hr)) {
+        hr = DirectUI::InitThread(TSM_IMMERSIVE);
+        if (FAILED(hr)) {
+            DirectUI::UnInitProcess();
+        }
+    }
+    //return hr;
+
+    ThrowIfFailed(RegisterPVLBehaviorFactory());
+
     ThrowIfFailed(InitThread(2));
+
+
 
     // uncomment to update class definitions
     // HookClassFactoryRegister();
@@ -101,7 +120,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     NativeHWNDHost *pwnd;
 
-    NativeHWNDHost::Create((UCString)L"AIOne", NULL, NULL, 600, 400, 800, 600, WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0, (NativeHWNDHost **)&pwnd);
+    NativeHWNDHost::Create((WCHAR*)L"AIOne", NULL, NULL, 600, 400, 800, 600, WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0, (NativeHWNDHost **)&pwnd);
 
     HWND hMainWnd = pwnd->GetHWND();
     SetWindowSubclass(hMainWnd, InvokeSubclass, 1, 0);
@@ -111,8 +130,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     ThrowIfFailed(DUIXmlParser::Create(&pParser, NULL, NULL, NULL, NULL));
 
     pParser->SetParseErrorCallback(
-        [](UCString err1, UCString err2, int unk, void *ctx) {
-            auto messg = std::format(L"err: {}; {}; {}\n", (LPCWSTR)err1, (LPCWSTR)err2, unk);
+        [](const WCHAR *pszError, const WCHAR *pszToken, int dLine, void *pContext) {
+            auto messg = std::format(L"err: {}; {}; {}\n", (LPCWSTR)pszError, (LPCWSTR)pszToken, dLine);
             OutputDebugString(messg.c_str());
             MessageBox(NULL, messg.c_str(), L"XML Parsing failed", WN_WINDOWS_ERROR);
             DebugBreak();
@@ -127,7 +146,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     Element *pMainElement;
 
-    ThrowIfFailed(pParser->CreateElement(UCString(L"AIOneMain"), hwndElement, NULL, NULL, &pMainElement));
+    ThrowIfFailed(pParser->CreateElement(L"AIOneMain", hwndElement, NULL, NULL, &pMainElement));
 
     // DoubleBuffered
     pMainElement->DoubleBuffered(true);
@@ -138,30 +157,30 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     pwnd->ShowWindow(SW_SHOW);
 
-    auto *title_elem = pMainElement->FindDescendent(StrToID((UCString)L"SXTitle"));
+    auto *title_elem = pMainElement->FindDescendent(StrToID((WCHAR*)L"SXTitle"));
 
-    ATOM sendButtonId = StrToID(UCString(L"SXWizardDefaultButton"));
+    ATOM sendButtonId = StrToID((L"SXWizardDefaultButton"));
     auto *sendButton = (Button *)pMainElement->FindDescendent(sendButtonId);
 
-    ATOM loadButtonId = StrToID(UCString(L"LoadModelButton"));
+    ATOM loadButtonId = StrToID((L"LoadModelButton"));
     auto *loadButton = (Button *)pMainElement->FindDescendent(loadButtonId);
 
-    auto *pModelLoadingProgressBar = (ModernProgressBar *)pMainElement->FindDescendent(StrToID((UCString)L"ModelLoadingProgress"));
+    auto *pModelLoadingProgressBar = (ModernProgressBar *)pMainElement->FindDescendent(StrToID((WCHAR*)L"ModelLoadingProgress"));
 
     pModelLoadingProgressBar->SetMinimum(0);
     pModelLoadingProgressBar->SetMaximum(100);
     pModelLoadingProgressBar->SetPosition(0);
 
-    auto *messageInput = (Edit *)pMainElement->FindDescendent(StrToID((UCString)L"MessageEditBox"));
+    auto *messageInput = (Edit *)pMainElement->FindDescendent(StrToID((WCHAR*)L"MessageEditBox"));
 
-    auto *progressSpinner = (ModernProgressRing *)pMainElement->FindDescendent(StrToID((UCString)L"SXWizardLoadingProgress"));
+    auto *progressSpinner = (ModernProgressRing *)pMainElement->FindDescendent(StrToID((WCHAR*)L"SXWizardLoadingProgress"));
 
-    auto messageList = pMainElement->FindDescendent(StrToID((UCString)L"MessageList"));
+    auto messageList = pMainElement->FindDescendent(StrToID((WCHAR*)L"MessageList"));
 
     // Element  *newItem = nullptr;
     //       //Element::Create(10, messageList, NULL, &newItem);
     //       pMainElement->Create(1, messageList, NULL, &newItem);
-    //       newItem->SetContentString(UCString(L"Heeeeeeeeeeey"));
+    //       newItem->SetContentString(WCHAR*(L"Heeeeeeeeeeey"));
 
     // Element *pNewMessage = nullptr;
 
@@ -174,7 +193,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     //      }
 
     // auto pScrollViewer = (ScrollViewer *)pMainElement->FindDescendent(
-    //           StrToID((UCString)L"ScrollViewer"));
+    //           StrToID((WCHAR*)L"ScrollViewer"));
 
     // ModernProgressRing *newItem = new DirectUI::ModernProgressRing();
 
@@ -243,16 +262,16 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     };
 
     EventListener clickListener([&](Element *elem, Event *ev) {
-        if (ev->flag != GMF_BUBBLED) return;
+        if (ev->nStage != GMF_BUBBLED) return;
 
-        auto id = ev->target->GetID();
-        if (ev->type == TouchButton::Click) {
+        auto id = ev->peTarget->GetID();
+        if (ev->uidType == TouchButton::Click) {
             if (loadButtonId == id) loadModel();
 
             return;
             if (id == sendButtonId) send();
             progressSpinner->SetVisible(true);
-        } else if (ev->type == Edit::Enter)
+        } else if (ev->uidType == Edit::Enter)
             send();
     });
 

@@ -1,13 +1,13 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 13199630,
-    "totalActiveTime": 387821
+    "totalFocusTime": 13433675,
+    "totalActiveTime": 419035
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
       "pending": 3393,
-      "focus": 80752
+      "focus": 109020
     },
     "AIOne/src/LLModel.hpp": {
       "pending": 0,
@@ -116,6 +116,18 @@
     "UITest/UITest.vcxproj": {
       "pending": 0,
       "focus": 19078
+    },
+    "DirectUI/.gitignore": {
+      "pending": 3167,
+      "focus": 19586
+    },
+    "DirectUI/LICENSE": {
+      "pending": 1977,
+      "focus": 9908
+    },
+    "DirectUI/README.md": {
+      "pending": 26070,
+      "focus": 78188
     }
   }
 }
