@@ -1,13 +1,13 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 15301927,
-    "totalActiveTime": 454867
+    "totalFocusTime": 15317503,
+    "totalActiveTime": 459302
   },
   "files": {
     "AIOne/src/TextGenOptions.hpp": {
-      "pending": 3393,
-      "focus": 109020
+      "pending": 4080,
+      "focus": 112762
     },
     "AIOne/src/LLModel.hpp": {
       "pending": 0,
@@ -30,8 +30,8 @@
       "focus": 107207
     },
     "AIOne/CMakeLists.txt": {
-      "pending": 36348,
-      "focus": 975189
+      "pending": 40096,
+      "focus": 978937
     },
     "AIOneWinUI/AIOneWinUI.vcxproj": {
       "pending": 49408,
@@ -131,7 +131,7 @@
     },
     ".gitmodules": {
       "pending": 3051,
-      "focus": 207507
+      "focus": 223083
     }
   }
 }
