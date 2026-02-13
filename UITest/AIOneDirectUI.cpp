@@ -55,7 +55,6 @@ struct EventListener : public IElementListener {
 
     void OnListenerAttach(Element *elem) override {}
     void OnListenerDetach(Element *elem) override {}
-    //booIElementListenerl OnPropertyChanging(DirectUI::Element *peFrom, const DirectUI::PropertyInfo *ppi, int iIndex, DirectUI::Value *pvOld, DirectUI::Value *pvNew, BOOL *pfAllowProcess) override { return true; }
     bool OnListenedPropertyChanging(Element *peFrom, const PropertyInfo *ppi, int iIndex, Value *pvOld, Value *pvNew) override { return true; }
     void OnListenedPropertyChanged(Element *elem, const PropertyInfo *prop, int type, Value *v1, Value *v2) override {}
     void OnListenedEvent(Element *elem, struct Event *iev) override { f(elem, iev); }
@@ -118,11 +117,11 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     ModelManager *modelManager = new ModelManager();
 
-    NativeHWNDHost *pwnd;
+    NativeHWNDHost *pWnd;
 
-    NativeHWNDHost::Create((WCHAR*)L"AIOne", NULL, NULL, 600, 400, 800, 600, WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0, (NativeHWNDHost **)&pwnd);
+    NativeHWNDHost::Create((WCHAR*)L"AIOne", NULL, NULL, 600, 400, 800, 600, WS_EX_WINDOWEDGE, WS_OVERLAPPEDWINDOW | WS_VISIBLE, 0, (NativeHWNDHost **)&pWnd);
 
-    HWND hMainWnd = pwnd->GetHWND();
+    HWND hMainWnd = pWnd->GetHWND();
     SetWindowSubclass(hMainWnd, InvokeSubclass, 1, 0);
 
     DUIXmlParser *pParser;
@@ -142,7 +141,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     unsigned long deferKey;
     HWNDElement *hwndElement;
-    HWNDElement::Create(pwnd->GetHWND(), true, 0, NULL, &deferKey, (Element **)&hwndElement);
+    HWNDElement::Create(pWnd->GetHWND(), true, 0, NULL, &deferKey, (Element **)&hwndElement);
 
     Element *pMainElement;
 
@@ -153,9 +152,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
     pMainElement->SetVisible(true);
     pMainElement->EndDefer(deferKey);
-    pwnd->Host(pMainElement);
+    pWnd->Host(pMainElement);
 
-    pwnd->ShowWindow(SW_SHOW);
+    pWnd->ShowWindow(SW_SHOW);
 
     auto *title_elem = pMainElement->FindDescendent(StrToID((WCHAR*)L"SXTitle"));
 
@@ -264,7 +263,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
         ZeroMemory(&ofn, sizeof(ofn));
         ofn.lStructSize = sizeof(ofn);
-        ofn.hwndOwner = pwnd->GetHWND();
+        ofn.hwndOwner = pWnd->GetHWND();
         ofn.lpstrFile = szFile;
         ofn.nMaxFile = sizeof(szFile);
         ofn.lpstrFilter = L"All\0*.*\GGUF\0*.gguf\0";
@@ -283,7 +282,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
             options.onProgress = [&](float progress) {
                 int steps = progress * 100;
-                PostMessage(pwnd->GetHWND(), WM_DIRECTUI_PROGRESS, (WPARAM)steps, (LPARAM)pModelLoadingProgressBar);
+                PostMessage(pWnd->GetHWND(), WM_DIRECTUI_PROGRESS, (WPARAM)steps, (LPARAM)pModelLoadingProgressBar);
             };
 
             modelManager->loadLLMAsync(fileName, options);
@@ -299,7 +298,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
         options.onToken = [&](std::string token) {
             std::string *wawa = new std::string(token);
-            PostMessage(pwnd->GetHWND(), WM_DIRECTUI_INVOKE, (WPARAM)title_elem, (LPARAM)wawa);
+            PostMessage(pWnd->GetHWND(), WM_DIRECTUI_INVOKE, (WPARAM)title_elem, (LPARAM)wawa);
         };
 
         modelManager->getChatManager()->sendAsync(message, options);
