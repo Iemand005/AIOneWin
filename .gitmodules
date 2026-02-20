@@ -1,3 +1,6 @@
 [submodule "AIOne"]
 	path = AIOne
 	url = https://github.com/Iemand005/AIOne.git
+[submodule "DirectUI"]
+	path = DirectUI
+	url = https://github.com/Iemand005/DirectUI.git
