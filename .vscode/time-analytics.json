@@ -1,12 +1,7 @@
 {
   "version": "1.0",
   "project": {
-    "totalFocusTime": 19766
+    "totalFocusTime": 56573
   },
-  "files": {
-    ".gitmodules": {
-      "pending": 0,
-      "focus": 19766
-    }
-  }
+  "files": {}
 }
